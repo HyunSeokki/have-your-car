@@ -62,7 +62,6 @@ public class BasicSampleController extends HController {
 	
 	@RequestMapping(value = "/basic/test.do")
     public String test() throws Exception {
-	    System.out.print("SDFsefsefsssefsfdsefsfdd");
 	    
         return "basic/test";
     }
