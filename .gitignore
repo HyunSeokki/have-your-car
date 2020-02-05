@@ -23,6 +23,7 @@
 *.tar.gz
 *.rar
 .metadata/*
+.settings/*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -41,3 +42,4 @@ buildNumber.properties
 .flattened-pom.xml
 
 # End of https://www.gitignore.io/api/java,maven
+
