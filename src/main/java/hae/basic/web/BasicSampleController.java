@@ -59,6 +59,13 @@ public class BasicSampleController extends HController {
 
 		return "basic/basicSampleList";
 	}
+	
+	@RequestMapping(value = "/basic/test.do")
+    public String test() throws Exception {
+	    System.out.print("SDFsefsefsssefsfdsefsfdd");
+	    
+        return "basic/test";
+    }
 
 	/**
 	 * 게시글을 상세 조회한다. 게시글 조회시 조회수(view_count)가 +1 증가한다.
