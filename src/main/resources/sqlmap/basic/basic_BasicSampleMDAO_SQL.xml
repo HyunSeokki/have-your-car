@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    SQL File Name : basic_BasicSampleMDAO_sql.xml 
+    Description : Basic Sample 데이터를 관리한다.(등록, 수정, 삭제 및 조회)
+
+    Modification Information 
+               수정일                 수정자         Version      Query Id
+    ==========  =======  ========   ==============
+    2016.07.01  ADM기술팀          1.0          최초 생성 
+-->
+<mapper namespace="hae.basic.service.dao.BasicSampleMDAO">
+	
+	<resultMap id="sample" type="hae.basic.vo.BasicSampleVO">
+		<result property="seq" column="seq"/>
+		<result property="category" column="category"/>
+		<result property="title" column="title"/>
+		<result property="description" column="description"/>
+		<result property="regUser" column="reg_user"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="viewCount" column="view_count"/>
+	</resultMap>
+	
+	<!-- 
+        Query ID : insertSample
+        Description : 게시글을 등록한다.
+     -->
+	<insert id="insertSample" parameterType="hae.basic.vo.BasicSampleVO">
+    <![CDATA[
+		INSERT /* Query ID=hae.basic.service.dao.BasicSampleMDAO.insertSample */ 
+		INTO BASIC
+			( SEQ
+			  , CATEGORY
+			  , TITLE
+			  , DESCRIPTION
+			  , REG_USER
+			  , REG_DATE
+			  , VIEW_COUNT )
+		VALUES ( NEXT VALUE FOR seq
+		      , #{category}
+			  , #{title}
+			  , #{description}
+			  , #{regUser}
+			  , TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+			  , 0 )
+    ]]>  
+	</insert>
+
+	<!-- 
+        Query ID : updateSample
+        Description : 게시글을 수정한다.
+     -->
+	<update id="updateSample" parameterType="hae.basic.vo.BasicSampleVO">
+	<![CDATA[
+		UPDATE /* Query ID=hae.basic.service.dao.BasicSampleMDAO.updateSample */ 
+			BASIC
+		SET CATEGORY = #{category}
+			, TITLE = #{title}
+			, DESCRIPTION = #{description}
+	  	WHERE SEQ = #{seq}
+	]]> 
+	</update>
+	
+	<!-- 
+        Query ID : deleteSample
+        Description : 게시글을 삭제한다.
+     -->
+	<delete id="deleteSample" parameterType="hae.basic.vo.BasicSampleVO">
+	<![CDATA[
+		DELETE /* Query ID=hae.basic.service.dao.BasicSampleMDAO.deleteSample */  
+		FROM BASIC
+		WHERE SEQ = #{seq}
+	]]> 
+	</delete>
+	
+	<!-- 
+        Query ID : selectSample
+        Description : 게시글을 조회한다.
+     -->
+	<select id="selectSample" resultMap="sample">
+	<![CDATA[
+		SELECT /* Query ID=hae.basic.service.dao.BasicSampleMDAO.selectSample */
+			SEQ
+			, CATEGORY
+			, TITLE
+			, DESCRIPTION
+			, REG_USER
+			, REG_DATE
+		FROM BASIC
+		WHERE SEQ = #{seq}
+	]]> 			
+	</select>
+	
+	<!-- 
+        Query ID : updateSampleViewCount
+        Description : 게시글 조회시 조회수를 카운트 한다.
+     -->
+	<update id="updateSampleViewCount" parameterType="hae.basic.vo.BasicSampleVO">
+	<![CDATA[
+		UPDATE /* Query ID=hae.basic.service.dao.BasicSampleMDAO.updateSampleViewCount */ 
+			BASIC
+		SET VIEW_COUNT = VIEW_COUNT+1
+		WHERE SEQ = #{seq}
+	]]> 
+	</update>
+	
+	<!-- 
+        Query ID : selectSampleList
+        Description : 게시글 목록을 조회한다.
+     -->
+	<select id="selectSampleList" parameterType="hae.basic.vo.BasicSampleVO" resultType="hMap">
+	<![CDATA[
+		SELECT /* Query ID=hae.basic.service.dao.BasicSampleMDAO.selectSampleList */ 
+			SEQ
+			, CATEGORY
+			, TITLE
+			, REG_USER
+			, REG_DATE
+			, VIEW_COUNT
+		FROM BASIC
+		WHERE 1=1
+	]]> 
+		<if test="searchKeyword != null and searchKeyword != ''">
+	        <choose>
+	            <when test="searchCondition == 0">
+					AND	CATEGORY LIKE '%' || #{searchKeyword} || '%'
+				</when>
+	            <when test="searchCondition == 1">
+					AND	TITLE LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<when test="searchCondition == 2">
+					AND	REG_USER LIKE '%' || #{searchKeyword} || '%'
+				</when>
+			</choose>
+		</if>
+		ORDER BY SEQ DESC
+			
+	</select>
+
+</mapper>
