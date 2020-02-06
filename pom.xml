@@ -45,11 +45,12 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
-        
+
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.2</version>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
         </dependency>
+        
     </dependencies>
 </project>
