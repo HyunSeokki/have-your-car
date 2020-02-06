@@ -28,12 +28,13 @@
 		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/oracle"/> 
 	 -->
 
-	<!-- Hsql (server mode)  -->
+	<!-- Hsql (server mode)  
      <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
         <property name="url" value="jdbc:hsqldb:hsql://localhost/sampledb"/>
         <property name="username" value="sa"/>
     </bean>
+    -->
 
     <!--    
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -52,13 +53,14 @@
     </bean>
     -->
     
-    <!-- oracle
+    <!--  
+    -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:example" />
-        <property name="username" value="user"/>
-        <property name="password" value="password"/>
+        <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:ORCL" />
+        <property name="username" value="hs"/>
+        <property name="password" value="123"/>
     </bean>
-    -->
+    
     
 </beans>
