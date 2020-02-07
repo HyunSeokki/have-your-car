@@ -29,8 +29,7 @@ public class CarVO {
     int capacity;
     int cost;
     String latitude;
-    String longtitude;
-    
+    String longitude;
     /**
      * @return the carNo
      */
@@ -128,16 +127,16 @@ public class CarVO {
         this.latitude = latitude;
     }
     /**
-     * @return the longtitude
+     * @return the longitude
      */
-    public String getLongtitude() {
-        return longtitude;
+    public String getLongitude() {
+        return longitude;
     }
     /**
-     * @param longtitude the longtitude to set
+     * @param longitude the longitude to set
      */
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
     /*
      * @see java.lang.Object#toString()
@@ -146,7 +145,9 @@ public class CarVO {
     public String toString() {
         return "CarVO [carNo=" + carNo + ", carSize=" + carSize + ", carType=" + carType + ", mileage=" + mileage
                 + ", birth=" + birth + ", capacity=" + capacity + ", cost=" + cost + ", latitude=" + latitude
-                + ", longtitude=" + longtitude + "]";
+                + ", longitude=" + longitude + "]";
     }
-    
+
+
+
 }

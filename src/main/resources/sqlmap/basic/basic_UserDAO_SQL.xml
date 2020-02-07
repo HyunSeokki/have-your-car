@@ -26,14 +26,14 @@
     ]]> 
     </update>
     
-    <delete id="deleteUser" parameterType="hae.basic.vo.UserVO">
+    <delete id="deleteUser" parameterType="String">
     <![CDATA[
         DELETE FROM USERIFTB
         WHERE user_id = #{userID}
     ]]> 
     </delete>
     
-     <select id="selectUser" resultMap="user">
+     <select id="selectUser" parameterType="String" resultMap="user">
     <![CDATA[
         SELECT user_id
             , user_pwd
@@ -42,7 +42,7 @@
     ]]>             
     </select>
     
-     <select id="selectUserList" parameterType="hae.basic.vo.UserVO" resultType="user">
+     <select id="selectUserList" resultType="user">
     <![CDATA[
         SELECT user_id
             , user_pwd

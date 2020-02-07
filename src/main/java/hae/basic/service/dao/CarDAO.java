@@ -28,7 +28,7 @@ import hae.basic.vo.CarVO;
 @Mapper("CarDAO")
 public interface CarDAO {
 
-    List<CarVO> selectCar();
+    List<CarVO> selectCarList();
     void insertCar(CarVO vo);
     CarVO selectCar(String carNo);
     void updateCar(CarVO vo);

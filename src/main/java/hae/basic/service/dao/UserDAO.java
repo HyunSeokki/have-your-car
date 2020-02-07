@@ -28,7 +28,7 @@ import hae.basic.vo.UserVO;
 @Mapper("UserDAO")
 public interface UserDAO {
 
-    List<UserVO> selectUser();
+    List<UserVO> selectUserList();
     void insertUser(UserVO vo);
     UserVO selectUser(String userID);
     void updateUser(UserVO vo);

@@ -10,7 +10,7 @@
     2020.02.07  Hyeonju    1.0          최초 생성 
 -->
 <mapper namespace="hae.basic.service.dao.ActiveDAO">
-    
+   
     <resultMap id="active" type="hae.basic.vo.ActiveVO">
         <result property="carNo" column="CAR_NO"/>
         <result property="startYn" column="START_YN"/>
@@ -26,7 +26,7 @@
         INTO ACTIVATB
             ( CAR_NO
               , START_YN )
-        VALUES ( NEXT VALUE FOR CAR_NO
+        VALUES ( #{carNo}
               , #{startYn}
               )
     ]]>  
@@ -61,7 +61,7 @@
         Query ID : selectActive
         Description : 시동정보을 조회한다.
      -->
-    <select id="selectActive" resultMap="active">
+    <select id="selectActive" parameterType="String" resultMap="active">
     <![CDATA[
         SELECT /* Query ID=hae.basic.service.dao.ActiveDAO.selectActive */
             CAR_NO

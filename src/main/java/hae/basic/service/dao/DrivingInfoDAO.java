@@ -33,13 +33,6 @@ public interface DrivingInfoDAO {
 	void insertDrivingInfo(DrivingInfoVO vo) throws Exception;
 	
 	/**
-	 * 주행정보 수정
-	 * @param vo
-	 * @throws Exception
-	 */
-	void updateDrivingInfo(DrivingInfoVO vo) throws Exception;
-	
-	/**
 	 * 주행정보 삭제
 	 * @param DrivingInfoNo
 	 * @throws Exception
