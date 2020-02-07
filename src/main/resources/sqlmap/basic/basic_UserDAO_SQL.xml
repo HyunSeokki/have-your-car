@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hae.basic.service.dao.UserDAO">
+
+    <resultMap id="user" type="hae.basic.vo.UserVO">
+        <result property="userID" column="USER_ID"/>
+        <result property="userPWD" column="USER_PWD"/>
+    </resultMap>
+    
+    <insert id="insertUser" parameterType="hae.basic.vo.UserVO">
+        <![CDATA[
+            INSERT INTO USERIFTB
+                   (USER_ID,
+                   USER_PWD)
+            VALUES (#{userID},
+                   #{userPWD})
+        ]]>
+    </insert>
+    
+    <update id="updateUser" parameterType="hae.basic.vo.UserVO">
+    <![CDATA[
+        UPDATE USERIFTB
+        SET user_pwd = #{userPWD}
+        WHERE user_id = #{userID}
+    ]]> 
+    </update>
+    
+    <delete id="deleteUser" parameterType="hae.basic.vo.UserVO">
+    <![CDATA[
+        DELETE FROM USERIFTB
+        WHERE user_id = #{userID}
+    ]]> 
+    </delete>
+    
+     <select id="selectUser" resultMap="user">
+    <![CDATA[
+        SELECT user_id
+            , user_pwd
+        FROM USERIFTB
+        WHERE user_id = #{userID}
+    ]]>             
+    </select>
+    
+     <select id="selectUserList" parameterType="hae.basic.vo.UserVO" resultType="user">
+    <![CDATA[
+        SELECT user_id
+            , user_pwd
+        FROM USERIFTB
+    ]]> 
+    </select>
+    
+</mapper>
