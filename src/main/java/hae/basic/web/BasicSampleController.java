@@ -51,17 +51,7 @@ public class BasicSampleController extends HController {
 	 * @throws Exception
 	 */
 	
-//	@RequestMapping(value = "/basic/   .do")
-//	public String selectItemList(@ModelAttribute("basicSampleVO") BasicSampleVO basicSampleVO,
-//								Model model) throws Exception {
-//
-//		List<BasicSampleVO> sampleList = basicSampleService.selectSampleList(basicSampleVO);
-//		model.addAttribute("resultList", sampleList);
-//
-//		return "basic/basicSampleList";
-//	}
-	
-	@RequestMapping(value = "/basic/test.do")
+	@RequestMapping(value = "/basic/selectItemList.do")
     public String test(@ModelAttribute("basicSampleVO") BasicSampleVO basicSampleVO,
             Model model) throws Exception {
 	    
@@ -69,7 +59,7 @@ public class BasicSampleController extends HController {
 	    System.out.println(sampleList);
         model.addAttribute("resultList", sampleList);
         
-        return "basic/test";
+        return "basic/basicSampleList";
     }
 
 	/**
