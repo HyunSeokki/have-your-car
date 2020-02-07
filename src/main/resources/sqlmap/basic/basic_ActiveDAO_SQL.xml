@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    SQL File Name : basic_ActiveDAO_SQL.xml 
+    Description : Active(시동정보) 데이터를 관리한다.(등록, 수정, 삭제 및 조회)
+
+    Modification Information 
+               수정일                 수정자         Version      Query Id
+    ==========  =======  ========   ==============
+    2020.02.07  Hyeonju    1.0          최초 생성 
+-->
+<mapper namespace="hae.basic.service.dao.ActiveDAO">
+   
+    <resultMap id="active" type="hae.basic.vo.ActiveVO">
+        <result property="carNo" column="CAR_NO"/>
+        <result property="startYn" column="START_YN"/>
+    </resultMap>
+    
+    <!-- 
+        Query ID : insertActive
+        Description : 시동 정보를 등록한다.
+     -->
+    <insert id="insertActive" parameterType="hae.basic.vo.ActiveVO">
+    <![CDATA[
+        INSERT /* Query ID=hae.basic.service.dao.ActiveDAO.insertActive */ 
+        INTO ACTIVATB
+            ( CAR_NO
+              , START_YN )
+        VALUES ( #{carNo}
+              , #{startYn}
+              )
+    ]]>  
+    </insert>
+
+    <!-- 
+        Query ID : updateActive
+        Description : 시동 정보를 수정한다.
+     -->
+    <update id="updateActive" parameterType="hae.basic.vo.ActiveVO">
+    <![CDATA[
+        UPDATE /* Query ID=hae.basic.service.dao.ActiveDAO.updateActive */ 
+            ACTIVATB
+        SET START_YN = #{startYn}
+        WHERE CAR_NO = #{carNo}
+    ]]> 
+    </update>
+    
+    <!-- 
+        Query ID : deleteActive
+        Description : 시동정보를 삭제한다.
+     -->
+    <delete id="deleteActive" parameterType="hae.basic.vo.ActiveVO">
+    <![CDATA[
+        DELETE /* Query ID=hae.basic.service.dao.ActiveDAO.deleteActive */  
+        FROM ACTIVATB
+        WHERE CAR_NO = #{carNo}
+    ]]> 
+    </delete>
+    
+    <!-- 
+        Query ID : selectActive
+        Description : 시동정보을 조회한다.
+     -->
+    <select id="selectActive" parameterType="String" resultMap="active">
+    <![CDATA[
+        SELECT /* Query ID=hae.basic.service.dao.ActiveDAO.selectActive */
+            CAR_NO
+            , START_YN
+        FROM ACTIVATB
+        WHERE CAR_NO = #{carNo}
+    ]]>             
+    </select>
+    
+    
+    <!-- 
+        Query ID : selectActiveList
+        Description : 시동정보 목록을 조회한다.
+     -->
+    <select id="selectActiveList" parameterType="hae.basic.vo.ActiveVO" resultType="active">
+    <![CDATA[
+        SELECT /* Query ID=hae.basic.service.dao.ActiveDAO.selectActiveList */ 
+            CAR_NO
+            , START_YN
+        FROM ACTIVATB
+    ]]>            
+    </select>
+
+</mapper>

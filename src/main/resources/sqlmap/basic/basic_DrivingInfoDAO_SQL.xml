@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--
+	SQL File Name : basic_DrivingInfoDAO_SQL.xml
+	Description : DrivingInfo DAO의 mapper
+	author 임현아
+	since 2020. 02. 07.
+	version 1.0
+	Modification Information
+		since        author            description
+	===========    =============    ===========================
+	2020. 02. 07.		임현아 		  DrivingInfo DAO의 mapper
+-->
+
+<mapper namespace="hae.basic.service.dao.DrivingInfoDAO">
+    
+    <resultMap id="drivingInfo" type="hae.basic.vo.DrivingInfoVO">
+        <result property="rentNo" column="rent_no"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="timeStamp" column="timestamp"/>
+    </resultMap>
+    
+    <!--
+        Query Name : insertDrivingInfo
+        Description : INSERT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410  		   최초 생성
+    -->
+    <insert id="insertDrivingInfo" parameterType="hae.basic.vo.DrivingInfoVO">
+        <![CDATA[
+            INSERT /* QueryID=insertDrivingInfo */ 
+              INTO DRVINFTB
+                   (RENT_NO,
+                    LATITUDE,
+                    LONGITUDE,
+                    TIMESTAMP)
+            VALUES (#{rentNo},
+                    #{latitude},
+                    #{longitude},
+                    #{timeStamp} )
+        ]]>
+    </insert>
+    
+    
+    <!--
+        Query Name : deleteDrivingInfo
+        Description : DELETE 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410   		  최초 생성
+    -->
+    <delete id="deleteDrivingInfo" parameterType="hae.basic.vo.DrivingInfoVO">
+        <![CDATA[
+            DELETE /* QueryID=deleteDrivingInfo */ 
+              FROM DRVINFTB
+             WHERE RENT_NO = #{rentNo} and 
+                   LATITUDE = #{latitude} and 
+                   LONGITUDE = #{longitude} and
+                   TIMESTAMP = #{timeStamp}
+        ]]>
+    </delete>
+    
+    <!--
+        Query Name : selectRent
+        Description : SELECT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410    	 최초 생성
+    -->
+    <select id="selectDrivingInfoList" resultType="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRent */
+                   RENT_NO,
+                   LATITUDE,
+                   LONGITUDE,
+                   TIMESTAMP
+              FROM DRVINFTB
+             WHERE 1=1
+        ]]>
+    </select>
+    
+    <!--
+        Query Name : selectRentList
+        Description : rent number 기준 리스트 반환
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410    	 최초 생성
+    -->
+    <select id="selectDrivingInfoList" parameterType="String" resultType="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRent */
+                   RENT_NO,
+                   LATITUDE,
+                   LONGITUDE,
+                   TIMESTAMP
+              FROM DRVINFTB
+             WHERE RENT_NO = #{rentNo}
+        ]]>
+    </select>
+    
+    
+
+
+</mapper>

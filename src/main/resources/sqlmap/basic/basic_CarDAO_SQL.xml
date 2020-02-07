@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    SQL File Name : xmlname.xm 
+    Description : 설명을 기술합니다.
+    author HAVE
+    since 2020. 2. 7.
+    version 1.0
+    Modification Information
+       since          author              description
+    ===========    =============    ===========================
+    2020. 2. 7.     HAVE  		   최초 생성
+-->
+
+<mapper namespace="hae.basic.service.dao.CarDAO">
+    <!-- 자동차 정보 데이터 형식 -->
+    <resultMap type="hae.basic.vo.CarVO" id="car">
+        <result property="carNo" column="car_no"/>
+        <result property="carSize" column="car_size"/>
+        <result property="carType" column="car_type"/>
+        <result property="mileage" column="mileage"/>
+        <result property="birth" column="birth"/>
+        <result property="capacity" column="capacity"/>    
+        <result property="cost" column="cost"/>    
+        <result property="latitude" column="latitude"/>    
+        <result property="longitude" column="longitude"/>    
+    </resultMap>
+
+    <!-- 자동차 정보 삽입 -->
+    <insert id="insertCar" parameterType="hae.basic.vo.CarVO">
+    <![CDATA[
+        INSERT 
+        INTO CARINFTB
+            ( car_no
+              , car_size
+              , car_type
+              , mileage
+              , birth
+              , capacity
+              , cost
+              , latitude
+              , longitude )
+        VALUES ( #{carNo} /* need fix */
+              , #{carSize}
+              , #{carType}
+              , #{mileage}
+              , #{birth}
+              , #{capacity}
+              , #{cost}
+              , #{latitude}
+              , #{longitude} )
+    ]]>  
+    
+    </insert>
+
+    <!-- 자동차 정보 업데이트 -->
+    <update id="updateCar" parameterType="hae.basic.vo.CarVO">
+    <![CDATA[
+        UPDATE CARINFTB
+        SET car_size = #{carSize}
+            , car_type = #{carType}
+            , mileage= #{mileage}
+            , birth = #{birth}
+            , capacity= #{capacity}
+            , cost = #{cost}
+            , latitude = #{latitude}
+            , longitude = #{longitude}
+        WHERE car_no = #{carNo}
+    ]]> 
+    </update>
+    
+    <!-- 자동차 정보 삭제 -->
+    <delete id="deleteCar" parameterType="hae.basic.vo.CarVO">
+    <![CDATA[
+        DELETE FROM CARINFTB
+        WHERE car_no = #{carNo}
+    ]]> 
+    </delete>
+    
+    <!-- 자동차 정보 불러오기 -->
+    <select id="selectCar" parameterType="String" resultMap="car">
+    <![CDATA[
+        SELECT car_no
+            , car_size
+            , car_type
+            , mileage
+            , birth
+            , capacity
+            , cost
+            , latitude
+            , longitude
+        FROM CARINFTB
+        WHERE car_no = #{carNo}
+    ]]>             
+    </select>
+
+    <!-- 자동차 정보 목록 불러오기 -->
+    <select id="selectCarList" resultType="car">
+    <![CDATA[
+        SELECT car_no
+            , car_size
+            , car_type
+            , mileage
+            , birth
+            , capacity
+            , cost
+            , latitude
+            , longitude
+        FROM CARINFTB
+    ]]> 
+    </select>
+
+</mapper>

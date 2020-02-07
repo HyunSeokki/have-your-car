@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    SQL File Name : basic_ActiveLogDAO_SQL.xml 
+    Description : ActiveLog(시동로그정보) 데이터를 관리한다.(등록, 수정, 삭제 및 조회)
+
+    Modification Information 
+               수정일                 수정자         Version      Query Id
+    ==========  =======  ========   ==============
+    2020.02.07  Hyeonju    1.0          최초 생성 
+-->
+<mapper namespace="hae.basic.service.dao.ActiveLogDAO">
+    
+    <resultMap id="activeLog" type="hae.basic.vo.ActiveLogVO">
+        <result property="startNo" column="START_NO"/>
+        <result property="carNo" column="CAR_NO"/>
+        <result property="onDate" column="ON_DATE"/>
+        <result property="offDate" column="OFF_DATE"/>
+    </resultMap>
+    
+    <!-- 
+        Query ID : insertActive
+        Description : 시동 정보를 등록한다.
+        **OFF_DATE: 시동을 끈 날짜는 NULL값
+     -->
+    <insert id="insertActiveLog" parameterType="hae.basic.vo.ActiveLogVO">
+    <![CDATA[
+        INSERT /* Query ID=hae.basic.service.dao.ActiveLogDAO.insertActiveLog */ 
+        INTO ACTLOGTB
+            ( START_NO
+              , CAR_NO
+              , ON_DATE)
+        VALUES ( NEXT VALUE FOR START_NO
+              , #{carNo}
+              , #TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
+    ]]>  
+    </insert>
+
+    <!-- 
+        Query ID : updateActiveLog
+        Description : 시동 로그 정보를 수정한다.
+        **ON_DATE: 시동킨 날짜는 insertActiveLog에서 설정된 데이터 그대로 유지
+     -->
+    <update id="updateActiveLog" parameterType="hae.basic.vo.ActiveLogVO">
+    <![CDATA[
+        UPDATE /* Query ID=hae.basic.service.dao.ActiveLogDAO.updateActiveLog */ 
+            ACTLOGTB
+        SET , CAR_NO = #{carNo}
+            , OFF_DATE = #TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+        WHERE START_NO = #{startNo}
+    ]]> 
+    </update>
+    
+    <!-- 
+        Query ID : deleteActiveLog
+        Description : 시동 로그 정보를 삭제한다.
+     -->
+    <delete id="deleteActiveLog" parameterType="hae.basic.vo.ActiveLogVO">
+    <![CDATA[
+        DELETE /* Query ID=hae.basic.service.dao.ActiveLogDAO.deleteActiveLog */  
+        FROM ACTLOGTB
+        WHERE START_NO = #{startNo}
+    ]]> 
+    </delete>
+    
+    <!-- 
+        Query ID : selectActiveLog
+        Description : 시동 로그 정보을 조회한다.
+     -->
+    <select id="selectActiveLog" parameter="String" resultMap="activeLog">
+    <![CDATA[
+        SELECT /* Query ID=hae.basic.service.dao.ActiveLogDAO.selectActiveLog */
+           START_NO
+             , CAR_NO
+             , ON_DATE
+             , OFF_DATE
+        FROM ACTLOGTB
+        WHERE START_NO = #{startNo}
+    ]]>             
+    </select>
+    
+    
+    <!-- 
+        Query ID : selectActiveLogList
+        Description : 시동 로그 정보 목록을 조회한다.
+     -->
+    <select id="selectActiveLogList" parameterType="hae.basic.vo.ActiveLogVO" resultType="activeLog">
+    <![CDATA[
+        SELECT /* Query ID=hae.basic.service.dao.ActiveLogDAO.selectActiveLogList */ 
+               START_NO
+             , CAR_NO
+             , ON_DATE
+             , OFF_DATE
+        FROM ACTLOGTB
+        WHERE 1=1
+    ]]>            
+    </select>
+
+</mapper>
