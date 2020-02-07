@@ -1,3 +1,16 @@
+/*
+아이디 새로 만들기
+sqlplus sys/oracle as sysdba
+
+create user local_dev
+identified by autoever
+account unlock;
+
+grant connect, resource to local_dev;
+
+alter user local_dev quota unlimited on users;
+*/
+
 --유저정보(로그인)
 CREATE TABLE USERIFTB(
   USER_ID VARCHAR2(12) PRIMARY KEY, 
