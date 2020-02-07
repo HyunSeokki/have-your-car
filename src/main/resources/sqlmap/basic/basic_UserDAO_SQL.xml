@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    SQL File Name : xmlname.xm 
+    Description : 설명을 기술합니다.
+    author OHS
+    since 2020. 2. 7.
+    version 1.0
+    Modification Information
+       since          author              description
+    ===========    =============    ===========================
+    2020. 2. 7.     OHS  		   최초 생성
+-->
+
+<mapper namespace="hae.basic.service.dao.UserMDAO">
+
+    <resultMap id="sample" type="hae.basic.vo.UserVO">
+        <result property="userID" column="USER_ID"/>
+        <result property="userPW" column="USER_PWD"/>
+    </resultMap>
+    
+    <!--
+        Query Name : insert_id
+        Description : INSERT 설명을 기술합니다.
+        author OHS
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     OHS  		   최초 생성
+    -->
+    <insert id="insertUser" parameterType="hae.basic.vo.UserVO">
+        <![CDATA[
+            INSERT /* QueryID=hae.basic.service.dao.UserDAO.insertUser */ 
+              INTO USERIFTB
+                   (USER_ID,
+                   USER_PWD)
+            VALUES (#{userID},
+                   #{userPW})
+        ]]>
+    </insert>
+    
+    
+</mapper>
