@@ -12,7 +12,7 @@ import hae.basic.vo.UserVO;
  * </pre>
  *
  * @ClassName   : UserDAO.java
- * @Description : 클래스 설명을 기술합니다.
+ * @Description : 유저 DAO
  * @author HAVE
  * @since 2020. 2. 7.
  * @version 1.0
@@ -28,10 +28,15 @@ import hae.basic.vo.UserVO;
 @Mapper("UserDAO")
 public interface UserDAO {
 
+    /* 유저 목록 불러오기 */
     List<UserVO> selectUser();
+    /* 유저 삽입  */
     void insertUser(UserVO vo);
+    /* 유저 정보 불러오기 */
     UserVO selectUser(String userID);
+    /* 유저 정보 업데이트 */
     void updateUser(UserVO vo);
+    /* 유저 삭제하기 */ 
     void deleteUser(String userID);
     
 }

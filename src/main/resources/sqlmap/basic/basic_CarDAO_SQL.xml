@@ -13,6 +13,8 @@
 -->
 
 <mapper namespace="hae.basic.service.dao.CarDAO">
+
+    <!-- 자동차 정보 데이터 형식 -->
     <resultMap type="hae.basic.vo.CarDAO" id="car">
         <result property="carNo" column="car_no"/>
         <result property="carSize" column="car_size"/>
@@ -25,6 +27,7 @@
         <result property="longtitude" column="longtitude"/>    
     </resultMap>
 
+    <!-- 자동차 정보 삽입 -->
     <insert id="insertCar" parameterType="hae.basic.vo.CarVO">
     <![CDATA[
         INSERT 
@@ -51,6 +54,7 @@
     
     </insert>
 
+    <!-- 자동차 정보 업데이트 -->
     <update id="updateCar" parameterType="hae.basic.vo.CarVO">
     <![CDATA[
         UPDATE CARINFTB
@@ -66,6 +70,7 @@
     ]]> 
     </update>
     
+    <!-- 자동차 정보 삭제 -->
     <delete id="deleteCar" parameterType="hae.basic.vo.CarVO">
     <![CDATA[
         DELETE FROM CARINFTB
@@ -73,6 +78,7 @@
     ]]> 
     </delete>
     
+    <!-- 자동차 정보 불러오기 -->
     <select id="selectCar" resultMap="car">
     <![CDATA[
         SELECT car_no
@@ -89,7 +95,7 @@
     ]]>             
     </select>
 
-
+    <!-- 자동차 정보 목록 불러오기 -->
     <select id="selectCarList" parameterType="hae.basic.vo.CarVO" resultType="car">
     <![CDATA[
         SELECT car_no
