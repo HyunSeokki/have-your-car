@@ -30,29 +30,29 @@ public interface DrivingInfoDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	void insertRent(DrivingInfoVO vo) throws Exception;
+	void insertDrivingInfo(DrivingInfoVO vo) throws Exception;
 	
 	/**
 	 * 주행정보 수정
 	 * @param vo
 	 * @throws Exception
 	 */
-	void updateRent(DrivingInfoVO vo) throws Exception;
+	void updateDrivingInfo(DrivingInfoVO vo) throws Exception;
 	
 	/**
 	 * 주행정보 삭제
-	 * @param rentNo
+	 * @param DrivingInfoNo
 	 * @throws Exception
 	 */
-	void deleteRent(DrivingInfoVO vo) throws Exception;
+	void deleteDrivingInfo(DrivingInfoVO vo) throws Exception;
 	
 	/**
 	 * 주행정보 상세 조회
-	 * @param rentNo
+	 * @param DrivingInfoNo
 	 * @return
 	 * @throws Exception
 	 */
-	DrivingInfoVO selectRent(DrivingInfoVO vo) throws Exception;
+	DrivingInfoVO selectDrivingInfo(DrivingInfoVO vo) throws Exception;
 	
 	/**
 	 * 주행정보 전체 조회
@@ -60,7 +60,7 @@ public interface DrivingInfoDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List<DrivingInfoVO> selectRentList() throws Exception;
+	List<DrivingInfoVO> selectDrivingInfoList() throws Exception;
 	
 	/**
      * 주행정보 렌트 정보 기준 조회
@@ -68,6 +68,6 @@ public interface DrivingInfoDAO {
      * @return
      * @throws Exception
      */
-    List<DrivingInfoVO> selectRentList(String rentNo) throws Exception;
+    List<DrivingInfoVO> selectDrivingInfoList(String rentNo) throws Exception;
 	
 }

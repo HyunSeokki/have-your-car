@@ -36,7 +36,7 @@
 			  , REG_USER
 			  , REG_DATE
 			  , VIEW_COUNT )
-		VALUES ( NEXT VALUE FOR seq
+		VALUES ( 3
 		      , #{category}
 			  , #{title}
 			  , #{description}

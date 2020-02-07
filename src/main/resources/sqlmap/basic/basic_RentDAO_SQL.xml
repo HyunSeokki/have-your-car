@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--
+	SQL File Name : basic_RentDAO_SQL.xml
+	Description : Rent DAO의 mapper
+	author 임현아
+	since 2020. 02. 07.
+	version 1.0
+	Modification Information
+		since        author            description
+	===========    =============    ===========================
+	2020. 02. 07.		임현아 		  Rent DAO의 mapper
+-->
+
+<mapper namespace="hae.basic.service.dao.RentDAO">
+    
+    <resultMap id="rent" type="hae.basic.vo.RentVO">
+        <result property="rentNo" column="rent_no"/>
+        <result property="carNo" column="car_no"/>
+        <result property="userID" column="user_id"/>
+        <result property="rentDate" column="rent_date"/>
+        <result property="returnDate" column="return_date"/>
+    </resultMap>
+    
+    <!--
+        Query Name : insertRent
+        Description : INSERT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410  		   최초 생성
+    -->
+    <insert id="insertRent" parameterType="hae.basic.vo.RentVO">
+        <![CDATA[
+            INSERT /* QueryID=insertRent */ 
+              INTO CARRENTB
+                   (RENT_NO,
+                    CAR_NO,
+                    USER_ID,
+                    RENT_DATE)
+            VALUES (#{rentNo},
+                    #{carNo},
+                    #{userID},
+                    TO_CHAR(SYSDATE, 'YYYY-MM-DD') )
+        ]]>
+    </insert>
+    
+    <!--
+        Query Name : updateRent
+        Description : rentNo에 대한 반납일자 수정.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410   		  최초 생성
+    -->
+    <update id="updateRent" parameterType="hae.basic.vo.RentVO">
+        <![CDATA[
+            UPDATE /* QueryID=updateRent */
+                   CARRENTB
+               SET RETURN_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+             WHERE RENT_NO = #{rentNo}
+        ]]>
+    </update>
+    
+    <!--
+        Query Name : deleteRent
+        Description : DELETE 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410   		  최초 생성
+    -->
+    <delete id="deleteRent" parameterType="hae.basic.vo.RentVO">
+        <![CDATA[
+            DELETE /* QueryID=deleteRent */ 
+              FROM CARRENTB
+             WHERE RENT_NO = #{rentNo}
+        ]]>
+    </delete>
+    
+    <!--
+        Query Name : selectRent
+        Description : SELECT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410    	 최초 생성
+    -->
+    <select id="selectRent" parameterType="hae.basic.vo.RentVO" resultMap="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRent */
+                   RENT_NO,
+                   CAR_NO,
+                   USER_ID,
+                   RENT_DATE,
+                   RETURN_DATE
+              FROM CARRENTB
+             WHERE RENT_NO = #{rentNo}
+        ]]>
+    </select>
+    
+    <!--
+        Query Name : selectRentList
+        Description : SELECT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 7.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 7.     6800410    	 최초 생성
+    -->
+    <select id="selectRentList" parameterType="hae.basic.vo.RentVO" resultType="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRent */
+                   RENT_NO,
+                   CAR_NO,
+                   USER_ID,
+                   RENT_DATE,
+                   RETURN_DATE
+              FROM CARRENTB
+             WHERE 1=1
+        ]]>
+    </select>
+    
+    
+
+
+</mapper>

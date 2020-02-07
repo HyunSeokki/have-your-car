@@ -33,7 +33,7 @@ public interface RentDAO {
 	void insertRent(RentVO vo) throws Exception;
 	
 	/**
-	 * 대여정보 수정
+	 * 반납일자 수정
 	 * @param vo
 	 * @throws Exception
 	 */
