@@ -5,9 +5,9 @@ package hae.basic.vo;
  * Statements
  * </pre>
  *
- * @ClassName   : StartVO.java
- * @Description : 클래스 설명을 기술합니다.
- * @author ableFrame
+ * @ClassName   : ActiveLogVO.java
+ * @Description : 시동Log 테이블
+ * @author Hyeonju
  * @since 2020. 2. 7.
  * @version 1.0
  * @see
@@ -15,7 +15,7 @@ package hae.basic.vo;
  * <pre>
  *     since          author              description
  *  ===========    =============    ===========================
- *  2020. 2. 7.     ableFrame     	최초 생성
+ *  2020. 2. 7.     Hyeonju     	최초 생성
  * </pre>
  */
 
