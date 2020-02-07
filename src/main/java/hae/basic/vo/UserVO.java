@@ -22,7 +22,7 @@ package hae.basic.vo;
 public class UserVO {
 
     String userID;
-    String userPW;
+    String userPWD;
     /**
      * @return the userID
      */
@@ -36,23 +36,24 @@ public class UserVO {
         this.userID = userID;
     }
     /**
-     * @return the userPW
+     * @return the userPWD
      */
-    public String getUserPW() {
-        return userPW;
+    public String getUserPWD() {
+        return userPWD;
     }
     /**
-     * @param userPW the userPW to set
+     * @param userPWD the userPWD to set
      */
-    public void setUserPW(String userPW) {
-        this.userPW = userPW;
+    public void setUserPWD(String userPWD) {
+        this.userPWD = userPWD;
     }
     /*
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "UserVO [userID=" + userID + ", userPW=" + userPW + "]";
+        return "UserVO [userID=" + userID + ", userPWD=" + userPWD + "]";
     }
+  
     
 }
