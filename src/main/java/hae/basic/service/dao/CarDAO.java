@@ -29,7 +29,7 @@ import hae.basic.vo.CarVO;
 public interface CarDAO {
 
     /* 자동차 목록 불러오기 */
-    List<CarVO> selectCar();
+    List<CarVO> selectCarList();
     /* 자동차 정보 삽입하기 */
     void insertCar(CarVO vo);
     /* 자동차 정보 가져오기 */

@@ -29,7 +29,7 @@
     </update>
     
     <!-- 유저 정보 삭제 -->
-    <delete id="deleteUser" parameterType="hae.basic.vo.UserVO">
+    <delete id="deleteUser" parameterType="String">
     <![CDATA[
         DELETE FROM USERIFTB
         WHERE user_id = #{userID}
@@ -37,7 +37,7 @@
     </delete>
     
     <!-- 유저 정보 불러오기 -->
-    <select id="selectUser" resultMap="user">
+     <select id="selectUser" parameterType="String" resultMap="user">
     <![CDATA[
         SELECT user_id
             , user_pwd
@@ -47,7 +47,7 @@
     </select>
     
     <!-- 유저 정보 목록 불러오기 -->
-    <select id="selectUserList" parameterType="hae.basic.vo.UserVO" resultType="user">
+     <select id="selectUserList" resultType="user">
     <![CDATA[
         SELECT user_id
             , user_pwd

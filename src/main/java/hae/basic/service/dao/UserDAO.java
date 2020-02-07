@@ -29,7 +29,7 @@ import hae.basic.vo.UserVO;
 public interface UserDAO {
 
     /* 유저 목록 불러오기 */
-    List<UserVO> selectUser();
+    List<UserVO> selectUserList();
     /* 유저 삽입  */
     void insertUser(UserVO vo);
     /* 유저 정보 불러오기 */

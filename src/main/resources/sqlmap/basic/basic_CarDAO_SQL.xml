@@ -13,9 +13,8 @@
 -->
 
 <mapper namespace="hae.basic.service.dao.CarDAO">
-
     <!-- 자동차 정보 데이터 형식 -->
-    <resultMap type="hae.basic.vo.CarDAO" id="car">
+    <resultMap type="hae.basic.vo.CarVO" id="car">
         <result property="carNo" column="car_no"/>
         <result property="carSize" column="car_size"/>
         <result property="carType" column="car_type"/>
@@ -24,7 +23,7 @@
         <result property="capacity" column="capacity"/>    
         <result property="cost" column="cost"/>    
         <result property="latitude" column="latitude"/>    
-        <result property="longtitude" column="longtitude"/>    
+        <result property="longitude" column="longitude"/>    
     </resultMap>
 
     <!-- 자동차 정보 삽입 -->
@@ -40,8 +39,8 @@
               , capacity
               , cost
               , latitude
-              , longtitude )
-        VALUES ( #{carNo}
+              , longitude )
+        VALUES ( #{carNo} /* need fix */
               , #{carSize}
               , #{carType}
               , #{mileage}
@@ -49,7 +48,7 @@
               , #{capacity}
               , #{cost}
               , #{latitude}
-              , #{longtitude} )
+              , #{longitude} )
     ]]>  
     
     </insert>
@@ -65,7 +64,7 @@
             , capacity= #{capacity}
             , cost = #{cost}
             , latitude = #{latitude}
-            , longtitude = #{longtitude}
+            , longitude = #{longitude}
         WHERE car_no = #{carNo}
     ]]> 
     </update>
@@ -79,7 +78,7 @@
     </delete>
     
     <!-- 자동차 정보 불러오기 -->
-    <select id="selectCar" resultMap="car">
+    <select id="selectCar" parameterType="String" resultMap="car">
     <![CDATA[
         SELECT car_no
             , car_size
@@ -89,14 +88,14 @@
             , capacity
             , cost
             , latitude
-            , longtitude
+            , longitude
         FROM CARINFTB
         WHERE car_no = #{carNo}
     ]]>             
     </select>
 
     <!-- 자동차 정보 목록 불러오기 -->
-    <select id="selectCarList" parameterType="hae.basic.vo.CarVO" resultType="car">
+    <select id="selectCarList" resultType="car">
     <![CDATA[
         SELECT car_no
             , car_size
@@ -106,7 +105,7 @@
             , capacity
             , cost
             , latitude
-            , longtitude
+            , longitude
         FROM CARINFTB
     ]]> 
     </select>

@@ -14,7 +14,7 @@
 
 <mapper namespace="hae.basic.service.dao.DrivingInfoDAO">
     
-    <resultMap id="drivingInfo" type="hae.basic.vo.DrivingInfoDAO">
+    <resultMap id="drivingInfo" type="hae.basic.vo.DrivingInfoVO">
         <result property="rentNo" column="rent_no"/>
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
@@ -40,36 +40,12 @@
                     LONGITUDE,
                     TIMESTAMP)
             VALUES (#{rentNo},
-                    #{carNo},
-                    #{userID},
+                    #{latitude},
+                    #{longitude},
                     #{timeStamp} )
         ]]>
     </insert>
     
-    <!-- 삭제 필요 -->
-    <!--
-        Query Name : updateRent
-        Description : DrivingInfo에 대한 반납일자 수정.
-        author 6800410
-        since 2020. 2. 7.
-        Modification Information
-           since          author              description
-        ===========    =============    ===========================
-        2020. 2. 7.     6800410   		  최초 생성
-    -->
-    <update id="updateDrivingInfo" parameterType="hae.basic.vo.DrivingInfoVO">
-        <![CDATA[
-            UPDATE /* QueryID=updateRent */
-                   DRVINFTB
-               SET LATITUDE = #{latitude},
-                   LONGITUDE = #{longitude},
-                   TIMESTAMP = #{timeStamp}
-             WHERE RENT_NO = #{rentNo} and 
-                   LATITUDE = #{latitude} and 
-                   LONGITUDE = #{longitude} and
-                   TIMESTAMP = #{timeStamp}
-        ]]>
-    </update>
     
     <!--
         Query Name : deleteDrivingInfo
@@ -124,7 +100,7 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectDrivingInfoList" parameterType="hae.basic.vo.DrivingInfoVO" resultType="rent">
+    <select id="selectDrivingInfoList" parameterType="String" resultType="rent">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,

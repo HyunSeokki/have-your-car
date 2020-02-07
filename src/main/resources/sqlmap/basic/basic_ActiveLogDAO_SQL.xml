@@ -29,13 +29,10 @@
         INTO ACTLOGTB
             ( START_NO
               , CAR_NO
-              , ON_DATE
-              , OFF_DATE )
+              , ON_DATE)
         VALUES ( NEXT VALUE FOR START_NO
               , #{carNo}
-              , #TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
-              , NULL
-              )
+              , #TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
     ]]>  
     </insert>
 
@@ -70,7 +67,7 @@
         Query ID : selectActiveLog
         Description : 시동 로그 정보을 조회한다.
      -->
-    <select id="selectActiveLog" resultMap="activeLog">
+    <select id="selectActiveLog" parameter="String" resultMap="activeLog">
     <![CDATA[
         SELECT /* Query ID=hae.basic.service.dao.ActiveLogDAO.selectActiveLog */
            START_NO
