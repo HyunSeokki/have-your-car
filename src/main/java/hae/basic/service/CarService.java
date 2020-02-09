@@ -61,7 +61,7 @@ public interface CarService {
      * @return
      * @throws Exception
      */
-    List<CarVO> selectCarList(CarVO vo) throws Exception;
+    List<CarVO> selectCarList() throws Exception;
   
     
 }
