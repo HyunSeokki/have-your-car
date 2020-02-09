@@ -8,6 +8,7 @@ import hae.basic.vo.CarVO;
  * <pre>
  * Statements
  * </pre>
+ *
  * @ClassName   : CarService.java
  * @Description : 클래스 설명을 기술합니다.
  * @author HAVE
@@ -41,14 +42,14 @@ public interface CarService {
     
     /**
      * 자동차 정보 삭제
-     * @param seq
+     * @param carNo
      * @throws Exception
      */
     void deleteCar(String carNo) throws Exception;
     
     /**
      * 자동차 정보 상세 조회
-     * @param seq
+     * @param carNo
      * @return
      * @throws Exception
      */
