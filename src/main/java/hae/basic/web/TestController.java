@@ -40,10 +40,12 @@ public class TestController extends HController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/basic/userList.do")
-    public String test(@ModelAttribute("basicSampleVO") UserVO userVO,
+    public String test(@ModelAttribute("userVO") UserVO userVO,
             Model model) throws Exception {
 	    
 	    List<UserVO> sampleList = userService.selectUserList();
+	    logger.debug("나는 사이즈에여 " + sampleList.size() + "");
+	    System.out.println(sampleList.toString());
         model.addAttribute("resultList", sampleList);
         
         return "basic/basicSampleList";
