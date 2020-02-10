@@ -18,34 +18,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Junho's Test JSP for DataBase</title>
 <script type="text/javaScript" language="javascript">
-    
+
+    function returnCar() {
+        document.detailForm.action = "<c:url value='/basic/return.do'/>";
+        document.detailForm.submit();
+    }
 </script>
 </head>
 <body>
-
-    <table width="500" border="1">
-        <thead>
-            <tr>
-                <th>차 번호</th>
-                <th>차 사이즈</th>
-                <th>차 종류</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:choose>
-                <c:forEach var="result" items="${resultList}"
-                    varStatus="status">
-                    <tr>
-                        <td><c:out value="${result.carNo }" /></td>
-                        <td><c:out value="${result.carSize }" /></td>
-                        <td><c:out value="${result.carType }" /></td>
-                    </tr>
-                </c:forEach>
-
-            </c:choose>
-        </tbody>
-    </table>
-
-
+    반납 버튼을 클릭 시, 차 번호를 전송하는 부분
+    
+    
+<a href="javascript:returnCar();"> 목록 </a>
 </body>
 </html>

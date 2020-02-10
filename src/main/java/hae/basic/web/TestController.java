@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import hae.basic.service.ActiveService;
+import hae.basic.service.RentService;
 import hae.basic.service.UserService;
 import hae.basic.vo.BasicSampleVO;
 import hae.basic.vo.UserVO;
@@ -39,6 +42,12 @@ public class TestController extends HController {
 	@Resource(name = "userService")
 	private UserService userService;
 	
+	@Resource(name = "rentService")
+	private RentService rentService;
+	
+	@Resource(name = "ActiveService")
+	private ActiveService activeService;
+	
 	@RequestMapping(value = "/basic/userList.do")
     public String test(@ModelAttribute("userVO") UserVO userVO,
             Model model) throws Exception {
@@ -51,5 +60,18 @@ public class TestController extends HController {
         return "basic/basicSampleList";
     }
 
-
+	@Resource(name = "/basic/return.do")
+	public String goTrip(@RequestParam("carNo") String carNo, Model model) throws Exception {
+        
+	    // 렌트 번호가 있는지, 해당 반납날짜가 있는지 확인
+	    
+	    
+	    // 시동이 꺼져 있는지 확인
+	    
+	    
+	    
+	    return carNo;
+	}
+	
+	
 }
