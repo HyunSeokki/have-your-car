@@ -78,7 +78,8 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectDrivingInfoList" resultType="rent">
+    <!-- 
+    <select id="selectDrivingInfoList" resultType="drivingInfo">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,
@@ -89,6 +90,7 @@
              WHERE 1=1
         ]]>
     </select>
+     -->
     
     <!--
         Query Name : selectRentList
@@ -100,7 +102,7 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectDrivingInfoList" parameterType="String" resultType="rent">
+    <select id="selectDrivingInfoList" parameterType="String" resultType="drivingInfo">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,

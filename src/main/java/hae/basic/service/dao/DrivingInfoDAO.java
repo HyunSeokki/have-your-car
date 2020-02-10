@@ -53,7 +53,7 @@ public interface DrivingInfoDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List<DrivingInfoVO> selectDrivingInfoList() throws Exception;
+//	List<DrivingInfoVO> selectDrivingInfoList() throws Exception;
 	
 	/**
      * 주행정보 렌트 정보 기준 조회

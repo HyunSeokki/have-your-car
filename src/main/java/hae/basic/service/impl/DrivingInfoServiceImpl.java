@@ -65,10 +65,10 @@ public class DrivingInfoServiceImpl extends HService implements DrivingInfoServi
     /*
      * @see hae.basic.service.DrivingInfoService#selectDrivingInfoList(hae.basic.vo.BasicSampleVO)
      */
-    @Override
-    public List<DrivingInfoVO> selectDrivingInfoList() throws Exception {
-        return drivingInfoDAO.selectDrivingInfoList();
-    }
+//    @Override
+//    public List<DrivingInfoVO> selectDrivingInfoList() throws Exception {
+//        return drivingInfoDAO.selectDrivingInfoList();
+//    }
 
     /*
      * @see hae.basic.service.DrinvingInfoService#selectDrivingInfo(hae.basic.vo.DrivingInfoVO)
