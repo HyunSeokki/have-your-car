@@ -68,13 +68,8 @@
 			<c:otherwise>
 				<c:forEach var="result" items="${resultList}"
 					varStatus="status">
-					<tr onclick="javascript:goView('${result.seq }')">
-						<td><c:out value="${result.seq }" /></td>
-						<td><c:out value="${result.category }" /></td>
-						<td><c:out value="${result.title }" /></td>
-						<td><c:out value="${result.regUser }" /></td>
-						<td><c:out value="${result.regDate }" /></td>
-						<td><c:out value="${result.viewCount }" /></td>
+					<tr onclick="javascript:goView('${result.userID }')">
+						<td><c:out value="${result.userPWD }" /></td>
 					</tr>
 				</c:forEach>
 

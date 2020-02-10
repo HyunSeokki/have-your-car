@@ -24,7 +24,7 @@ import hae.basic.vo.UserVO;
  * </pre>
  */
 
-public interface DrinvingInfoService {
+public interface DrivingInfoService {
 
     /**
      * 운전정보 등록

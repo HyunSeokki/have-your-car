@@ -36,7 +36,7 @@ import hae.basic.vo.ActiveLogVO;
 public class ActiveLogServiceimpl extends HService implements ActiveLogService{
     
     /** MDAO 등록 */
-    @Resource(name = "ActiveLogDAO")
+    @Resource(name = "activeLogDAO")
     private ActiveLogDAO activeLogDAO;
     
     @Override

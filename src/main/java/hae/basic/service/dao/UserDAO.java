@@ -25,7 +25,7 @@ import hae.basic.vo.UserVO;
  * </pre>
  */
 
-@Mapper("UserDAO")
+@Mapper("userDAO")
 public interface UserDAO {
 
     /* 유저 목록 불러오기 */

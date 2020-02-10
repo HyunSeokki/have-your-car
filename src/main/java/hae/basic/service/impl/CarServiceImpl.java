@@ -31,11 +31,11 @@ import hae.basic.vo.CarVO;
  * </pre>
  */
 
-@Service("CarService")
+@Service("carService")
 public class CarServiceImpl extends HService implements CarService{
 
     /** MDAO 등록*/
-    @Resource(name = "CarDAO")
+    @Resource(name = "carDAO")
     private CarDAO carDAO;
     
     /*

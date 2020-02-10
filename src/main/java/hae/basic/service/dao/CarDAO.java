@@ -25,7 +25,7 @@ import hae.basic.vo.CarVO;
  * </pre>
  */
 
-@Mapper("CarDAO")
+@Mapper("carDAO")
 public interface CarDAO {
 
     /* 자동차 목록 불러오기 */

@@ -34,11 +34,11 @@ import hae.basic.vo.UserVO;
  * </pre>
  */
 
-@Service("UserService")
+@Service("userService")
 public class UserServiceImpl extends HService implements UserService {
     
     /** MDAO 등록 */
-    @Resource(name = "UserDAO")
+    @Resource(name = "userDAO")
     private UserDAO userDAO;
     
     /*

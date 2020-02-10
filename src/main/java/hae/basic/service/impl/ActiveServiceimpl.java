@@ -34,7 +34,7 @@ import hae.basic.vo.ActiveVO;
 @Service("activeService")
 public class ActiveServiceimpl extends HService implements ActiveService{
     /** MDAO 등록 */
-    @Resource(name = "ActiveDAO")
+    @Resource(name = "activeDAO")
     private ActiveDAO activeDAO;
     
     @Override

@@ -8,7 +8,7 @@ import able.com.service.HService;
 
 import org.springframework.stereotype.Service;
 
-import hae.basic.service.DrinvingInfoService;
+import hae.basic.service.DrivingInfoService;
 import hae.basic.service.dao.DrivingInfoDAO;
 import hae.basic.vo.DrivingInfoVO;
 
@@ -31,11 +31,11 @@ import hae.basic.vo.DrivingInfoVO;
  * </pre>
  */
 
-@Service("DrivingInfoService")
-public class DrivingInfoServiceImpl extends HService implements DrinvingInfoService {
+@Service("drivingInfoService")
+public class DrivingInfoServiceImpl extends HService implements DrivingInfoService {
     
     /** MDAO 등록 */
-    @Resource(name = "DrivingInfoDAO")
+    @Resource(name = "drivingInfoDAO")
     private DrivingInfoDAO drivingInfoDAO;
     
     /*
