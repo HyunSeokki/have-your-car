@@ -95,7 +95,7 @@
     </select>
 
     <!-- 자동차 정보 목록 불러오기 -->
-    <select id="selectCarList" resultType="car">
+    <select id="selectCarList" resultMap="car">
     <![CDATA[
         SELECT car_no
             , car_size

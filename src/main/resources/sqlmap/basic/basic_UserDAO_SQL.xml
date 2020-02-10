@@ -47,7 +47,7 @@
     </select>
     
     <!-- 유저 정보 목록 불러오기 -->
-     <select id="selectUserList" resultType="user">
+     <select id="selectUserList" resultMap="user">
     <![CDATA[
         SELECT user_id
             , user_pwd

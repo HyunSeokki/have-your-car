@@ -30,23 +30,7 @@
 <body>
 
 <h1>Basic Sample</h1><br>
-<form:form commandName="basicSampleVO" id="listForm" name="listForm" method="post">
-<input type="hidden" name="selectedSeq" />
-<table>
-	<tr>
-		<td>
-			<form:select path="searchCondition">
-				<form:option value="2" label="작성자" />
-				<form:option value="1" label="제목" />
-				<form:option value="0" label="분류" />
-			</form:select>
-			<form:input path="searchKeyword" />
-			<a href="javascript:goSearch();"> 검색</a> 
-			<a href="javascript:goRegister();">	등록	</a>
-		</td>
-	</tr>	
-</table>
-<br>
+
 <table width="500" border="1">
 	<thead>
 		<tr>
@@ -68,16 +52,14 @@
 			<c:otherwise>
 				<c:forEach var="result" items="${resultList}"
 					varStatus="status">
-					<tr onclick="javascript:goView('${result.userID }')">
+						<td><c:out value="${result.userID }" /></td>
 						<td><c:out value="${result.userPWD }" /></td>
-					</tr>
 				</c:forEach>
 
 			</c:otherwise>
 		</c:choose>
 	</tbody>
 </table>
-</form:form>
 
 </body>
 </html>
