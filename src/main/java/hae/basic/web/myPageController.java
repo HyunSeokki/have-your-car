@@ -43,10 +43,13 @@ public class myPageController extends HController {
     private RentService rentService;
     
     @RequestMapping(value = "/basic/mypage.do")
-    public String rentList(@ModelAttribute("RentVO") RentVO rentVO,
+    public String rentList(@ModelAttribute("userID") String userID,
             Model model) throws Exception {
         
-        List<RentVO> rentList = rentService.selectRentList(rentVO);
+        // temp
+        userID = "user1";
+        
+        List<RentVO> rentList = rentService.selectRentListByUserID(userID);
         System.out.println(rentList);
         model.addAttribute("myRentList", rentList);
         
