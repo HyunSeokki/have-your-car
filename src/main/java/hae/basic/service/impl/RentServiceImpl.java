@@ -1,5 +1,7 @@
 package hae.basic.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -79,9 +81,39 @@ public class RentServiceImpl extends HService implements RentService {
      * @see hae.basic.service.RentService#selectRentList(hae.basic.vo.RentVO)
      */
     @Override
-    public List<RentVO> selectRentList(RentVO vo) throws Exception {
+    public List<RentVO> selectRentList() throws Exception {
         // TODO Auto-generated method stub
-        return rentDAO.selectRentList(vo);
+        return rentDAO.selectRentList();
+    }
+
+    /*
+     * @see hae.basic.service.RentService#selectRentListByCar(java.lang.String)
+     */
+    @Override
+    public List<RentVO> selectRentListByCar(String carNo) throws Exception {
+        // TODO Auto-generated method stub
+        List<RentVO> temp = new ArrayList<RentVO>();
+        for(RentVO items : rentDAO.selectRentList()) {
+            if(items.getCarNo().equals(carNo))
+                temp.add(items);
+        }
+        
+        return temp;
+    }
+
+    /*
+     * @see hae.basic.service.RentService#selectRentListByUserID(java.lang.String)
+     */
+    @Override
+    public List<RentVO> selectRentListByUserID(String userID) throws Exception {
+        // TODO Auto-generated method stub
+        List<RentVO> temp =  new ArrayList<RentVO>();
+        for(RentVO items : rentDAO.selectRentList()) {
+            if(items.getUserID().equals(userID))
+                temp.add(items);
+        }
+        
+        return temp;
     }
 
 }

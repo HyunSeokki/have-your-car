@@ -62,6 +62,22 @@ public interface RentService {
      * @return
      * @throws Exception
      */
-    List<RentVO> selectRentList(RentVO vo) throws Exception;
+    List<RentVO> selectRentList() throws Exception;
+    
+    /**
+     * 대여정보 차 번호로 조회
+     * @param String
+     * @return
+     * @throws Exception
+     */
+    List<RentVO> selectRentListByCar(String carNo) throws Exception;
+    
+    /**
+     * 대여정보 유저 아이디로 조회
+     * @param String
+     * @return
+     * @throws Exception
+     */
+    List<RentVO> selectRentListByUserID(String userID) throws Exception;
     
 }

@@ -1,14 +1,11 @@
 package hae.basic.web;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import able.com.web.HController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,7 +13,6 @@ import hae.basic.service.ActiveService;
 import hae.basic.service.RentService;
 import hae.basic.service.UserService;
 import hae.basic.vo.ActiveVO;
-import hae.basic.vo.UserVO;
 
 /**
  * <pre>
@@ -74,7 +70,7 @@ public class JunController extends HController{
         } else {
             logger.debug("시동 꺼짐");
             // 시동이 꺼져있을 때
-            model.addAttribute("carNo", carNo);
+            model.addAttribute("rentList", rentService.selectRentListByCar(carNo));
             return "basic/trip";
         }
     }
