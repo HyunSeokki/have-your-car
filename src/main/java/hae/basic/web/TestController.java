@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import hae.basic.service.ActiveService;
+import hae.basic.service.RentService;
 import hae.basic.service.UserService;
 import hae.basic.vo.BasicSampleVO;
 import hae.basic.vo.UserVO;
@@ -38,6 +41,7 @@ public class TestController extends HController {
 	 */
 	@Resource(name = "userService")
 	private UserService userService;
+
 	
 	@RequestMapping(value = "/basic/userList.do")
     public String test(@ModelAttribute("userVO") UserVO userVO,
@@ -50,6 +54,6 @@ public class TestController extends HController {
         
         return "basic/basicSampleList";
     }
-
-
+	
+	
 }
