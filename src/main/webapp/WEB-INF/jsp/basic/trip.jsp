@@ -23,7 +23,7 @@
 </head>
 <body>
     come here
-    <c:forEach var="rent" items="${rentList}" varStatus="status">
+    <c:forEach var="rent" items="${rentInfo}" varStatus="status">
         <tr>
             <td><c:out value="${rent.rentNo }" /></td>
             <td><c:out value="${rent.carNo }" /></td>

@@ -1,5 +1,6 @@
 package hae.basic.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -60,7 +61,12 @@ public class ActiveLogServiceImpl extends HService implements ActiveLogService{
     }
     
     @Override
-    public List<ActiveLogVO> selectActiveLogList(ActiveLogVO vo) throws Exception{
-        return activeLogDAO.selectActiveLogList(vo);
+    public List<ActiveLogVO> selectActiveLogList() throws Exception{
+        return activeLogDAO.selectActiveLogList();
     }
+
 }
+
+
+
+
