@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import able.com.web.HController;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +37,8 @@ import hae.basic.vo.UserVO;
  * </pre>
  */
 
-public class JunController {
+@Controller
+public class JunController extends HController{
     
     /**
      * CRUD 기본 샘플의 서비스
@@ -45,24 +49,34 @@ public class JunController {
     @Resource(name = "rentService")
     private RentService rentService;
     
-    @Resource(name = "ActiveService")
+    @Resource(name = "activeService")
     private ActiveService activeService;
+    
+    // test login user
+    String loginID = "test";
 
-    @Resource(name = "/basic/return.do")
-    public String goTrip(@RequestParam("carNo") String carNo, Model model) throws Exception {
-        
+    @RequestMapping(value = "/basic/go.do")
+    public String goTest() throws Exception {
+        return "basic/JunsTest";  
+    }
+    
+    @RequestMapping(value = "/basic/return.do")
+    public String goTrip(@RequestParam("carNo") String carNo,
+            Model model) throws Exception {
+        logger.debug("진입");
         // 시동이 꺼져 있는지 확인
         ActiveVO temp = activeService.selectActive(carNo);
-        if(temp.getStartYn() == "Y") {
+        if(temp.getStartYn().equals("Y")) {
             // 시동이 걸려있을 때
             // 되돌려보낸다.
+            logger.debug("시동 켜져있음");
+            return "basic/returnRefuse";
         } else {
+            logger.debug("시동 꺼짐");
             // 시동이 꺼져있을 때
             model.addAttribute("carNo", carNo);
             return "basic/trip";
         }
-        
-        return carNo;
     }
     
     

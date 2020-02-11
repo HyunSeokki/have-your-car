@@ -18,17 +18,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Junho's Test JSP for DataBase</title>
 <script type="text/javaScript" language="javascript">
-
-    function returnCar() {
-        document.detailForm.action = "<c:url value='/basic/return.do'/>";
-        document.detailForm.submit();
-    }
 </script>
 </head>
 <body>
     반납 버튼을 클릭 시, 차 번호를 전송하는 부분
-    
-    
-<a href="javascript:returnCar();"> 목록 </a>
+    <br>
+
+    <form action="return.do" method="post">
+        <input type="text" name="carNo" placeholder="차 번호 입력">
+        <br>
+        <input type="submit" value="gogo">
+    </form>
+
+
 </body>
 </html>
