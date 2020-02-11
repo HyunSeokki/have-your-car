@@ -2,7 +2,7 @@
 
 
 
-#### **사용자버전**
+#### **사용자버전** 
 
 | 화면       | 상황             | 상세                                                         |
 | ---------- | ---------------- | ------------------------------------------------------------ |
@@ -13,69 +13,21 @@
 | trip.jsp   |                  | 이동 경로  표시(경로 데이터 가져옴) + 결제 버튼              |
 | mypage.jsp |                  | 대여 리스트<br/>해당 대여리스트  아래에 (모달팝업으로) 이동경로 표시 |
 
-
-
-```mermaid
-sequenceDiagram
-	participant 시작
-	participant login.jsp
-	participant main.jsp
-	participant rent.jsp
-	participant trip.jsp
-	participant mypage.jsp
-	
-	시작 -->> login.jsp : [index.do]
-	
-	login.jsp -->> main.jsp : 로그인 요청<br/>[/login.do]
-	login.jsp ->> login.jsp : 실패시
-	
-	Note left of login.jsp : 로그인 후 세션유지
-	
-	loop 가능차량 확인
-		main.jsp -->> main.jsp : [/main.do?carNo={car_no}]
-	end
-	main.jsp -->> rent.jsp : 대여버튼 클릭<br/>[/rent.do]
-	
-	rent.jsp -->> trip.jsp : 반납버튼 클릭<br/>[/return.do?carNo={car_no}]
-	rent.jsp ->> rent.jsp : 실패시
-	trip.jsp -->> main.jsp : 성공시 리다이렉트<br/>[/pay.do]
-	
-	main.jsp -->> mypage.jsp : 마이페이지 클릭<br/>[mypage.do]
-	loop 대여 상세 표시
-		mypage.jsp -->> mypage.jsp : [mypage.do?rentNo=rent_no]
-	end
-```
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdHBhcnRpY2lwYW50IOyLnOyekVxuXHRwYXJ0aWNpcGFudCBsb2dpbi5qc3Bcblx0cGFydGljaXBhbnQgbWFpbi5qc3Bcblx0cGFydGljaXBhbnQgcmVudC5qc3Bcblx0cGFydGljaXBhbnQgdHJpcC5qc3Bcblx0cGFydGljaXBhbnQgbXlwYWdlLmpzcFxuXHRcblx07Iuc7J6RIC0tPj4gbG9naW4uanNwIDogW2luZGV4LmRvXVxuXHRcblx0bG9naW4uanNwIC0tPj4gbWFpbi5qc3AgOiDroZzqt7jsnbgg7JqU7LKtPGJyLz5bL2xvZ2luLmRvXVxuXHRsb2dpbi5qc3AgLT4-IGxvZ2luLmpzcCA6IOyLpO2MqOyLnFxuXHRcblx0Tm90ZSBsZWZ0IG9mIGxvZ2luLmpzcCA6IOuhnOq3uOyduCDtm4Qg7IS47IWY7Jyg7KeAXG5cdFxuXHRsb29wIOqwgOuKpeywqOufiSDtmZXsnbhcblx0XHRtYWluLmpzcCAtLT4-IG1haW4uanNwIDogWy9tYWluLmRvP2Nhck5vPXtjYXJfbm99XVxuXHRlbmRcblx0bWFpbi5qc3AgLS0-PiByZW50LmpzcCA6IOuMgOyXrOuyhO2KvCDtgbTrpq08YnIvPlsvcmVudC5kb11cblx0XG5cdHJlbnQuanNwIC0tPj4gdHJpcC5qc3AgOiDrsJjrgqnrsoTtirwg7YG066atPGJyLz5bL3JldHVybi5kbz9jYXJObz17Y2FyX25vfV1cblx0cmVudC5qc3AgLT4-IHJlbnQuanNwIDog7Iuk7Yyo7IucXG5cdHRyaXAuanNwIC0tPj4gbWFpbi5qc3AgOiDshLHqs7Xsi5wg66as64uk7J2066CJ7Yq4PGJyLz5bL3BheS5kb11cblx0XG5cdG1haW4uanNwIC0tPj4gbXlwYWdlLmpzcCA6IOuniOydtO2OmOydtOyngCDtgbTrpq08YnIvPltteXBhZ2UuZG9dXG5cdGxvb3Ag64yA7JesIOyDgeyEuCDtkZzsi5xcblx0XHRteXBhZ2UuanNwIC0tPj4gbXlwYWdlLmpzcCA6IFtteXBhZ2UuZG8_cmVudE5vPXJlbnRfbm9dXG5cdGVuZCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdHBhcnRpY2lwYW50IOyLnOyekVxuXHRwYXJ0aWNpcGFudCBsb2dpbi5qc3Bcblx0cGFydGljaXBhbnQgbWFpbi5qc3Bcblx0cGFydGljaXBhbnQgcmVudC5qc3Bcblx0cGFydGljaXBhbnQgdHJpcC5qc3Bcblx0cGFydGljaXBhbnQgbXlwYWdlLmpzcFxuXHRcblx07Iuc7J6RIC0tPj4gbG9naW4uanNwIDogW2luZGV4LmRvXVxuXHRcblx0bG9naW4uanNwIC0tPj4gbWFpbi5qc3AgOiDroZzqt7jsnbgg7JqU7LKtPGJyLz5bL2xvZ2luLmRvXVxuXHRsb2dpbi5qc3AgLT4-IGxvZ2luLmpzcCA6IOyLpO2MqOyLnFxuXHRcblx0Tm90ZSBsZWZ0IG9mIGxvZ2luLmpzcCA6IOuhnOq3uOyduCDtm4Qg7IS47IWY7Jyg7KeAXG5cdFxuXHRsb29wIOqwgOuKpeywqOufiSDtmZXsnbhcblx0XHRtYWluLmpzcCAtLT4-IG1haW4uanNwIDogWy9tYWluLmRvP2Nhck5vPXtjYXJfbm99XVxuXHRlbmRcblx0bWFpbi5qc3AgLS0-PiByZW50LmpzcCA6IOuMgOyXrOuyhO2KvCDtgbTrpq08YnIvPlsvcmVudC5kb11cblx0XG5cdHJlbnQuanNwIC0tPj4gdHJpcC5qc3AgOiDrsJjrgqnrsoTtirwg7YG066atPGJyLz5bL3JldHVybi5kbz9jYXJObz17Y2FyX25vfV1cblx0cmVudC5qc3AgLT4-IHJlbnQuanNwIDog7Iuk7Yyo7IucXG5cdHRyaXAuanNwIC0tPj4gbWFpbi5qc3AgOiDshLHqs7Xsi5wg66as64uk7J2066CJ7Yq4PGJyLz5bL3BheS5kb11cblx0XG5cdG1haW4uanNwIC0tPj4gbXlwYWdlLmpzcCA6IOuniOydtO2OmOydtOyngCDtgbTrpq08YnIvPltteXBhZ2UuZG9dXG5cdGxvb3Ag64yA7JesIOyDgeyEuCDtkZzsi5xcblx0XHRteXBhZ2UuanNwIC0tPj4gbXlwYWdlLmpzcCA6IFtteXBhZ2UuZG8_cmVudE5vPXJlbnRfbm9dXG5cdGVuZCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19)
 
 
 
-#### 자동차버전
-
-| 화면        | 상황      | 상세                                                         |
-| ----------- | --------- | ------------------------------------------------------------ |
-| carTest.jsp |           | 차량 선택  리스트 + 시동 버튼(시동 상태에 따른 색 변화)      |
-|             | 차량 선택 | /selectCar.do?carNo={car_no} [GET]<br/>해당 차량 시동 여부를 가져옴. |
-|             | 시동 on   | /activate.do?carNo={car_no} [GET]                            |
-|             | 시동 off  | /inactivate.do?carNo={car_no} [GET]                          |
 
 
+#### 자동차버전 (/have/car)
 
-```mermaid
-sequenceDiagram
-	participant 시작
-	participant carTest.jsp
-	participant server
-	
-	시작 -->> carTest.jsp : /main.do
-	loop 차량 선택
-		carTest.jsp-->>server : /selectCar.do?carNo={car_no}
-		server->>carTest.jsp : 차량 시동 여부
-	end
-	
-	loop 시동 버튼 클릭
-		carTest.jsp-->>server : 시동이 안걸려있을 때 <br/>/activate.do?carNo={car_no}
-		carTest.jsp-->>server : 시동이 걸려있을 때<br/>/inactivate.do?carNo={car_no}
-	end
-	server ->> carTest.jsp : Toggle
-	
-```
+| 화면        | 상황          | 상세                                                         |
+| :---------- | ------------- | ------------------------------------------------------------ |
+| carTest.jsp |               | 차량 선택  리스트 + 시동 버튼(시동 상태에 따른 색 변화)      |
+|             | 차량 선택     | /selectCar.do?carNo={car_no} [GET]<br/>해당 차량 시동 여부를 가져옴. |
+|             | 시동 업데이트 | /updateActiveState.do?carNo={car_no} [GET]                   |
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdHBhcnRpY2lwYW50IOyLnOyekVxuXHRwYXJ0aWNpcGFudCBjYXJUZXN0LmpzcFxuXHRwYXJ0aWNpcGFudCBzZXJ2ZXJcblx0XG5cdOyLnOyekSAtLT4-IGNhclRlc3QuanNwIDogL21haW4uZG9cblx0bG9vcCDssKjrn4kg7ISg7YOdXG5cdFx0Y2FyVGVzdC5qc3AtLT4-c2VydmVyICA6IC9zZWxlY3RDYXIuZG8_Y2FyTm89e2Nhcl9ub31cblx0XHRzZXJ2ZXItPj5jYXJUZXN0LmpzcCA6IOywqOufiSDsi5zrj5kg7Jes67aAXG5cdGVuZFxuXHRcblx0bG9vcCDsi5zrj5kg67KE7Yq8IO2BtOumrVxuXHRcdGNhclRlc3QuanNwLS0-PnNlcnZlciA6ICAvdXBkYXRlQWN0aXZlU3RhdGUuZG8_Y2FyTm89e2Nhcl9ub31cblx0XHRzZXJ2ZXIgLT4-IGNhclRlc3QuanNwIDog7Iuc64-Z7KCV67O0IOyXheuNsOydtO2KuFxuXHRlbmQiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdHBhcnRpY2lwYW50IOyLnOyekVxuXHRwYXJ0aWNpcGFudCBjYXJUZXN0LmpzcFxuXHRwYXJ0aWNpcGFudCBzZXJ2ZXJcblx0XG5cdOyLnOyekSAtLT4-IGNhclRlc3QuanNwIDogL21haW4uZG9cblx0bG9vcCDssKjrn4kg7ISg7YOdXG5cdFx0Y2FyVGVzdC5qc3AtLT4-c2VydmVyICA6IC9zZWxlY3RDYXIuZG8_Y2FyTm89e2Nhcl9ub31cblx0XHRzZXJ2ZXItPj5jYXJUZXN0LmpzcCA6IOywqOufiSDsi5zrj5kg7Jes67aAXG5cdGVuZFxuXHRcblx0bG9vcCDsi5zrj5kg67KE7Yq8IO2BtOumrVxuXHRcdGNhclRlc3QuanNwLS0-PnNlcnZlciA6ICAvdXBkYXRlQWN0aXZlU3RhdGUuZG8_Y2FyTm89e2Nhcl9ub31cblx0XHRzZXJ2ZXIgLT4-IGNhclRlc3QuanNwIDog7Iuc64-Z7KCV67O0IOyXheuNsOydtO2KuFxuXHRlbmQiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
+
+
 
