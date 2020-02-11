@@ -40,4 +40,14 @@ public class ActiveVO {
     public void setStartYn(String startYn) {
         this.startYn = startYn;
     }
+
+    /*
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ActiveVO [carNo=" + carNo + ", startYn=" + startYn + "]";
+    }
+    
+    
 }
