@@ -38,7 +38,7 @@ import hae.basic.vo.UserVO;
 
 @Controller
 public class myPageController extends HController {
-    
+
     @Resource(name = "rentService")
     private RentService rentService;
     
