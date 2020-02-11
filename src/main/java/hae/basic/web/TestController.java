@@ -50,6 +50,4 @@ public class TestController extends HController {
         
         return "basic/basicSampleList";
     }
-
-
 }
