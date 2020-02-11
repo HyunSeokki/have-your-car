@@ -1,5 +1,7 @@
 package hae.basic.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import able.com.web.HController;
@@ -8,14 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import hae.basic.service.ActiveLogService;
 import hae.basic.service.ActiveService;
 import hae.basic.service.CarService;
 import hae.basic.service.DrivingInfoService;
 import hae.basic.service.RentService;
 import hae.basic.service.UserService;
 import hae.basic.vo.ActiveVO;
+import hae.basic.vo.DrivingInfoVO;
+import hae.basic.vo.RentVO;
 
 /**
  * <pre>
@@ -51,9 +55,6 @@ public class JunController extends HController{
     @Resource(name = "activeService")
     private ActiveService activeService;
     
-    @Resource(name = "activeLogService")
-    private ActiveLogService activeLogService;
-    
     @Resource(name = "carService")
     private CarService carService;
     
@@ -83,20 +84,34 @@ public class JunController extends HController{
             logger.debug("시동 꺼짐");
             // 시동이 꺼져있을 때
             // 렌트 정보 가져오기
-            model.addAttribute("rentInfo", rentService.selectRentListByCar(carNo));
-            // 시동 로그 가져오기
-            model.addAttribute("activeLog", rentService.selectRentListByCar(carNo));
+            List<RentVO> rent = rentService.selectRentListByCar(carNo);
+            RentVO rentOne = new RentVO();
+            for (RentVO item : rent) {
+                if(item.getReturnDate()==null)
+                    rentOne = item;
+            }
+            model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
-            model.addAttribute("drivingInfo", rentService.selectRentListByCar(carNo));
+//            model.addAttribute("drivingInfo", rentService.selectRentListByCar(carNo));
             // 차량 정보에서 비용 가져오기
-            model.addAttribute("carInfo", rentService.selectRentListByCar(carNo));
-            
-            
+            int cost = carService.selectCar(carNo).getCost();
+            model.addAttribute("cost", cost);
             
             return "basic/trip";
         }
     }
     
-    
+    @RequestMapping(value= "/basic/insertTestSample.do")
+    @ResponseBody
+    public void logDatas(@RequestParam String lng, @RequestParam String lat, @RequestParam String rentNo,
+            Model model) throws Exception {
+        
+        logger.debug(lng + " " + lat + " " + rentNo);
+//        DrivingInfoVO dvo = new DrivingInfoVO();
+//        dvo.setLatitude(lat);
+//        dvo.setLongitude(lng);
+//        drivingInfoService.insertDrivingInfo();
+        
+    }
     
 }
