@@ -44,7 +44,7 @@ import hae.basic.vo.RentVO;
  */
 
 @Controller
-public class JunController extends HController{
+public class ReturnMapController extends HController{
     
     /**
      * CRUD 기본 샘플의 서비스
