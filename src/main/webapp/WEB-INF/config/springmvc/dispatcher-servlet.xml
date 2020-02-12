@@ -12,6 +12,8 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
+    <!-- for json -->
+    <context:component-scan base-package="ajax.controller"></context:component-scan>
 
 <!-- LocaleResolver 선언 시작 -->
     <!-- multi language message Resolver request가 가지고 있는 session으로 부터 locale 정보를 가져온다 -->
@@ -106,6 +108,20 @@
 	</mvc:interceptors> -->
 	<!--mvc 태그 사용 설정 끝  -->
 <!-- HandlerMappings 선언 끝  -->
+
+
+<!-- for json - @responsebody 한글처리 -->
+<mvc:annotation-driven>
+    <mvc:message-converters>
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes">
+                <list>
+                    <value>text/html;charset=UTF-8</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:message-converters>
+</mvc:annotation-driven>
 
 
 <!-- HandlerAdapters 선언 시작 -->
