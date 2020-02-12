@@ -86,7 +86,7 @@ sumLo += "${dr.longitude}"*1;
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(sumLa/"${drv.size()}", sumLo/"${drv.size()}"), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };
 
 // 지도 그리기
@@ -96,7 +96,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 var polyline = new kakao.maps.Polyline({
     path: linePath, // 선을 구성하는 좌표배열 입니다
     strokeWeight: 5, // 선의 두께 입니다
-    strokeColor: '#FFAE00', // 선의 색깔입니다
+    strokeColor: '#6633FF', // 선의 색깔입니다
     strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'solid' // 선의 스타일입니다
 });
