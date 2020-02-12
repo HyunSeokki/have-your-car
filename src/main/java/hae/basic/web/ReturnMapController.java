@@ -44,7 +44,7 @@ import hae.basic.vo.RentVO;
  */
 
 @Controller
-public class JunController extends HController{
+public class ReturnMapController extends HController{
     
     /**
      * CRUD 기본 샘플의 서비스
@@ -64,9 +64,6 @@ public class JunController extends HController{
     @Resource(name = "drivingInfoService")
     private DrivingInfoService drivingInfoService;
     
-    // test login user
-    String loginID = "test";
-
     @RequestMapping(value = "/basic/go.do")
     public String goTest() throws Exception {
         return "basic/JunsTest";  
@@ -102,7 +99,8 @@ public class JunController extends HController{
             }
             model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
-            model.addAttribute("drivingInfo", drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo()));
+            List<DrivingInfoVO> drv = drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo());
+            model.addAttribute("drv", drv);
             // 차량 정보에서 비용 가져오기
             int cost = carService.selectCar(carNo).getCost();
             model.addAttribute("cost", cost);
