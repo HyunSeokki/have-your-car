@@ -102,7 +102,7 @@ public class JunController extends HController{
             }
             model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
-//            model.addAttribute("drivingInfo", rentService.selectRentListByCar(carNo));
+            model.addAttribute("drivingInfo", drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo()));
             // 차량 정보에서 비용 가져오기
             int cost = carService.selectCar(carNo).getCost();
             model.addAttribute("cost", cost);

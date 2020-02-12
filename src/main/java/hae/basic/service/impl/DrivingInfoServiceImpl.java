@@ -54,22 +54,7 @@ public class DrivingInfoServiceImpl extends HService implements DrivingInfoServi
         drivingInfoDAO.deleteDrivingInfo(vo);
     }
 
-    /*
-     * @see hae.basic.service.DrivingInfoService#selectDrivingInfo(java.lang.String)
-     */
-    @Override
-    public List<DrivingInfoVO> selectDrivingInfoList(String rentNo) throws Exception {
-        return drivingInfoDAO.selectDrivingInfoList(rentNo);
-    }
-
-    /*
-     * @see hae.basic.service.DrivingInfoService#selectDrivingInfoList(hae.basic.vo.BasicSampleVO)
-     */
-//    @Override
-//    public List<DrivingInfoVO> selectDrivingInfoList() throws Exception {
-//        return drivingInfoDAO.selectDrivingInfoList();
-//    }
-
+    
     /*
      * @see hae.basic.service.DrinvingInfoService#selectDrivingInfo(hae.basic.vo.DrivingInfoVO)
      */
@@ -77,5 +62,23 @@ public class DrivingInfoServiceImpl extends HService implements DrivingInfoServi
     public DrivingInfoVO selectDrivingInfo(DrivingInfoVO vo) throws Exception {
         // TODO Auto-generated method stub
         return drivingInfoDAO.selectDrivingInfo(vo);
+    }
+
+    /*
+     * @see hae.basic.service.DrivingInfoService#selectDrivingInfoList()
+     */
+    @Override
+    public List<DrivingInfoVO> selectDrivingInfoList() throws Exception {
+        // TODO Auto-generated method stub
+        return drivingInfoDAO.selectDrivingInfoList();
+    }
+
+    /*
+     * @see hae.basic.service.DrivingInfoService#selectDrivingInfoListByRentNo(java.lang.String)
+     */
+    @Override
+    public List<DrivingInfoVO> selectDrivingInfoListByRentNo(String rentNo) throws Exception {
+        // TODO Auto-generated method stub
+        return drivingInfoDAO.selectDrivingInfoListByRentNo(rentNo);
     }
 }
