@@ -56,9 +56,10 @@ public interface ActiveLogService {
     
     /**
      * 시동Log정보 목록 조회
-     * @param vo
+     * @param 
      * @return
      * @throws Exception
      */
-    List<ActiveLogVO> selectActiveLogList(ActiveLogVO vo) throws Exception;
+    List<ActiveLogVO> selectActiveLogList() throws Exception;
+    
 }
