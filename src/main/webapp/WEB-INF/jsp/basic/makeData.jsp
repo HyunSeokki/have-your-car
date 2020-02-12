@@ -27,9 +27,9 @@
 </script>
 </head>
 <body>
-<div id="map" style="width:100%;height:500px;"></div>
+<h1>Make Data Page</h1>
+<div id="map" style="width:100%;height:650px; "></div>
 
-<p><em>경로 테스트 맵!</em></p> 
 <div id="clickLatlng"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>

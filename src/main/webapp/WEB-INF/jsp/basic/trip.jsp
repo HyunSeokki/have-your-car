@@ -23,14 +23,18 @@
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
-
+var rentNo = "${rentInfo.rentNo }";
+function makeData() {
+    window.open("makeData.do?rentNo="+rentNo,"width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+}
 </script>
 </head>
 <body>
 <div id="map" style="width:100%;height:500px;"></div>
 
 <p><em>Trip 확인</em></p> 
-<div id="clickLatlng"></div>
+<a href="javascript:makeData();"> Make Data </a> 
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
@@ -40,7 +44,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 3 // 지도의 확대 레벨
     };
 
-var rentNo = "${rentInfo.rentNo }";
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 

@@ -72,6 +72,13 @@ public class JunController extends HController{
         return "basic/JunsTest";  
     }
     
+    @RequestMapping(value = "/basic/makeData.do")
+    public String makeData(@RequestParam("rentNo") String rentNo,
+            Model model) throws Exception {
+        model.addAttribute("rentNo", rentNo);
+        return "basic/makeData";
+    }
+    
     @RequestMapping(value = "/basic/return.do")
     public String goTrip(@RequestParam("carNo") String carNo,
             Model model) throws Exception {
