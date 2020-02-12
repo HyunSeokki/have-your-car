@@ -71,7 +71,7 @@ public class myPageController extends HController {
         
         res.setContentType("text/html; charset=UTF-8");
 
-        List<DrivingInfoVO> selectDrivingInfoList = drivingInfoService.selectDrivingInfoList(rentNo);
+        List<DrivingInfoVO> selectDrivingInfoList = drivingInfoService.selectDrivingInfoListByRentNo(rentNo);
 
 //        for (int i = 0; i < selectDrivingInfoList.size(); i++) {
 //            System.out.println(selectDrivingInfoList.get(i));
