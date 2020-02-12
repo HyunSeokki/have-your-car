@@ -33,13 +33,38 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+    .btn {margin-left:90%;background-color: #3498db; border-bottom: 5px solid #2980B9; text-shadow: 0px -2px #2980B9; position: relative; padding: 10px 40px; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 15px; color: #FFF; text-decoration: none;}
+    #map {margin: 15px 0 0 0;}
 </style>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d"></script>
-
+<script>
+function mypage_click()
+{
+    alert('hi');
+}
+function goRent(carNo, userID)
+{
+    var rent = document.data;
+            
+    rent.carNo.value = carNo;
+    rent.userID.value = "test";
+    
+    rent.action = "./rent.do";
+    rent.method = "post";
+    rent.submit();
+    
+}
+</script>
 </head>
 <body>
+    <button class="btn" type="button" onclick="mypage_click();">My page</button>
+    
     <div id="map" style="width:100%;height:600px;"></div>
+    <form name="data">
+        <input type="hidden" name="carNo"/>
+        <input type="hidden" name="userID"/>
+    </form>
 <script>
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
     var lat, lon;
@@ -85,7 +110,9 @@
     var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
     imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
     imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-                
+    
+    overlay = new Array();
+    
     <c:forEach items="${resultList}" var="result" varStatus="status">
     //alert('${status.index}');
      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
@@ -104,7 +131,7 @@
     '    <div class="info">' + 
     '        <div class="title">' + 
     '            ${result.carType}' + 
-    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+    '            <div class="close" onclick="closeOverlay('+${status.index}+')" title="닫기"></div>' + 
     '        </div>' + 
     '        <div class="body">' + 
     '            <div class="img">' +
@@ -113,7 +140,7 @@
     '            <div class="desc">' + 
     '                <div class="ellipsis">${result.carSize}</div>' + 
     '                <div class="jibun ellipsis">${result.capacity}인승</div>' + 
-    '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">신청</a></div>' + 
+    '                <div><a href="javascript:goRent('+${result.carNo}+')">대여</a></div>' + 
     '            </div>' + 
     '        </div>' + 
     '    </div>' +    
@@ -121,20 +148,20 @@
 
     // 마커 위에 커스텀오버레이를 표시합니다
     // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-    var overlay = new kakao.maps.CustomOverlay({
+    overlay['${status.index}'] = new kakao.maps.CustomOverlay({
         content: content,
-        map: map,
+        //map: map, // 주석처리할 것
         position: marker.getPosition()       
     });
     
     // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
     kakao.maps.event.addListener(marker, 'click', function() {
-        overlay.setMap(map);
+        overlay['${status.index}'].setMap(map);
     });            
     
  // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-    function closeOverlay() {
-        overlay.setMap(null);     
+    function closeOverlay(idx) {
+        overlay[idx].setMap(null);     
     }
     </c:forEach>
 </script>
