@@ -40,7 +40,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 3 // 지도의 확대 레벨
     };
 
-var rentNo = "${rentInfo.rentNo }";
+var rentNo = "${rentNo }";
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 지도를 클릭한 위치에 표출할 마커입니다

@@ -44,7 +44,7 @@ import hae.basic.vo.RentVO;
  */
 
 @Controller
-public class JunController extends HController{
+public class ReturnMapController extends HController{
     
     /**
      * CRUD 기본 샘플의 서비스
@@ -64,9 +64,6 @@ public class JunController extends HController{
     @Resource(name = "drivingInfoService")
     private DrivingInfoService drivingInfoService;
     
-    // test login user
-    String loginID = "test";
-
     @RequestMapping(value = "/basic/go.do")
     public String goTest() throws Exception {
         return "basic/JunsTest";  
