@@ -138,7 +138,7 @@
                  var map = new kakao.maps.Map(container, options);
                  var mapContainer = document.getElementById('map');
                  mapContainer.style.width = '100%';
-                 mapContainer.style.height = '400px'; 
+                 mapContainer.style.height = '500px'; 
              </script>
         </div>    
       </div>
@@ -162,24 +162,27 @@ $("#rentTable tr").click(function(){
         // td.eq(index)를 통해 대여번호[0] 가져오기.
         var rentNo = td.eq(0).text();
         
-        
-        function ajaxAct() {
             $.ajax ({
-                type : "GET",                   
-                url : "mypage.do", /* "mypage.do?rentNo=" + rentNo*/
-                data: { 'rentNo': rentNo},
-                dataType : 'json',      
-                success : function(data){    
-                    dataAct(data);    //성공시 이 함수 실행          
+                type : "GET",
+                url : "mypagedetail.do?rentNo=" + rentNo,
+                dataType : 'text',
+                contentType : 'application/json; charset=utf-8',
+                success : function(args) {
+                    console.log('연결성공');
+                    var test2 = JSON.parse(args);
+                    console.log(test2);
+                 
+                    
+                    //document.getElementsByClassName(modal-body).innerHTML=data;         
+                },  
+                error : function(request, status, error) {   // 오류가 발생했을 때 호출된다. 
+                    console.log("연결실패");
+                    console.log(request);
                 },
-            
-                error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                },
-                complete : function () {   // 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
+                complete : function () {
+                    console.log("********");// 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
                 }
             });
-        }
         
         
         //****Modal****
