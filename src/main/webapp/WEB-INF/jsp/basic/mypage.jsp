@@ -31,7 +31,7 @@
 
 <style>
     #container{
-        width: 700px;
+        width: 800px;
         margin: 0 auto;
     }
     
@@ -59,7 +59,7 @@
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 50%;                        
+            width: 80%;                        
         }
         /* The Close Button */
         .close {
@@ -70,9 +70,14 @@
         }
         .close:hover,
         .close:focus {
-            color: black;
+            color: #4374D9;
             text-decoration: none;
             cursor: pointer;
+        }
+        
+        #map_container{
+            width: 100%;
+            height:90%;
         }
     
 </style>
@@ -96,18 +101,18 @@
             <c:choose>
                 <c:when test="${empty myRentList}">
                     <tr>
-                        <td colspan="4" align="center">빌린 내역이 없습니다.</td>
+                        <td colspan="5" align="center">빌린 내역이 없습니다.</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
                     <c:forEach var="result" items="${myRentList}"
                         varStatus="status">
                         <tr>
-                            <td><c:out value="${result.rentNo }" /></td>
-                            <td><c:out value="${result.carNo }" /></td>
-                            <td><c:out value="${result.rentDate }" /></td>
-                            <td><c:out value="${result.returnDate }" /></td>
-                            <td><c:out value="${result.userID }" /></td>              
+                            <td id = "rentNo"><c:out value="${result.rentNo }" /></td>
+                            <td id = "carNo"><c:out value="${result.carNo }" /></td>
+                            <td id = "rentDate"><c:out value="${result.rentDate }" /></td>
+                            <td id = "returnDate"><c:out value="${result.returnDate }" /></td>
+                            <td id = "userId"><c:out value="${result.userID }" /></td>              
                         </tr>
                     </c:forEach>
                 </c:otherwise>
@@ -115,65 +120,92 @@
         </tbody>
     </table>
  
-    <!-- The Modal -->
     <div id="myModal" class="modal">
- 
-      <!-- Modal content -->
       <div class="modal-content">
-        <span class="close">&times;</span>                                                               
-        <p>Some text in the Modal..</p>
+        <span class="close">&times;</span>
+           
+        <!-- 지도생성 -->
+        <div id = "map_container">                                                                 
+            <div id="map"></div>    
+             <script type="text/javascript" 
+             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e59a0e357c5eaa690aa6f65b5549031c"></script>
+             <script>
+                 var container = document.getElementById('map');
+                 var options = {
+                         center: new kakao.maps.LatLng(33.450701, 126.570667),
+                         level: 3
+                 };
+                 var map = new kakao.maps.Map(container, options);
+                 var mapContainer = document.getElementById('map');
+                 mapContainer.style.width = '100%';
+                 mapContainer.style.height = '500px'; 
+             </script>
+        </div>    
       </div>
- 
-    </div>
-    
-    
+    </div>   
 </div>
+
 <script>
-$("#rentTable tr").click(function(){
+$("#rentTable tr").click(function(){    
     var str = ""
-        var tdArr = new Array(); // 배열 선언
-        
+        var tdArr = new Array(); // 배열 선언       
         // 현재 클릭된 Row(<tr>)
         var tr = $(this);
-        var td = tr.children();
-        
+        var td = tr.children();      
         // tr.text()를 통해 클릭된 모든 값을 가져온다.
-        console.log("클릭한 Row의 모든 데이터 : "+tr.text());
-        
+        console.log("클릭한 Row의 모든 데이터 : "+tr.text());        
         // 반복문을 이용해서 배열에 값 담기
         td.each(function(i){
             tdArr.push(td.eq(i).text());
-        });
-        
-        console.log("배열에 담긴 값 : "+tdArr);
-        
+        });        
+        console.log("배열에 담긴 값 : "+tdArr);        
         // td.eq(index)를 통해 대여번호[0] 가져오기.
         var rentNo = td.eq(0).text();
         
+            $.ajax ({
+                type : "GET",
+                url : "mypagedetail.do?rentNo=" + rentNo,
+                dataType : 'text',
+                contentType : 'application/json; charset=utf-8',
+                success : function(args) {
+                    console.log('연결성공');
+                    var test2 = JSON.parse(args);
+                    console.log(test2);
+                 
+                    
+                    //document.getElementsByClassName(modal-body).innerHTML=data;         
+                },  
+                error : function(request, status, error) {   // 오류가 발생했을 때 호출된다. 
+                    console.log("연결실패");
+                    console.log(request);
+                },
+                complete : function () {
+                    console.log("********");// 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
+                }
+            });
+        
+        
+        //****Modal****
         var modal = document.getElementById("myModal");
         
         //모달이 보임.
-        modal.style.display = 'block';   
+        modal.style.display = 'block';  
+        map.relayout();  
+        //모달 가져옴
+        var modal = document.getElementById('myModal');
+        //모달을 닫을 span가져옴
+        var span = document.getElementsByClassName("close")[0];                                          
+        //<span> (x) 눌렀을 때, 모달을 닫음
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        //모달 밖을 눌렀을때도 창이 닫힘
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 });
-
-// 모달 가져옴
-var modal = document.getElementById('myModal');
-
-// 모달을 닫을 span가져옴
-var span = document.getElementsByClassName("close")[0];                                          
-
-// <span> (x) 눌렀을 때, 모달을 닫음
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// 모달 밖을 눌렀을때도 창이 닫힘
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-    
+</script>   
 </body>
 </html>
