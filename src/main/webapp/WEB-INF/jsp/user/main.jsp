@@ -33,7 +33,7 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
-    .btn {margin-left:90%;background-color: #3498db; border-bottom: 5px solid #2980B9; text-shadow: 0px -2px #2980B9; position: relative; padding: 10px 40px; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 15px; color: #FFF; text-decoration: none;}
+    .btn1 {margin-left:90%;background-color: #3498db; border-bottom: 5px solid #2980B9; text-shadow: 0px -2px #2980B9; position: relative; padding: 10px 40px; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 15px; color: #FFF; text-decoration: none;}
     #map {margin: 15px 0 0 0;}
 </style>
 
@@ -58,7 +58,7 @@ function goRent(carNo, userID)
 </script>
 </head>
 <body>
-    <button class="btn" type="button" onclick="mypage_click();">My page</button>
+    <button class="btn1" type="button" onclick="mypage_click();">My page</button>
     
     <div id="map" style="width:100%;height:600px;"></div>
     <form name="data">
@@ -139,8 +139,9 @@ function goRent(carNo, userID)
     '           </div>' + 
     '            <div class="desc">' + 
     '                <div class="ellipsis">${result.carSize}</div>' + 
-    '                <div class="jibun ellipsis">${result.capacity}인승</div>' + 
-    '                <div><a href="javascript:goRent('+${result.carNo}+')">대여</a></div>' + 
+    '                <div class="jibun ellipsis">${result.capacity}인승</div>' +
+    '                <button class="btn2" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
+    //'                <div><a href="javascript:goRent('+${result.carNo}+')">대여</a></div>' + 
     '            </div>' + 
     '        </div>' + 
     '    </div>' +    

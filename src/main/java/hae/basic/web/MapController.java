@@ -55,7 +55,7 @@ public class MapController extends HController{
         List<CarVO> sampleList = mapService.selectPossibleCar();
         //System.out.println(sampleList.toString());
         model.addAttribute("resultList", sampleList);
-        return "basic/main";
+        return "user/main";
     }
     
     @RequestMapping(value = "/rent.do")
@@ -64,6 +64,6 @@ public class MapController extends HController{
         
         rentService.insertRent(rentVO);
         
-        return "basic/rent";
+        return "user/rent";
     }
 }
