@@ -1,11 +1,14 @@
 package hae.basic.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import able.com.web.HController;
 
+import org.apache.commons.net.ntp.TimeStamp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,11 +109,15 @@ public class JunController extends HController{
     public void logDatas(@RequestParam String lng, @RequestParam String lat, @RequestParam String rentNo,
             Model model) throws Exception {
         
-        logger.debug(lng + " " + lat + " " + rentNo);
-//        DrivingInfoVO dvo = new DrivingInfoVO();
-//        dvo.setLatitude(lat);
-//        dvo.setLongitude(lng);
-//        drivingInfoService.insertDrivingInfo();
+        DrivingInfoVO dvo = new DrivingInfoVO();
+        dvo.setLatitude(lat);
+        dvo.setLongitude(lng);
+        dvo.setRentNo(rentNo);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        String timestamp = format.format(System.currentTimeMillis());
+        dvo.setTimeStamp(timestamp);
+        logger.debug(lng + " " + lat + " " + rentNo + " " + timestamp);
+        drivingInfoService.insertDrivingInfo(dvo);
         
     }
     
