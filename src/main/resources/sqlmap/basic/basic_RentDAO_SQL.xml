@@ -40,10 +40,10 @@
                     CAR_NO,
                     USER_ID,
                     RENT_DATE)
-            VALUES (#{rentNo},
+            VALUES (RENT_NO_SEQ.NEXTVAL,
                     #{carNo},
                     #{userID},
-                    TO_CHAR(SYSDATE, 'YYYY-MM-DD') )
+                    TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') )
         ]]>
     </insert>
     
