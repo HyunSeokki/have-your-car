@@ -64,9 +64,6 @@ public class JunController extends HController{
     @Resource(name = "drivingInfoService")
     private DrivingInfoService drivingInfoService;
     
-    // test login user
-    String loginID = "test";
-
     @RequestMapping(value = "/basic/go.do")
     public String goTest() throws Exception {
         return "basic/JunsTest";  
