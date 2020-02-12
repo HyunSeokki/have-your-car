@@ -36,21 +36,25 @@ function makeData() {
 <div id="map" style="width:100%;height:500px;"></div>
 
 <p>Trip 확인</p> 
-<div>
+<div style="text-align: center;">
+<!-- Rent 정보  -->
 <h3>Rent data Check</h3>
 <tr>
     <td>rentNo     :  ${rentInfo.rentNo }</td>
     <td>carNo      :  ${rentInfo.carNo }</td>
     <td>userID     :  ${rentInfo.userID }</td>
-    <td>rentDate   : ${rentInfo.rentDate }</td>
-    <td>returnDate : ${rentInfo.returnDate }</td>
+    <td>rentDate   :  ${rentInfo.rentDate }</td>
+    <td>returnDate :  ${rentInfo.returnDate }</td>
 </tr>
 
+<!-- 결제 시에 필요한 비용 돈/거리 -->
 <h3>CarData Cost Check</h3>
 <tr>
     <td>Cost : ${cost }</td>
 </tr>
 
+
+<!-- 지도에 표시될 좌표 리스트 -->
 <h3>Driving Data Check</h3>
 <c:forEach var="drv" items="${drivingInfo }">
 <tr>
@@ -64,11 +68,7 @@ function makeData() {
 </div>
 
 
-
-
-
-
-
+<!-- 카카오 지도 그리는 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -79,7 +79,31 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+var lats = "${latis}";
+var longs = "${longs}";
+
+for(var i=0; i<lats.length; i++) {
+    console.log(lats[i] + " " + longs[i]);
+}
+
+
+/*
+ * 
+ var linePath = [
+                 new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
+                 new kakao.maps.LatLng(33.452739313807456, 126.5709308145358),
+                 new kakao.maps.LatLng(33.45178067090639, 126.5726886938753) 
+             ];
+ 
+ */
+
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
