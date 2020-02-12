@@ -103,17 +103,7 @@ public class JunController extends HController{
             model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
             List<DrivingInfoVO> drv = drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo());
-            String [] latitudes = new String[drv.size()];
-            String [] longitudes = new String[drv.size()];
-            // data 배열로 전송
-            for (int i = 0; i < drv.size(); i++) {
-                latitudes[i] = drv.get(i).getLatitude(); 
-                longitudes[i] = drv.get(i).getLongitude();
-            }
-            
-            model.addAttribute("drivingInfo", drv);
-            model.addAttribute("latis", latitudes);
-            model.addAttribute("longs", longitudes);
+            model.addAttribute("drv", drv);
             // 차량 정보에서 비용 가져오기
             int cost = carService.selectCar(carNo).getCost();
             model.addAttribute("cost", cost);

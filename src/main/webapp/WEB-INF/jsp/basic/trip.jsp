@@ -56,12 +56,12 @@ function makeData() {
 
 <!-- 지도에 표시될 좌표 리스트 -->
 <h3>Driving Data Check</h3>
-<c:forEach var="drv" items="${drivingInfo }">
+<c:forEach var="dr" items="${drv }">
 <tr>
-    <td>rentNo    : <c:out value="${drv.rentNo}" /> </td>
-    <td>latitude  : <c:out value="${drv.latitude}" /> </td>
-    <td>longitude : <c:out value="${drv.longitude}" /> </td>
-    <td>timestamp : <c:out value="${drv.timeStamp}" /> </td>
+    <td>rentNo    : <c:out value="${dr.rentNo}" /> </td>
+    <td>latitude  : <c:out value="${dr.latitude}" /> </td>
+    <td>longitude : <c:out value="${dr.longitude}" /> </td>
+    <td>timestamp : <c:out value="${dr.timeStamp}" /> </td>
 </tr>
 <br>
 </c:forEach>
@@ -71,31 +71,38 @@ function makeData() {
 <!-- 카카오 지도 그리는 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
+
+var linePath = new Array();
+var sumLa = 0;
+var sumLo = 0;
+
+<c:forEach var="dr" items="${drv }">
+linePath.push(new kakao.maps.LatLng("${dr.latitude}", "${dr.longitude}"));
+sumLa += "${dr.latitude}"*1;
+sumLo += "${dr.longitude}"*1;
+</c:forEach>
+
+// 지도 초기값 보여주기
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(37.507150, 127.058639), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(sumLa/"${drv.size()}", sumLo/"${drv.size()}"), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
     };
 
+// 지도 그리기
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-var lats = "${latis}";
-var longs = "${longs}";
+// 선 그리기
+var polyline = new kakao.maps.Polyline({
+    path: linePath, // 선을 구성하는 좌표배열 입니다
+    strokeWeight: 5, // 선의 두께 입니다
+    strokeColor: '#FFAE00', // 선의 색깔입니다
+    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeStyle: 'solid' // 선의 스타일입니다
+});
 
-for(var i=0; i<lats.length; i++) {
-    console.log(lats[i] + " " + longs[i]);
-}
+polyline.setMap(map);  
 
-
-/*
- * 
- var linePath = [
-                 new kakao.maps.LatLng(33.452344169439975, 126.56878163224233),
-                 new kakao.maps.LatLng(33.452739313807456, 126.5709308145358),
-                 new kakao.maps.LatLng(33.45178067090639, 126.5726886938753) 
-             ];
- 
- */
 
 </script>
 
