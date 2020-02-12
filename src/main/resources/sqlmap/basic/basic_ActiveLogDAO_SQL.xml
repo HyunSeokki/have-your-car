@@ -67,7 +67,7 @@
         Query ID : selectActiveLog
         Description : 시동 로그 정보을 조회한다.
      -->
-    <select id="selectActiveLog" parameter="String" resultMap="activeLog">
+    <select id="selectActiveLog" parameterType="String" resultMap="activeLog">
     <![CDATA[
         SELECT /* Query ID=hae.basic.service.dao.ActiveLogDAO.selectActiveLog */
            START_NO
@@ -84,7 +84,7 @@
         Query ID : selectActiveLogList
         Description : 시동 로그 정보 목록을 조회한다.
      -->
-    <select id="selectActiveLogList" parameterType="hae.basic.vo.ActiveLogVO" resultType="activeLog">
+    <select id="selectActiveLogList" parameterType="hae.basic.vo.ActiveLogVO" resultMap="activeLog">
     <![CDATA[
         SELECT /* Query ID=hae.basic.service.dao.ActiveLogDAO.selectActiveLogList */ 
                START_NO

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    SQL File Name : xmlname.xm 
+    Description : 설명을 기술합니다.
+    author OHS
+    since 2020. 2. 11.
+    version 1.0
+    Modification Information
+       since          author              description
+    ===========    =============    ===========================
+    2020. 2. 11.     OHS  		   최초 생성
+-->
+
+<mapper namespace="hae.basic.service.dao.MapDAO">
+
+    <resultMap type="hae.basic.vo.CarVO" id="car">
+        <result property="carNo" column="car_no"/>
+        <result property="carSize" column="car_size"/>
+        <result property="carType" column="car_type"/>
+        <result property="mileage" column="mileage"/>
+        <result property="birth" column="birth"/>
+        <result property="capacity" column="capacity"/>    
+        <result property="cost" column="cost"/>    
+        <result property="latitude" column="latitude"/>    
+        <result property="longitude" column="longitude"/>    
+    </resultMap>
+    
+    <!--
+        Query Name : selectPossibleCar
+        Description : SELECT 설명을 기술합니다.
+        author OHS
+        since 2020. 2. 11.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 11.     OHS    	 최초 생성
+    -->
+    <select id="selectPossibleCar" resultMap="car">
+        <![CDATA[
+            SELECT B.CAR_NO,
+                   B.CAR_SIZE,
+                   B.CAR_TYPE,
+                   B.MILEAGE,
+                   B.BIRTH,
+                   B.CAPACITY,
+                   B.COST, 
+                   B.LATITUDE,
+                   B.LONGITUDE
+              FROM CARRENTB A, CARINFTB B, (SELECT MAX(AA.RENT_NO) RENT_NO,
+                                       BB.CAR_NO
+                                  FROM CARRENTB AA, CARINFTB BB
+                                 WHERE AA.CAR_NO(+) = BB.CAR_NO
+                                 GROUP BY BB.CAR_NO) C
+             WHERE A.RENT_NO = C.RENT_NO
+               AND A.CAR_NO = B.CAR_NO
+               AND A.RETURN_DATE IS NOT NULL
+            UNION
+            SELECT A.CAR_NO,
+                   A.CAR_SIZE,
+                   A.CAR_TYPE,
+                   A.MILEAGE,
+                   A.BIRTH,
+                   A.CAPACITY,
+                   A.COST, 
+                   A.LATITUDE,
+                   A.LONGITUDE
+              FROM CARINFTB A
+             WHERE NOT EXISTS (SELECT CAR_NO B FROM CARRENTB B WHERE A.CAR_NO = B.CAR_NO)
+        ]]>
+    </select>       
+</mapper>

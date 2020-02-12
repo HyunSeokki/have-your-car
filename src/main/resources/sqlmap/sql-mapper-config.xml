@@ -4,5 +4,11 @@
 <configuration>
     <typeAliases>
 		<typeAlias alias="hMap" type="able.com.vo.HMap"/>
+		<typeAlias alias="activeLog" type="hae.basic.vo.ActiveLogVO"/>
+		<typeAlias alias="active" type="hae.basic.vo.ActiveVO"/>
+		<typeAlias alias="car" type="hae.basic.vo.CarVO"/>
+		<typeAlias alias="drivingInfo" type="hae.basic.vo.DrivingInfoVO"/>
+		<typeAlias alias="rent" type="hae.basic.vo.RentVO"/>
+		<typeAlias alias="user" type="hae.basic.vo.UserVO"/>
     </typeAliases>
 </configuration>

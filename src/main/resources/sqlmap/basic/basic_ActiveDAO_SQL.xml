@@ -76,7 +76,7 @@
         Query ID : selectActiveList
         Description : 시동정보 목록을 조회한다.
      -->
-    <select id="selectActiveList" parameterType="hae.basic.vo.ActiveVO" resultType="active">
+    <select id="selectActiveList" parameterType="hae.basic.vo.ActiveVO" resultMap="active">
     <![CDATA[
         SELECT /* Query ID=hae.basic.service.dao.ActiveDAO.selectActiveList */ 
             CAR_NO

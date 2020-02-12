@@ -61,6 +61,6 @@ public interface DrivingInfoDAO {
      * @return
      * @throws Exception
      */
-    List<DrivingInfoVO> selectDrivingInfoList(String rentNo) throws Exception;
+    List<DrivingInfoVO> selectDrivingInfoListByRentNo(String rentNo) throws Exception;
 	
 }

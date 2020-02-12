@@ -40,10 +40,10 @@
                     CAR_NO,
                     USER_ID,
                     RENT_DATE)
-            VALUES (#{rentNo},
+            VALUES (RENT_NO_SEQ.NEXTVAL,
                     #{carNo},
                     #{userID},
-                    TO_CHAR(SYSDATE, 'YYYY-MM-DD') )
+                    TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') )
         ]]>
     </insert>
     
@@ -117,7 +117,7 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectRentList" parameterType="hae.basic.vo.RentVO" resultType="rent">
+    <select id="selectRentList" parameterType="hae.basic.vo.RentVO" resultMap="rent">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,

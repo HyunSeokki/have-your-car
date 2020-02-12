@@ -39,10 +39,10 @@
                     LATITUDE,
                     LONGITUDE,
                     TIMESTAMP)
-            VALUES (#{rentNo},
-                    #{latitude},
-                    #{longitude},
-                    #{timeStamp} )
+            VALUES (TO_NUMBER(#{rentNo}),
+                    TO_NUMBER(#{latitude}),
+                    TO_NUMBER(#{longitude}),
+                    To_DATE(sysdate, 'YYYY/MM/DD HH24:MI:SS') )
         ]]>
     </insert>
     
@@ -78,7 +78,7 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectDrivingInfoList" resultType="rent">
+    <select id="selectDrivingInfoList" resultMap="drivingInfo">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,
@@ -86,7 +86,6 @@
                    LONGITUDE,
                    TIMESTAMP
               FROM DRVINFTB
-             WHERE 1=1
         ]]>
     </select>
     
@@ -100,7 +99,7 @@
         ===========    =============    ===========================
         2020. 2. 7.     6800410    	 최초 생성
     -->
-    <select id="selectDrivingInfoList" parameterType="String" resultType="rent">
+    <select id="selectDrivingInfoListByRentNo" parameterType="String" resultMap="drivingInfo">
         <![CDATA[
             SELECT /* QueryID=selectRent */
                    RENT_NO,

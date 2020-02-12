@@ -86,6 +86,14 @@ public class RentVO {
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
+    /*
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "RentVO [rentNo=" + rentNo + ", carNo=" + carNo + ", userID=" + userID + ", rentDate=" + rentDate
+                + ", returnDate=" + returnDate + "]";
+    }
     
     
 	

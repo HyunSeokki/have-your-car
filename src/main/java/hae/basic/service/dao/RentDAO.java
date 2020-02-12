@@ -60,6 +60,6 @@ public interface RentDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	List<RentVO> selectRentList(RentVO vo) throws Exception;
+	List<RentVO> selectRentList() throws Exception;
 	
 }
