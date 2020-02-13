@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
 <%@ page session="true" %>
 <%-- 
-    JSP Name : jspName.jsp
+    JSP Name : main.jsp
     Description : 설명을 기술합니다.
     author OHS
     since 2020. 2. 10.
@@ -40,28 +40,24 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d"></script>
 <script>
-function mypage_click()
-{
-    location.href="/have/basic/mypage.do";
-}
-function goRent(carNo, userID)
+
+function goRent(carNo)
 {
     var rent = document.data;
             
     rent.carNo.value = carNo;
-    rent.userID.value = "test";
+    rent.userID.value = "<%=(String)session.getAttribute("user")%>";
     
     rent.action = "./rent.do";
     rent.method = "post";
-    rent.submit();
-    
+    rent.submit();    
 }
 </script>
 </head>
 <body>
     <span><%= session.getAttribute("user") %> 님 환영합니다.</span>
     <a href="logout.do">로그아웃</a>
-    <button class="btn1" type="button" onclick="mypage_click();">My page</button>
+    <button class="btn1" type="button" onclick="location.href='./mypage.do'">My page</button>
     
     <div id="map" style="width:100%;height:600px;"></div>
     <form name="data">
@@ -71,22 +67,18 @@ function goRent(carNo, userID)
 <script>
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
     var lat, lon;
-    
-    if (navigator.geolocation) {
-        
+       
+    if (navigator.geolocation) {        
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {
-            
             lat = position.coords.latitude; // 위도
             lon = position.coords.longitude; // 경도
-            //alert(lat);
-            //alert(lon);
+            
             var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                         
           });
         
     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-        
         var locPosition = new kakao.maps.LatLng(37.506561, 127.05841800000002);  
         
         lat = 37.506561; // 위도
@@ -97,14 +89,15 @@ function goRent(carNo, userID)
     
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
+        //center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
         center: new kakao.maps.LatLng(37.506561, 127.05841800000002), // 지도의 중심좌표
         level: 5 // 지도의 확대 레벨 
     }; 
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     
-    //var markerPosition = new kakao.maps.LatLng(lat, lon); 
-    var markerPosition = new kakao.maps.LatLng(37.506561, 127.05841800000002);
+    var markerPosition = new kakao.maps.LatLng(lat, lon); 
+    //var markerPosition = new kakao.maps.LatLng(37.506561, 127.05841800000002);
     var marker = new kakao.maps.Marker({ position:markerPosition });
     
     marker.setMap(map);
@@ -144,7 +137,6 @@ function goRent(carNo, userID)
     '                <div class="ellipsis">${result.carSize}</div>' + 
     '                <div class="jibun ellipsis">${result.capacity}인승</div>' +
     '                <button class="btn2" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
-    //'                <div><a href="javascript:goRent('+${result.carNo}+')">대여</a></div>' + 
     '            </div>' + 
     '        </div>' + 
     '    </div>' +    
