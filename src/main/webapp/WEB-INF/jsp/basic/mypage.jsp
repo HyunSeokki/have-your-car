@@ -132,13 +132,34 @@
              <script>
                  var container = document.getElementById('map');
                  var options = {
-                         center: new kakao.maps.LatLng(33.450701, 126.570667),
+                         center: new kakao.maps.LatLng(37.507381428880635, 127.05895942121612),
                          level: 3
                  };
                  var map = new kakao.maps.Map(container, options);
                  var mapContainer = document.getElementById('map');
                  mapContainer.style.width = '100%';
                  mapContainer.style.height = '500px'; 
+                 
+                 //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+                 var linePath = new Array();
+                 // 지도에 표시할 선을 생성합니다
+                 var polyline = new kakao.maps.Polyline({
+                     path: linePath, 
+                     strokeWeight: 5,
+                     strokeColor: '#FFAE00',
+                     strokeOpacity: 0.7,
+                     strokeStyle: 'solid'
+                 });
+                 
+                 /* //지도 범위 재설정
+                 var bounds = new kakao.maps.LatLngBounds(); 
+                 for(i=0; i<linePath.length;i++){
+                     bounds.extend(linePath[i]);
+                 }
+                 map.setBounds(linePath);  */
+                 
+                 // 지도에 선을 표시합니다 
+                 polyline.setMap(map);  
              </script>
         </div>    
       </div>
@@ -169,19 +190,17 @@ $("#rentTable tr").click(function(){
                 contentType : 'application/json; charset=utf-8',
                 success : function(args) {
                     console.log('연결성공');
-                    var test2 = JSON.parse(args);
-                    console.log(test2);
-                 
+                    var trip = JSON.parse(args).data;                
                     
-                    //document.getElementsByClassName(modal-body).innerHTML=data;         
+                    for(var i=0; i<Object.keys(trip).length; i++){
+                        linePath.push(new kakao.maps.LatLng(trip[i].longitude, trip[i].latitude));
+                    }
+                    console.log("linePath",linePath);
                 },  
-                error : function(request, status, error) {   // 오류가 발생했을 때 호출된다. 
+                error : function(request, status, error) {
                     console.log("연결실패");
                     console.log(request);
                 },
-                complete : function () {
-                    console.log("********");// 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
-                }
             });
         
         
