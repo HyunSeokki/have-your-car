@@ -23,16 +23,13 @@
 <script type="text/javaScript" language="javascript">
 function goRoute(carNo)
 {
-    alert(carNo);
-    /*
     var route = document.data;
     
     route.carNo.value = carNo;
     
-    route.action = "./rent.do";
+    route.action = "./return.do";
     route.method = "post";
     route.submit();
-    */
 }
 </script>
 </head>
