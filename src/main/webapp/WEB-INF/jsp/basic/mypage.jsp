@@ -56,7 +56,7 @@
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;                        
@@ -79,13 +79,26 @@
             width: 100%;
             height:90%;
         }
+        
+        #pageCtrl{
+            width: 3%;
+            height: 3%;
+        }
     
 </style>
 
 </head>
 <body>
 <div id = "container">
-    <h1 id = "title">MyPage</h1><br>
+    
+        <h1 id = "title">MyPage</h1>
+        <div>
+            <img id ="pageCtrl" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
+            onclick = "history.go(-1)">
+            <img id ="pageCtrl" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
+            <img id ="pageCtrl" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
+            onclick = "location.href='./main.do'">
+        </div>      
     
     <table id="rentTable" width="100%" class="table table-bordered table-hover text-center">
         <thead>
@@ -162,63 +175,64 @@ $("#rentTable tr").click(function(){
     
     // td.eq(index)를 통해 대여번호[0] 가져오기.
     var rentNo = td.eq(0).text();
+    if(isNaN(rentNo) == false)
+    {
+        $.ajax ({
+            type : "GET",
+            url : "mypagedetail.do?rentNo=" + rentNo,
+            dataType : 'text',
+            contentType : 'application/json; charset=utf-8',
+            success : function(args) {
+                console.log('연결성공');
+                var trip = JSON.parse(args).data;                
+                
+                //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+                var linePath = new Array();
+                
+                for(var i=0; i<Object.keys(trip).length; i++){
+                    var temp = new kakao.maps.LatLng(trip[i].latitude, trip[i].longitude);
+                    linePath.push(temp);
+                    bounds.extend(temp);
+                }
     
-    $.ajax ({
-        type : "GET",
-        url : "mypagedetail.do?rentNo=" + rentNo,
-        dataType : 'text',
-        contentType : 'application/json; charset=utf-8',
-        success : function(args) {
-            console.log('연결성공');
-            var trip = JSON.parse(args).data;                
-            
-            //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-            var linePath = new Array();
-            
-            for(var i=0; i<Object.keys(trip).length; i++){
-                var temp = new kakao.maps.LatLng(trip[i].latitude, trip[i].longitude);
-                linePath.push(temp);
-                bounds.extend(temp);
-            }
-
-            // 지도에 표시할 선을 생성합니다
-            var polyline = new kakao.maps.Polyline({
-                path: linePath, 
-                strokeWeight: 5,
-                strokeColor: '#FFAE00',
-                strokeOpacity: 0.7,
-                strokeStyle: 'solid'
-            });
-            
-            // 지도에 선을 표시합니다 
-            polyline.setMap(map);  
-            map.setBounds(bounds);
-        },  
-        error : function(request, status, error) {
-            console.log("연결실패");
-            console.log(request);
-        },
-    });
-    
-    
-    //****Modal****//
-    var modal = document.getElementById("myModal");
-    
-    //모달이 보임.
-    modal.style.display = 'block';  
-    map.relayout();  
-    //모달 가져옴
-    var modal = document.getElementById('myModal');
-    //모달을 닫을 span가져옴
-    var span = document.getElementsByClassName("close")[0];                                          
-    //<span> (x) 눌렀을 때, 모달을 닫음
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    //모달 밖을 눌렀을때도 창이 닫힘
-    window.onclick = function(event) {
-        if (event.target == modal) {
+                // 지도에 표시할 선을 생성합니다
+                var polyline = new kakao.maps.Polyline({
+                    path: linePath, 
+                    strokeWeight: 5,
+                    strokeColor: '#FFAE00',
+                    strokeOpacity: 0.7,
+                    strokeStyle: 'solid'
+                });
+                
+                // 지도에 선을 표시합니다 
+                polyline.setMap(map);  
+                map.setBounds(bounds);
+            },  
+            error : function(request, status, error) {
+                console.log("연결실패");
+                console.log(request);
+            },
+        });
+         
+        //****Modal****//
+        var modal = document.getElementById("myModal");
+        
+        //모달이 보임.
+        modal.style.display = 'block';  
+        map.relayout();  
+        //모달 가져옴
+        var modal = document.getElementById('myModal');
+        //모달을 닫을 span가져옴
+        var span = document.getElementsByClassName("close")[0];                                          
+        //<span> (x) 눌렀을 때, 모달을 닫음
+        span.onclick = function() {
             modal.style.display = "none";
+        }
+        //모달 밖을 눌렀을때도 창이 닫힘
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     }
 });
