@@ -52,7 +52,7 @@ public class myPageController extends HController {
             Model model) throws Exception {
         
         // temp
-        userID = "user1";
+        userID = "TEST";
         
         List<RentVO> rentList = rentService.selectRentListByUserID(userID);
 
