@@ -57,6 +57,17 @@ public class CarPlatformController extends HController {
         return "car/carTest";
     }
     
+    @RequestMapping(value = "/test.do")
+    public String test(@ModelAttribute("carVO") CarVO carVO,
+            Model model) throws Exception {
+        
+        List<CarVO> carList = carService.selectCarList();
+        model.addAttribute("carList", carList);
+        
+        return "car/test";
+    }
+    
+    
     @RequestMapping(value = "/selectCar.do")
     @ResponseBody
     public String getActiveState(@RequestParam(value = "carNo") String carNo) throws Exception {
