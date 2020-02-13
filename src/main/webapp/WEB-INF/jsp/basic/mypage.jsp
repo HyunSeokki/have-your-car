@@ -140,26 +140,7 @@
                  mapContainer.style.width = '100%';
                  mapContainer.style.height = '500px'; 
                  
-                 //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-                 var linePath = new Array();
-                 // 지도에 표시할 선을 생성합니다
-                 var polyline = new kakao.maps.Polyline({
-                     path: linePath, 
-                     strokeWeight: 5,
-                     strokeColor: '#FFAE00',
-                     strokeOpacity: 0.7,
-                     strokeStyle: 'solid'
-                 });
                  
-                 /* //지도 범위 재설정
-                 var bounds = new kakao.maps.LatLngBounds(); 
-                 for(i=0; i<linePath.length;i++){
-                     bounds.extend(linePath[i]);
-                 }
-                 map.setBounds(linePath);  */
-                 
-                 // 지도에 선을 표시합니다 
-                 polyline.setMap(map);  
              </script>
         </div>    
       </div>
@@ -192,10 +173,27 @@ $("#rentTable tr").click(function(){
                     console.log('연결성공');
                     var trip = JSON.parse(args).data;                
                     
+                    //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+                    var linePath = new Array();
+                    
                     for(var i=0; i<Object.keys(trip).length; i++){
-                        linePath.push(new kakao.maps.LatLng(trip[i].longitude, trip[i].latitude));
+                        linePath.push(new kakao.maps.LatLng(trip[i].latitude, trip[i].longitude));
                     }
                     console.log("linePath",linePath);
+                    
+
+                    // 지도에 표시할 선을 생성합니다
+                    var polyline = new kakao.maps.Polyline({
+                        path: linePath, 
+                        strokeWeight: 5,
+                        strokeColor: '#FFAE00',
+                        strokeOpacity: 0.7,
+                        strokeStyle: 'solid'
+                    });
+
+                    
+                    // 지도에 선을 표시합니다 
+                    polyline.setMap(map);  
                 },  
                 error : function(request, status, error) {
                     console.log("연결실패");
@@ -204,7 +202,7 @@ $("#rentTable tr").click(function(){
             });
         
         
-        //****Modal****
+        //****Modal****//
         var modal = document.getElementById("myModal");
         
         //모달이 보임.
