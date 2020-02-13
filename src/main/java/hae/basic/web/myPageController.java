@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import able.com.web.HController;
 
@@ -48,11 +49,11 @@ public class myPageController extends HController {
     private RentService rentService;
       
     @RequestMapping(value = "/basic/mypage.do")
-    public String rentList(@ModelAttribute("userID") String userID,
+    public String rentList(HttpSession session, @ModelAttribute("userID") String userID,
             Model model) throws Exception {
         
         // temp
-        userID = "TEST";
+        userID = (String) session.getAttribute("user");
         
         List<RentVO> rentList = rentService.selectRentListByUserID(userID);
 

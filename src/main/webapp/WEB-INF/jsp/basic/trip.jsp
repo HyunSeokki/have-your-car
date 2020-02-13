@@ -71,21 +71,19 @@ function makeData() {
 <!-- 카카오 지도 그리는 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
-
+var bounds = new kakao.maps.LatLngBounds();
 var linePath = new Array();
-var sumLa = 0;
-var sumLo = 0;
 
 <c:forEach var="dr" items="${drv }">
-linePath.push(new kakao.maps.LatLng("${dr.latitude}", "${dr.longitude}"));
-sumLa += "${dr.latitude}"*1;
-sumLo += "${dr.longitude}"*1;
+var temp = new kakao.maps.LatLng("${dr.latitude}", "${dr.longitude}");
+linePath.push(temp);
+bounds.extend(temp);
 </c:forEach>
 
 // 지도 초기값 보여주기
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(sumLa/"${drv.size()}", sumLo/"${drv.size()}"), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.507381428880635, 127.05895942121612), // 지도의 중심좌표
         level: 5 // 지도의 확대 레벨
     };
 
@@ -102,7 +100,7 @@ var polyline = new kakao.maps.Polyline({
 });
 
 polyline.setMap(map);  
-
+map.setBounds(bounds);
 
 </script>
 

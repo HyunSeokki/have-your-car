@@ -42,7 +42,7 @@
 <script>
 function mypage_click()
 {
-    alert('hi');
+    location.href="/have/basic/mypage.do";
 }
 function goRent(carNo, userID)
 {
