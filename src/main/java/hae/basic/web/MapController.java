@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import hae.basic.service.CarService;
 import hae.basic.service.MapService;
 import hae.basic.service.RentService;
 import hae.basic.vo.CarVO;
@@ -49,12 +50,15 @@ public class MapController extends HController{
     @Resource(name = "rentService")
     private RentService rentService;
     
+    @Resource(name = "carService")
+    private CarService carService;
+    
     @RequestMapping(value = "/basic/main.do")
     public String main(Model model) throws Exception {
         
-        List<CarVO> sampleList = mapService.selectPossibleCar();
-        //System.out.println(sampleList.toString());
-        model.addAttribute("resultList", sampleList);
+        List<CarVO> resultList = mapService.selectPossibleCar();
+        
+        model.addAttribute("resultList", resultList);
         return "user/main";
     }
     
@@ -62,7 +66,10 @@ public class MapController extends HController{
     public String rent(@ModelAttribute("rentVO") RentVO rentVO, 
             Model model) throws Exception {
         
-        rentService.insertRent(rentVO);
+        rentService.insertRent(rentVO);        
+        CarVO carInfo = carService.selectCar(rentVO.getCarNo());
+        
+        model.addAttribute("carInfo",carInfo);
         
         return "user/rent";
     }
