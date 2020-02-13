@@ -38,6 +38,7 @@ import hae.basic.vo.CarVO;
  */
 
 @Controller
+@RequestMapping(value = "/car")
 public class CarPlatformController extends HController {
     
     @Resource(name = "carService")
@@ -46,7 +47,7 @@ public class CarPlatformController extends HController {
     @Resource(name = "activeService")
     private ActiveService activeService;
     
-    @RequestMapping(value = "/car/main.do")
+    @RequestMapping(value = "/main.do")
     public String carMain(@ModelAttribute("carVO") CarVO carVO,
             Model model) throws Exception {
         
@@ -56,14 +57,14 @@ public class CarPlatformController extends HController {
         return "car/carTest";
     }
     
-    @RequestMapping(value = "/car/selectCar.do")
+    @RequestMapping(value = "/selectCar.do")
     @ResponseBody
     public String getActiveState(@RequestParam(value = "carNo") String carNo) throws Exception {
         ActiveVO actVo = activeService.selectActive(carNo);
         return actVo.getStartYn();
     }
     
-    @RequestMapping(value = "/car/updateActiveInfo.do")
+    @RequestMapping(value = "/updateActiveInfo.do")
     @ResponseBody
     public String updateActiveState(@RequestParam(value = "carNo") String carNo) throws Exception {
         logger.debug(carNo);
