@@ -30,21 +30,18 @@ function makeData() {
 </script>
 </head>
 <body>
+<h2 style="text-align: center;">주행 기록 확인</h2>
 <div align="right" style="margin: 5px;"><em>
 <a href="javascript:makeData();"> Make Data </a> 
 </em></div>
-<div id="map" style="width:100%;height:500px;"></div>
+<div id="map" style="width:60%;height:500px; left: 20%;"></div>
 
-<p>Trip 확인</p> 
-<div style="text-align: center;">
+<div style="text-align: left; margin-left: 20%; margin-right: 20%;">
 <!-- Rent 정보  -->
-<h3>Rent data Check</h3>
+<h3>주행 정보</h3>
 <tr>
-    <td>rentNo     :  ${rentInfo.rentNo }</td>
-    <td>carNo      :  ${rentInfo.carNo }</td>
-    <td>userID     :  ${rentInfo.userID }</td>
-    <td>rentDate   :  ${rentInfo.rentDate }</td>
-    <td>returnDate :  ${rentInfo.returnDate }</td>
+    <td>사용자 ID     :  ${rentInfo.userID }</td> <hr>
+    <td>빌린 시간              :  <span id="rentDate"></span></td> <hr>
 </tr>
 
 <!-- 결제 시에 필요한 비용 돈/거리 -->
@@ -71,6 +68,24 @@ function makeData() {
 <!-- 카카오 지도 그리는 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
+/*
+ * String Data 재조립
+ */
+
+var rentDate = "${rentInfo.rentDate }";
+var splitDate = function(date) {
+    console.log(date);
+    return date.substring(0,4)+"년 "+date.substring(4,6)+"월 "
+    +date.substring(6,8)+"일 "+date.substring(8,10)+"시 "
+    +date.substring(10,12)+"분 "+date.substring(12,14)+"초";
+}
+console.log(splitDate(rentDate));
+document.getElementById('rentDate').innerHTML = splitDate(rentDate);
+
+/*
+ * 카카오 맵
+ */
+
 var bounds = new kakao.maps.LatLngBounds();
 var linePath = new Array();
 

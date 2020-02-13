@@ -66,14 +66,14 @@ public class ReturnMapController extends HController{
     
     @RequestMapping(value = "/basic/go.do")
     public String goTest() throws Exception {
-        return "basic/JunsTest";  
+        return "test/JunsTest";  
     }
     
     @RequestMapping(value = "/basic/makeData.do")
     public String makeData(@RequestParam("rentNo") String rentNo,
             Model model) throws Exception {
         model.addAttribute("rentNo", rentNo);
-        return "basic/makeData";
+        return "user/makeData";
     }
     
     @RequestMapping(value = "/basic/return.do")
@@ -105,7 +105,7 @@ public class ReturnMapController extends HController{
             int cost = carService.selectCar(carNo).getCost();
             model.addAttribute("cost", cost);
             
-            return "basic/trip";
+            return "user/trip";
         }
     }
     
