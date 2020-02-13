@@ -1,6 +1,7 @@
 package hae.basic.web;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,7 @@ import hae.basic.service.ActiveService;
 import hae.basic.service.CarService;
 import hae.basic.vo.ActiveVO;
 import hae.basic.vo.CarVO;
+import net.sf.json.JSONArray;
 
 /**
  * <pre>
@@ -94,7 +96,20 @@ public class CarPlatformController extends HController {
         
         return actVo.getStartYn();
     }
-
+    
+    @RequestMapping(value="/insertDrivingInfo.do")
+    @ResponseBody
+    public String insertDrivingInfo(
+            @RequestParam(value = "drivingInfo") String drivingInfo) throws Exception {
+        
+        JSONArray arr = JSONArray.fromObject(drivingInfo);
+        
+        
+        
+        logger.debug(arr.toString());
+        
+        return "hello";
+    }
 
 
 }

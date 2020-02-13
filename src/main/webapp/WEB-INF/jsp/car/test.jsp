@@ -25,6 +25,10 @@
 </head>
 
 <body>
+    <div>
+        <button onclick="startDriving()">주행 시작</button>
+        <button onclick="endDriving()">주행 종료</button>
+    </div>
     <div class="map_wrap">
         <div id="mapWrapper"
             style="width: 50%; height: 300px; float: left">
@@ -109,6 +113,52 @@
                 rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
             //}
         });
+    }
+    
+    var drivingInfo = [];
+    var logDataInterval;
+    
+    function startDriving() {
+        logDataInterval = setInterval(function() {
+            var markerPosition = rvMarker.getPosition();
+            var intervalPosition = {
+                    latitude : markerPosition.getLat(),
+                    longitude : markerPosition.getLng(),
+                    timestamp : new Date().getTime()
+            };
+            drivingInfo.push(intervalPosition);
+            //console.log(intervalPosition);
+        }, 1000);
+        
+        sendDataInterval = setInterval(function() {
+            var jsonData = JSON.stringify(drivingInfo);
+            console.log(jsonData);
+            drivingInfo = []; // 초기화
+            
+            $.ajax({
+               url : "insertDrivingInfo.do",
+               dataType : "json",
+               //contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+               /* headers : {
+                   "mode" : CommonConstant.RequestMode.regist
+               }, */
+               type : "POST",
+               data : {"drivingInfo" : jsonData},
+               success : function(data) {
+                   console.log(data);
+               },
+               error : function() {
+                   console.log("통신실패")
+               }
+            });
+            
+        }, 5000);
+        
+    }
+    
+    function endDriving() {
+        clearInterval(logDataInterval);
+        clearInterval(sendDataInterval);
     }
 </script>
 <style>
