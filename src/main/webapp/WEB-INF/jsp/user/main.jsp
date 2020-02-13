@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
+<%@ page session="true" %>
 <%-- 
     JSP Name : jspName.jsp
     Description : 설명을 기술합니다.
@@ -58,6 +59,8 @@ function goRent(carNo, userID)
 </script>
 </head>
 <body>
+    <span><%= session.getAttribute("user") %> 님 환영합니다.</span>
+    <a href="logout.do">로그아웃</a>
     <button class="btn1" type="button" onclick="mypage_click();">My page</button>
     
     <div id="map" style="width:100%;height:600px;"></div>

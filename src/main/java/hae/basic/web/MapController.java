@@ -49,7 +49,7 @@ public class MapController extends HController{
     @Resource(name = "rentService")
     private RentService rentService;
     
-    @RequestMapping(value = "/main.do")
+    @RequestMapping(value = "/basic/main.do")
     public String main(Model model) throws Exception {
         
         List<CarVO> sampleList = mapService.selectPossibleCar();
@@ -58,7 +58,7 @@ public class MapController extends HController{
         return "user/main";
     }
     
-    @RequestMapping(value = "/rent.do")
+    @RequestMapping(value = "/basic/rent.do")
     public String rent(@ModelAttribute("rentVO") RentVO rentVO, 
             Model model) throws Exception {
         

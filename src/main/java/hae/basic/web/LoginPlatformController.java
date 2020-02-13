@@ -89,7 +89,13 @@ public class LoginPlatformController extends HController {
         }            
         
         session.setAttribute("user", userVO.getUserID());
-        return "user/main";
+        return "redirect:/basic/main.do";
+    }
+    
+    @RequestMapping(value = "/basic/logout.do", method = RequestMethod.GET)
+    public String logoutProcess(HttpSession session) throws Exception {
+        session.removeAttribute("user");
+        return "redirect:/basic/index.do";
     }
     
     // 가져온 JSON 형식의 Request를 Map 형태로 변환해주는 메소드
