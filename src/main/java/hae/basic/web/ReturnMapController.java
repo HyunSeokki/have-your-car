@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import able.com.web.HController;
 
@@ -21,6 +22,7 @@ import hae.basic.service.DrivingInfoService;
 import hae.basic.service.RentService;
 import hae.basic.service.UserService;
 import hae.basic.vo.ActiveVO;
+import hae.basic.vo.CarVO;
 import hae.basic.vo.DrivingInfoVO;
 import hae.basic.vo.RentVO;
 
@@ -121,9 +123,29 @@ public class ReturnMapController extends HController{
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
         String timestamp = format.format(System.currentTimeMillis());
         dvo.setTimeStamp(timestamp);
-        logger.debug(lng + " " + lat + " " + rentNo + " " + timestamp);
         drivingInfoService.insertDrivingInfo(dvo);
+    }
+    
+    @RequestMapping(value = "/basic/payAndReturn.do")
+    public String payAndReturn(@RequestParam int distance, @RequestParam String lat, 
+            @RequestParam String lng, @RequestParam String rentNo, Model model ) throws Exception {   
+        /*
+         * 이제 데이터 업데이트하는 부분을 작성하면 된다잉
+         */
+        RentVO rentInfo = rentService.selectRent(rentNo);
+        rentService.updateRent(rentInfo);
         
+        CarVO tempCar = carService.selectCar(rentInfo.getCarNo());
+        tempCar.setLatitude(lat);
+        tempCar.setLongitude(lng);
+        tempCar.setMileage(tempCar.getMileage() + distance);
+        carService.updateCar(tempCar);
+        
+        return "redirect:/basic/main.do";
     }
     
 }
+
+
+
+

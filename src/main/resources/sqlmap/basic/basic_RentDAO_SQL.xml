@@ -61,7 +61,7 @@
         <![CDATA[
             UPDATE /* QueryID=updateRent */
                    CARRENTB
-               SET RETURN_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+               SET RETURN_DATE = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
              WHERE RENT_NO = #{rentNo}
         ]]>
     </update>

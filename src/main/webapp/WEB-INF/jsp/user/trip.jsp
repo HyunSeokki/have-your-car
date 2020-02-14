@@ -46,7 +46,7 @@ function makeData() {
 </tr>
 
 <div style="text-align: right;">
-<button id="payBtn" type="button" onclick=""></button>
+<button id="payBtn" type="button" onclick="payAndReturn()"></button>
 </div>
 
 <!-- 지도에 표시될 좌표 리스트 -->
@@ -74,12 +74,10 @@ function makeData() {
 
 var rentDate = "${rentInfo.rentDate }";
 var splitDate = function(date) {
-    console.log(date);
     return date.substring(0,4)+"년 "+date.substring(4,6)+"월 "
     +date.substring(6,8)+"일 "+date.substring(8,10)+"시 "
     +date.substring(10,12)+"분 "+date.substring(12,14)+"초";
 }
-console.log(splitDate(rentDate));
 document.getElementById('rentDate').innerHTML = splitDate(rentDate);
 
 /*
@@ -88,11 +86,15 @@ document.getElementById('rentDate').innerHTML = splitDate(rentDate);
 
 var bounds = new kakao.maps.LatLngBounds();
 var linePath = new Array();
+var lastLat = 0;
+var lastLng = 0;
 
 <c:forEach var="dr" items="${drv }">
 var temp = new kakao.maps.LatLng("${dr.latitude}", "${dr.longitude}");
 linePath.push(temp);
 bounds.extend(temp);
+lastLat = "${dr.latitude}";
+lastLng = "${dr.longitude}";
 </c:forEach>
 
 // 지도 초기값 보여주기
@@ -114,6 +116,9 @@ var polyline = new kakao.maps.Polyline({
     strokeStyle: 'solid' // 선의 스타일입니다
 });
 
+/*
+ * kakao 거리 계산으로 distance for pay Cost 구하기
+ */
 // 움직인 거리(단위: m), km단위로 반올림
 var distance = Math.round(polyline.getLength());
 document.getElementById("rentDistance").innerHTML = distance + "m";
@@ -126,8 +131,27 @@ document.getElementById("payBtn").innerHTML = "결제 금액 : "+ cost + "원 ";
 polyline.setMap(map);  
 map.setBounds(bounds);
 
-</script>
 
+function payAndReturn(){
+    var payReturn = document.data;
+    payReturn.distance.value = distance;
+    payReturn.lat.value = lastLat;
+    payReturn.lng.value = lastLng;
+    payReturn.rentNo.value = rentNo;
+    
+    payReturn.action = "./payAndReturn.do";
+    payReturn.method = "post";
+    payReturn.submit();
+}
+
+
+</script>
+<form name="data">
+        <input type="hidden" name="distance"/>
+        <input type="hidden" name="lat"/>
+        <input type="hidden" name="lng"/>
+        <input type="hidden" name="rentNo"/>
+</form>
 </body>
 </html>
 

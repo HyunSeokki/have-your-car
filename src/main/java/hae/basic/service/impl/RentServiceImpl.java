@@ -56,7 +56,7 @@ public class RentServiceImpl extends HService implements RentService {
     @Override
     public void updateRent(RentVO vo) throws Exception {
         // TODO Auto-generated method stub
-        rentDAO.insertRent(vo);
+        rentDAO.updateRent(vo);
     }
 
     /*

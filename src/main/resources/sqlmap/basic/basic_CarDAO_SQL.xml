@@ -57,11 +57,7 @@
     <update id="updateCar" parameterType="hae.basic.vo.CarVO">
     <![CDATA[
         UPDATE CARINFTB
-        SET car_size = #{carSize}
-            , car_type = #{carType}
-            , mileage= #{mileage}
-            , birth = #{birth}
-            , capacity= #{capacity}
+        SET mileage= #{mileage}
             , cost = #{cost}
             , latitude = #{latitude}
             , longitude = #{longitude}
