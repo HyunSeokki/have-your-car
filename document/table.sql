@@ -9,6 +9,8 @@ account unlock;
 grant connect, resource to local_dev;
 
 alter user local_dev quota unlimited on users;
+GRANT DELETE, INSERT, SELECT, UPDATE ON 테이블 이름 TO 유저(사용자);
+
 */
 
 --유저정보(로그인)
@@ -172,3 +174,13 @@ INSERT INTO DRVINFTB VALUES(
   20.0, -- 경도
   TO_DATE(SYSDATE,'YYYYMMDDHH24MISS') -- 시간
   );
+  
+-- 트리거 추가
+-- 오류 시 CMD에서 GRANT DELETE, INSERT, SELECT, UPDATE ON LOCAL_DEV.CARINFTB TO LOCAL_DEV;
+CREATE OR REPLACE TRIGGER ADD_CARNO
+AFTER 
+INSERT ON LOCAL_DEV.CARINFTB
+FOR EACH ROW
+  BEGIN
+    INSERT INTO LOCAL_DEV.ACTIVATB VALUES(:NEW.CAR_NO,'N');
+  END;
