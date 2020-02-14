@@ -34,24 +34,23 @@ function makeData() {
 <div align="right" style="margin: 5px;"><em>
 <a href="javascript:makeData();"> Make Data </a> 
 </em></div>
-<div id="map" style="width:60%;height:500px; left: 20%;"></div>
+<div id="map" style="width:70%;height:500px; left: 15%;"></div>
 
-<div style="text-align: left; margin-left: 20%; margin-right: 20%;">
+<div style="text-align: left; margin-left: 15%; margin-right: 15%;">
 <!-- Rent 정보  -->
 <h3>주행 정보</h3>
 <tr>
-    <td>사용자 ID     :  ${rentInfo.userID }</td> <hr>
-    <td>빌린 시간              :  <span id="rentDate"></span></td> <hr>
+    <td>사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</td> <hr>
+    <td>빌린 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></td> <hr>
+    <td>총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></td> <hr>
 </tr>
 
-<!-- 결제 시에 필요한 비용 돈/거리 -->
-<h3>CarData Cost Check</h3>
-<tr>
-    <td>Cost : ${cost }</td>
-</tr>
-
+<div style="text-align: right;">
+<button id="payBtn" type="button" onclick=""></button>
+</div>
 
 <!-- 지도에 표시될 좌표 리스트 -->
+<!-- 
 <h3>Driving Data Check</h3>
 <c:forEach var="dr" items="${drv }">
 <tr>
@@ -62,6 +61,7 @@ function makeData() {
 </tr>
 <br>
 </c:forEach>
+ -->
 </div>
 
 
@@ -113,6 +113,15 @@ var polyline = new kakao.maps.Polyline({
     strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'solid' // 선의 스타일입니다
 });
+
+// 움직인 거리(단위: m), km단위로 반올림
+var distance = Math.round(polyline.getLength());
+document.getElementById("rentDistance").innerHTML = distance + "m";
+distance = Math.round(distance / 1000 );
+var cost = "${cost}"*1; // rent 정보에 저장된 비용
+cost = distance * cost;
+document.getElementById("payBtn").innerHTML = "결제 금액 : "+ cost + "원 ";
+
 
 polyline.setMap(map);  
 map.setBounds(bounds);
