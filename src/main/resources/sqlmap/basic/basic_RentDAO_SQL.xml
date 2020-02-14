@@ -130,6 +130,29 @@
         ]]>
     </select>
     
+    <!--
+        Query Name : selectRentByCarNo
+        Description : SELECT 설명을 기술합니다.
+        author 6800410
+        since 2020. 2. 14.
+        Modification Information
+           since          author              description
+        ===========    =============    ===========================
+        2020. 2. 14.     6800410    	 최초 생성
+    -->
+    <select id="selectRentByCarNo" parameterType="String" resultMap="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRentByCarNo */
+                   RENT_NO,
+                   CAR_NO,
+                   USER_ID,
+                   RENT_DATE,
+                   RETURN_DATE
+              FROM CARRENTB
+             WHERE CAR_NO = #{carNo} AND RETURN_DATE IS NULL
+        ]]>
+    </select>
+    
     
 
 

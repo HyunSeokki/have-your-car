@@ -62,4 +62,7 @@ public interface RentDAO {
 	 */
 	List<RentVO> selectRentList() throws Exception;
 	
+	// 차량번호로 대여중인 정보 가져오기.
+	RentVO selectRentByCarNo(String carNo) throws Exception;
+	
 }

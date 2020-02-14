@@ -116,4 +116,13 @@ public class RentServiceImpl extends HService implements RentService {
         return temp;
     }
 
+    /*
+     * @see hae.basic.service.RentService#selectRentByCarNo(java.lang.String)
+     */
+    @Override
+    public RentVO selectRentByCarNo(String carNo) throws Exception {
+        // TODO Auto-generated method stub
+        return rentDAO.selectRentByCarNo(carNo);
+    }
+
 }

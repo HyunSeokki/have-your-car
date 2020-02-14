@@ -80,4 +80,6 @@ public interface RentService {
      */
     List<RentVO> selectRentListByUserID(String userID) throws Exception;
     
+    
+    RentVO selectRentByCarNo(String carNo) throws Exception;
 }

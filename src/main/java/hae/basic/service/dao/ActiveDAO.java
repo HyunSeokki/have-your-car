@@ -64,5 +64,5 @@ public interface ActiveDAO {
      * @return
      * @throws Exception
      */
-    List<ActiveVO> selectActiveList(ActiveVO vo) throws Exception;
+    List<ActiveVO> selectActiveList() throws Exception;
 }

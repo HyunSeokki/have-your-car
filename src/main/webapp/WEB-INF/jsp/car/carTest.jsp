@@ -18,17 +18,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"
-    type="text/javascript"></script>
-<script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff" />
 <title>Insert title here</title>
-
-
 </head>
 
 <script type="text/javascript">
@@ -39,18 +32,9 @@
         <div class="dropdown float-left">
             <button onclick="myFunction()" class="dropbtn">Dropdown</button>
             <div id="myDropdown" class="dropdown-content">
-                <c:forEach var="car" items="${carList}"
-                    varStatus="status">
-                    <div class="dropdown-item"
-                        onclick="getDetail(${car.carNo})">
-                        <div class="dropdown-component dropdown-number">
-                            ${car.carNo}</div>
-                        <div class="dropdown-component">
-                            ${car.carSize}</div>
-                        <div class="dropdown-component">
-                            ${car.carType}</div>
-                        <div class="dropdown-component">
-                            ${car.cost} 원/km</div>
+                <c:forEach var="car" items="${carList}" varStatus="status">
+                    <div class="dropdown-item" onclick="getDetail(${car.carNo})">
+                        <div class="dropdown-component dropdown-number"> ${car.carNo}</div>
                     </div>
                 </c:forEach>
             </div>
@@ -61,6 +45,55 @@
             </div>
         </div>
     </div>
+   <!--  <div class="nav-bar">
+        <h3 class="float-left" id="carSize"></h3>
+        <h3 class="float-left" id="carType"></h3>
+        <h3 class="float-left" id="capacity"></h3>
+        <h3 class="float-left" id="cost"></h3>
+    </div> -->
+    
+    <div class = "nav-bar">
+        <table class="car-info-table float-left" border="1">
+            <caption style="text-align:left;">차 정보</caption>
+            <thead>
+                <tr>
+                    <th>차번호</th>
+                    <th>차크기</th>
+                    <th>차종</th>
+                    <th>인원</th>
+                    <th>가격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="carNo"></td>
+                    <td id="carSize"></td>
+                    <td id="carType"></td>
+                    <td id="capacity"></td>
+                    <td id="cost"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="rent-info-table float-left" border="1">
+            <caption style="text-align:left;">대여 정보</caption>
+            <thead>
+                <tr>
+                    <th>대여번호</th>
+                    <th>대여자</th>
+                    <th>대여날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="rentNo"></td>
+                    <td id="userID"></td>
+                    <td id="rentDate"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
     <div class="contents">
         <div id="map" style="width: 100%; height: 650px;"></div>
     </div>
@@ -88,18 +121,30 @@ function myFunction() {
 }
 
 /* for get Detail */
-function getDetail(car_no) {
+function getDetail(carNo) {
     var as = document.getElementById("active-status");
     $.ajax({
         type : "GET", //전송방식을 지정한다 (POST,GET)
-        url : "selectCar.do?carNo="+car_no,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+        url : "selectCar.do?carNo="+carNo,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
         dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-        error : function(){
+        contentType : 'application/json; charset=utf-8',
+        error : function(message){
+            console.log(message);
             as.style.color = "gray";
         },
-        success : function(startYn){
-            as.value = car_no;
-            setColor(as, startYn);
+        success : function(car){
+            as.value = carNo;
+            setDetail({});
+            setRentInfo({});
+            
+            var carInfo = JSON.parse(car);
+            var detail = carInfo.detail;
+            var activeStatus = carInfo.activeStatus.startYn;
+            var rentInfo = carInfo.rentInfo;
+            
+            setColor(as, activeStatus);
+            setDetail(detail);
+            setRentInfo(rentInfo);
         }
     });
 }
@@ -125,19 +170,41 @@ function updateStatus() {
 }
 
 /* for coloring  */
-function setColor(actice_status, startYn) {
+function setColor(as, startYn) {
     if(startYn == 'Y') {
-        actice_status.style.color = "blue";
+        as.style.color = "blue";
     } else if (startYn == 'N') {
-        actice_status.style.color = "black";               
+        as.style.color = "black";               
     }
+}
+
+/* for put data */
+function setDetail(detail) {
+    document.getElementById("carNo").innerHTML = typeCheck(detail.carNo); 
+    document.getElementById("carSize").innerHTML = typeCheck(detail.carSize);
+    document.getElementById("carType").innerHTML= typeCheck(detail.carType);
+    document.getElementById("capacity").innerHTML= typeCheck(detail.capacity) + '명';
+    document.getElementById("cost").innerHTML= typeCheck(detail.cost) + '원/km';
+    map.setCenter(new kakao.maps.LatLng(Number(detail.latitude), Number(detail.longitude)));
+    marker.setPosition(map.getCenter());
+}
+
+function setRentInfo(rentInfo) {
+    document.getElementById("rentNo").innerHTML = typeCheck(rentInfo.rentNo);
+    document.getElementById("userID").innerHTML = typeCheck(rentInfo.userID);
+    document.getElementById("rentDate").innerHTML = typeCheck(rentInfo.rentDate);
+}
+
+function typeCheck(arg) {
+    return typeof arg == 'undefined' ? "-" : arg;
 }
 
 /* for map */
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(37.507150, 127.058639), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 3, // 지도의 확대 레벨,
+        draggable : true
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -169,12 +236,19 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 </script>
 
 <style>
-.contents #map {
-    z-index: -1;
-}
 
 .nav-bar {
     clear: both;
+    min-height: 30px;
+    width:100%;
+}
+
+.rent-info-table {  
+    width:40%;
+}
+
+.car-info-table {
+    width:40%;
 }
 
 .float-left {
@@ -207,6 +281,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 .dropdown {
     position: relative;
     display: inline-block;
+    z-index:2;
 }
 
 /* Dropdown Content (Hidden by Default) */

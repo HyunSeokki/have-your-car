@@ -115,16 +115,17 @@
         });
     }
     
-    var drivingInfo = [];
+    var drivingInfo = new Array();
     var logDataInterval;
     
     function startDriving() {
         logDataInterval = setInterval(function() {
             var markerPosition = rvMarker.getPosition();
             var intervalPosition = {
+                    rentNo : 1,
                     latitude : markerPosition.getLat(),
                     longitude : markerPosition.getLng(),
-                    timestamp : new Date().getTime()
+                    timeStamp : new Date().getTime()
             };
             drivingInfo.push(intervalPosition);
             //console.log(intervalPosition);
@@ -133,26 +134,24 @@
         sendDataInterval = setInterval(function() {
             var jsonData = JSON.stringify(drivingInfo);
             console.log(jsonData);
-            drivingInfo = []; // 초기화
+            drivingInfo = new Array(); // 초기화
             
             $.ajax({
                url : "insertDrivingInfo.do",
-               dataType : "json",
-               //contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-               /* headers : {
-                   "mode" : CommonConstant.RequestMode.regist
-               }, */
+               dataType : "text",
+               contentType : "application/json; charset=UTF-8",
                type : "POST",
-               data : {"drivingInfo" : jsonData},
+               data : jsonData,
                success : function(data) {
                    console.log(data);
                },
-               error : function() {
-                   console.log("통신실패")
+               error : function(message) {
+                   console.log(message);
+                   console.log("통신실패");
                }
             });
             
-        }, 5000);
+        }, 5001);
         
     }
     
