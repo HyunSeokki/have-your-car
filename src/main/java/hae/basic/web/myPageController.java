@@ -51,8 +51,7 @@ public class myPageController extends HController {
     @RequestMapping(value = "/basic/mypage.do")
     public String rentList(HttpSession session, @ModelAttribute("userID") String userID,
             Model model) throws Exception {
-        
-        // temp
+       
         userID = (String) session.getAttribute("user");
         
         List<RentVO> rentList = rentService.selectRentListByUserID(userID);
@@ -74,29 +73,9 @@ public class myPageController extends HController {
 
         List<DrivingInfoVO> selectDrivingInfoList = drivingInfoService.selectDrivingInfoListByRentNo(rentNo);
 
-//        for (int i = 0; i < selectDrivingInfoList.size(); i++) {
-//            System.out.println(selectDrivingInfoList.get(i));
-//        }
-        
         JSONObject jo = new JSONObject();
         jo.put("data", selectDrivingInfoList);
         
         return jo.toString();
-       
-//        return "{test : success, test2 : hello }";
     }
-    
-    
-/*    @RequestMapping(value = "/basic/mypagedetail.do")
-    @ResponseBody
-    public String getDrivingInfo(@RequestParam(value = "rentNo") String rentNo) throws Exception {
-        logger.debug(rentNo);
-        
-        List<DrivingInfoVO> selectDrivingInfoList = drivingInfoService.selectDrivingInfoList(rentNo);
-        
-        for (int i = 0; i < selectDrivingInfoList.size(); i++) {
-            System.out.println(selectDrivingInfoList.get(i));
-        }
-        return "{test : success, test2 : hello }";
-    }
-*/}
+}
