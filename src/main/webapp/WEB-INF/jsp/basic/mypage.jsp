@@ -81,9 +81,11 @@
         }
         
         #pageCtrl{
+            margin: 0.5%;
             width: 3%;
             height: 3%;
         }
+       
     
 </style>
 
@@ -92,13 +94,13 @@
 <div id = "container">
     
         <h1 id = "title">MyPage</h1>
-        <div>
+        <div id = ctrlContainer>
             <img id ="pageCtrl" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
             onclick = "history.go(-1)">
             <img id ="pageCtrl" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
             <img id ="pageCtrl" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
             onclick = "location.href='./main.do'">
-        </div>      
+        </div>
     
     <table id="rentTable" width="100%" class="table table-bordered table-hover text-center">
         <thead>
