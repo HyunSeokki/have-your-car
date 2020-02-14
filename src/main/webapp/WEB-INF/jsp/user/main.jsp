@@ -54,7 +54,8 @@ function goRent(carNo)
 }
 
 var lat, lon;
-function get_loc(callback){
+function get_loc(callback)
+{
     if (navigator.geolocation) {        
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -85,8 +86,15 @@ function get_loc(callback){
     </form>
 <script>
 // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-
-    function draw(){
+    var overlay = new Array();
+    
+    function closeOverlay(idx) 
+    {
+            overlay[idx].setMap(null);     
+    }
+    
+    function draw()
+    {
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = { 
             center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
@@ -123,6 +131,8 @@ function get_loc(callback){
         
         marker.setMap(map);
         
+        
+        
         var content = '<div class="wrap">' + 
         '    <div class="info">' + 
         '        <div class="title">' + 
@@ -156,9 +166,7 @@ function get_loc(callback){
         });            
         
      // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-        function closeOverlay(idx) {
-            overlay[idx].setMap(null);     
-        }
+        
         </c:forEach>
     }
     
