@@ -58,7 +58,7 @@ public class ActiveServiceImpl extends HService implements ActiveService{
     }
     
     @Override
-    public List<ActiveVO> selectActiveList(ActiveVO vo) throws Exception{
-        return activeDAO.selectActiveList(vo);
+    public List<ActiveVO> selectActiveList() throws Exception{
+        return activeDAO.selectActiveList();
     }
 }
