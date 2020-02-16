@@ -97,14 +97,12 @@ public class CarPlatformController extends HController {
     @RequestMapping(value = "/updateActiveInfo.do")
     @ResponseBody
     public String updateActiveState(@RequestParam(value = "carNo") String carNo) throws Exception {
-        logger.debug(carNo);
         
         ActiveVO actVo = activeService.selectActive(carNo);
-        logger.debug("--- 현재 시동 상태 --- : " + actVo.toString());
-         
         if(actVo.getStartYn().equals("Y")) { // 시동이 걸려있는 상태라면 --토글-> 시동 끔
             actVo.setStartYn("N");
         } 
+        
         else { // 시동이 꺼져있는 상태라면 --토글-> 시동 킴
             actVo.setStartYn("Y");
         }
@@ -118,15 +116,11 @@ public class CarPlatformController extends HController {
     @ResponseBody
     public String insertDrivingInfo( HttpServletRequest request, @RequestBody String jsonData ) throws Exception {
         
-          //JSONArray drivingInfo = JSONArray.fromObject(jsonData);
-        
           List<JSONObject> drivingInfo = JSONArray.fromObject(jsonData);  
           for(JSONObject div : drivingInfo) {
               logger.debug(div.toString());
           }
         
-//        logger.debug(arr.toString());
-          
           String data = "hello";
         
         return data;
