@@ -180,7 +180,7 @@ $("#rentTable tr").click(function(){
         tdArr.push(td.eq(i).text());
     });        
     console.log("배열에 담긴 값 : "+tdArr);       
-    
+
     // td.eq(index)를 통해 대여번호[0] 가져오기.
     var rentNo = td.eq(0).text();
     if(isNaN(rentNo) == false)
@@ -202,16 +202,15 @@ $("#rentTable tr").click(function(){
                     linePath.push(temp);
                     bounds.extend(temp);
                 }
-    
+                
                 // 지도에 표시할 선을 생성합니다
                 var polyline = new kakao.maps.Polyline({
                     path: linePath, 
                     strokeWeight: 5,
-                    strokeColor: '#FFAE00',
+                    strokeColor: '#013469',
                     strokeOpacity: 0.7,
                     strokeStyle: 'solid'
                 });
-                
                 // 지도에 선을 표시합니다 
                 polyline.setMap(map);  
                 map.setBounds(bounds);
@@ -234,11 +233,15 @@ $("#rentTable tr").click(function(){
         var span = document.getElementsByClassName("close")[0];                                          
         //<span> (x) 눌렀을 때, 모달을 닫음
         span.onclick = function() {
+            map = new kakao.maps.Map(container, options);
+            bounds = new kakao.maps.LatLngBounds();
             modal.style.display = "none";
         }
         //모달 밖을 눌렀을때도 창이 닫힘
         window.onclick = function(event) {
             if (event.target == modal) {
+                map = new kakao.maps.Map(container, options);
+                bounds = new kakao.maps.LatLngBounds();
                 modal.style.display = "none";
             }
         }
