@@ -129,11 +129,13 @@
             success : function(activeStatus) {
                 setColor(as, activeStatus);
                 if(activeStatus == "Y") {
-                    alert("시동을 켰습니다. 주행을 시작하세요.")
+                    alert("시동을 켰습니다. 지도를 움직여 주행을 시작하세요.")
+                    map.setDraggable(true);
                     startDriving();
                 } else if(activeStatus == "N") {
                     endDriving();
                     alert("주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.")
+                    map.setDraggable(false);
                     window.close();
                 }
             }
@@ -156,8 +158,8 @@
     mapCenter = new kakao.maps.LatLng("${carInfo.latitude}", "${carInfo.longitude}"), // 지도의 가운데 좌표
     mapOption = {
         center : mapCenter, // 지도의 중심좌표
-        level : 3
-    // 지도의 확대 레벨
+        level : 3,// 지도의 확대 레벨
+        draggable : false
     };
 
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -181,7 +183,7 @@
     var rvMarker = new kakao.maps.Marker({
         image : markImage,
         position : mapCenter,
-        draggable : true,
+        draggable : false,
         map : map
     });
 
