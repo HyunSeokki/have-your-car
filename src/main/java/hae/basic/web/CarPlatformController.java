@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hae.basic.service.ActiveService;
 import hae.basic.service.CarService;
+import hae.basic.service.DrivingInfoService;
 import hae.basic.service.RentService;
 import hae.basic.vo.ActiveVO;
 import hae.basic.vo.CarVO;
+import hae.basic.vo.DrivingInfoVO;
 import hae.basic.vo.RentVO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -56,8 +58,24 @@ public class CarPlatformController extends HController {
     
     @Resource(name = "rentService")
     private RentService rentService;
+    
+    @Resource(name = "drivingInfoService")
+    private DrivingInfoService drivingInfoService;
 
     @RequestMapping(value = "/main.do")
+    public String carPopup (@RequestParam(value = "rentNo") String rentNo,
+            Model model) throws Exception {
+        
+        RentVO rentInfo = rentService.selectRent(rentNo);
+        CarVO carInfo = carService.selectCar(rentInfo.getCarNo());
+        
+        model.addAttribute("carInfo", carInfo);
+        model.addAttribute("rentInfo", rentInfo);
+        
+        return "car/carPopup";
+    }
+    
+    /*@RequestMapping(value = "/main.do")
     public String carMain(@RequestParam(value = "rentNo") String rentNo,
             Model model) throws Exception {
         
@@ -68,64 +86,48 @@ public class CarPlatformController extends HController {
         model.addAttribute("carList", carList);
         
         return "car/carTest";
-    }
+    }*/
     
-    @RequestMapping(value = "/test.do")
-    public String test(@ModelAttribute("carVO") CarVO carVO,
-            Model model) throws Exception {
-        
-        List<CarVO> carList = carService.selectCarList();
-        model.addAttribute("carList", carList);
-        
-        return "car/test";
-    }
-    
-    
-    @RequestMapping(value = "/selectCar.do", produces="application/json; charset=UTF-8")
+    @RequestMapping(value = "/selectCar.do")
     @ResponseBody
     public String getCarDetail(@RequestParam(value = "carNo") String carNo) throws Exception {
-        CarVO carVO = carService.selectCar(carNo);
         ActiveVO activeVO = activeService.selectActive(carNo);
-        RentVO rentVO = rentService.selectRentByCarNo(carNo);
-        
-        JSONObject jo = new JSONObject();
-        jo.put("detail", carVO);
-        jo.put("activeStatus", activeVO);
-        jo.put("rentInfo", rentVO);
-        
-        return jo.toString();
+        return activeVO.getStartYn();
     }
     
     @RequestMapping(value = "/updateActiveInfo.do")
     @ResponseBody
     public String updateActiveState(@RequestParam(value = "carNo") String carNo) throws Exception {
+        ActiveVO activeVO = activeService.selectActive(carNo);
         
-        ActiveVO actVo = activeService.selectActive(carNo);
-        if(actVo.getStartYn().equals("Y")) { // 시동이 걸려있는 상태라면 --토글-> 시동 끔
-            actVo.setStartYn("N");
+        if(activeVO.getStartYn().equals("Y")) { // 시동이 걸려있는 상태라면 --토글-> 시동 끔
+            activeVO.setStartYn("N");
         } 
-        
         else { // 시동이 꺼져있는 상태라면 --토글-> 시동 킴
-            actVo.setStartYn("Y");
+            activeVO.setStartYn("Y");
         }
+        activeService.updateActive(activeVO);
         
-        activeService.updateActive(actVo);
-        
-        return actVo.getStartYn();
+        return activeVO.getStartYn();
     }
     
     @RequestMapping(value="/insertDrivingInfo.do", method=RequestMethod.POST)
     @ResponseBody
-    public String insertDrivingInfo( HttpServletRequest request, @RequestBody String jsonData ) throws Exception {
-        
+    public void insertDrivingInfo( HttpServletRequest request, @RequestBody String jsonData ) throws Exception {
           List<JSONObject> drivingInfo = JSONArray.fromObject(jsonData);  
           for(JSONObject div : drivingInfo) {
-              logger.debug(div.toString());
+              
+              DrivingInfoVO dvin = new DrivingInfoVO();
+              dvin.setRentNo(div.getString("rentNo"));
+              dvin.setLatitude(div.getString("latitude"));
+              dvin.setLongitude(div.getString("longitude"));
+              dvin.setTimeStamp(div.getString("timeStamp"));
+              
+              logger.debug(dvin.toString());
+              
+              drivingInfoService.insertDrivingInfo(dvin);
+              
           }
-        
-          String data = "hello";
-        
-        return data;
     }
 
 

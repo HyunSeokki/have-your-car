@@ -42,7 +42,7 @@
             VALUES (TO_NUMBER(#{rentNo}),
                     TO_NUMBER(#{latitude}),
                     TO_NUMBER(#{longitude}),
-                    To_DATE(sysdate, 'YYYY/MM/DD HH24:MI:SS') )
+                    #{timeStamp} )
         ]]>
     </insert>
     
