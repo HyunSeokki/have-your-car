@@ -68,9 +68,11 @@ public class MapController extends HController{
         
         rentService.insertRent(rentVO);        
         CarVO carInfo = carService.selectCar(rentVO.getCarNo());
+        RentVO rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
         
         model.addAttribute("carInfo",carInfo);
-        
+        model.addAttribute("rentInfo",rentInfo);
+
         return "user/rent";
     }
 }
