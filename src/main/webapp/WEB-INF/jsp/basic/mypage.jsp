@@ -27,13 +27,9 @@
 <script src =  "https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> 
 
 <!-- bootstrap CSS -->
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
-    #container{
-        width: 95%;
-        margin: 0 auto;
-    }
     
     #title{
         text-align: center;
@@ -55,12 +51,20 @@
     
         /* Modal Content/Box */
         .modal-content {
+            -ms-overflow-style: none; // IE에서 스크롤바 감춤
             background-color: #fefefe;
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;                        
+            width: 80%; 
+            height: 850px;                       
         }
+        
+            .modal-dialog {
+                max-width: 900px;
+                margin: 1.75rem auto;
+            }
+        
         /* The Close Button */
         .close {
             color: #aaa;
@@ -77,7 +81,7 @@
         
         #map_container{
             width: 100%;
-            height:90%;
+            height:100%;
         }
         
         #pageCtrl{
@@ -85,14 +89,13 @@
             width: 3%;
             height: 3%;
         }
-       
+        
     
 </style>
 
 </head>
 <body>
 <div id = "container">
-    
         <h1 id = "title">MyTrip</h1>
         <div id = ctrlContainer>
             <img id ="pageCtrl" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
@@ -102,7 +105,7 @@
             onclick = "location.href='./main.do'">
         </div>
     
-    <table id="rentTable" width="100%" class="table table-bordered table-hover text-center">
+    <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
         <thead>
             <tr>
                 <th>대여번호</th>
@@ -141,8 +144,15 @@
     </table>
  
     <div id="myModal" class="modal">
+     <div class="modal-dialog modal-dialog-centered" role="document">  
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <div class = "modal-header">
+            <h5 class="modal-title">해당 이동경로</h5>    
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          
+        </div>
            
         <!-- 지도생성 -->
         <div id = "map_container">                                                                 
@@ -160,9 +170,13 @@
                  container.style.height = '500px'; 
                  var bounds = new kakao.maps.LatLngBounds();
              </script>
-        </div>    
-      </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id = "close">Close</button>            
+        </div>
+       </div>
     </div>   
+    </div>
 </div>
 
 <script>
@@ -237,6 +251,15 @@ $("#rentTable tr").click(function(){
             bounds = new kakao.maps.LatLngBounds();
             modal.style.display = "none";
         }
+        
+        //<close> 버튼 눌렀을 때, 모달을 닫음
+        var close = document.getElementById('close');
+        close.onclick = function() {
+            map = new kakao.maps.Map(container, options);
+            bounds = new kakao.maps.LatLngBounds();
+            modal.style.display = "none";
+        }
+        
         //모달 밖을 눌렀을때도 창이 닫힘
         window.onclick = function(event) {
             if (event.target == modal) {
