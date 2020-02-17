@@ -215,5 +215,5 @@
      -->
     <bean id="urlFilenameViewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
     
-     
+     <mvc:resources mapping="/resources/**" location="/resources/css/" />
 </beans>
