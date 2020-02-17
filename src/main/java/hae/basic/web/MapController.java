@@ -66,9 +66,14 @@ public class MapController extends HController{
     public String rent(@ModelAttribute("rentVO") RentVO rentVO, 
             Model model) throws Exception {
         
-        rentService.insertRent(rentVO);        
         CarVO carInfo = carService.selectCar(rentVO.getCarNo());
         RentVO rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
+        
+        if(rentInfo == null)
+        {
+            rentService.insertRent(rentVO);  
+            rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
+        }
         
         model.addAttribute("carInfo",carInfo);
         model.addAttribute("rentInfo",rentInfo);

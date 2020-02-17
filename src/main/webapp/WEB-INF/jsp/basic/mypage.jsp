@@ -31,7 +31,7 @@
 
 <style>
     #container{
-        width: 800px;
+        width: 95%;
         margin: 0 auto;
     }
     
@@ -93,7 +93,7 @@
 <body>
 <div id = "container">
     
-        <h1 id = "title">MyPage</h1>
+        <h1 id = "title">MyTrip</h1>
         <div id = ctrlContainer>
             <img id ="pageCtrl" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
             onclick = "history.go(-1)">
@@ -106,7 +106,7 @@
         <thead>
             <tr>
                 <th>대여번호</th>
-                <th>식별번호</th>
+                <th>차종</th>
                 <th>대여날짜</th>
                 <th>반납날짜</th>
                 <th>ID</th>
@@ -124,7 +124,12 @@
                         varStatus="status">
                         <tr>
                             <td id = "rentNo"><c:out value="${result.rentNo }" /></td>
-                            <td id = "carNo"><c:out value="${result.carNo }" /></td>
+                            <td id = "carNo">
+                                <c:forEach var="car" items="${carList }">
+                                    <c:if test="${car.carNo eq result.carNo}">
+                                        <c:out value="${car.carType}" />
+                                    </c:if>
+                                </c:forEach></td>
                             <td id = "rentDate"><c:out value="${result.rentDate }" /></td>
                             <td id = "returnDate"><c:out value="${result.returnDate }" /></td>
                             <td id = "userId"><c:out value="${result.userID }" /></td>              
@@ -161,6 +166,7 @@
 </div>
 
 <script>
+
 $("#rentTable tr").click(function(){    
     var str = ""
     var tdArr = new Array(); // 배열 선언       

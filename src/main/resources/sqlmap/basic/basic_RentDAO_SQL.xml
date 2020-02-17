@@ -104,6 +104,7 @@
                    RETURN_DATE
               FROM CARRENTB
              WHERE RENT_NO = #{rentNo}
+            
         ]]>
     </select>
     
@@ -127,6 +128,7 @@
                    RETURN_DATE
               FROM CARRENTB
              WHERE 1=1
+             ORDER BY RENT_NO
         ]]>
     </select>
     

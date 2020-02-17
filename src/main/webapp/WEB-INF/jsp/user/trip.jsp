@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
-<title>Insert title here</title>
+<title>결제 화면</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
 var rentNo = "${rentInfo.rentNo }";
@@ -31,37 +31,24 @@ function makeData() {
 </head>
 <body>
 <h2 style="text-align: center;">주행 기록 확인</h2>
-<div align="right" style="margin: 5px;"><em>
-<a href="javascript:makeData();"> Make Data </a> 
-</em></div>
-<div id="map" style="width:70%;height:500px; left: 15%;"></div>
-
-<div style="text-align: left; margin-left: 15%; margin-right: 15%;">
-<!-- Rent 정보  -->
-<h3>주행 정보</h3>
-<tr>
-    <td>사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</td> <hr>
-    <td>빌린 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></td> <hr>
-    <td>총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></td> <hr>
-</tr>
-
-<div style="text-align: right;">
-<button id="payBtn" type="button" onclick="payAndReturn()"></button>
+<div align="right" style="margin: 5px;">
+<em><a href="javascript:makeData();"> Make Data </a></em>
 </div>
+<div id="map" style="width:90%;height: 60vh; left: 5%;"></div>
 
-<!-- 지도에 표시될 좌표 리스트 -->
-<!-- 
-<h3>Driving Data Check</h3>
-<c:forEach var="dr" items="${drv }">
-<tr>
-    <td>rentNo    : <c:out value="${dr.rentNo}" /> </td>
-    <td>latitude  : <c:out value="${dr.latitude}" /> </td>
-    <td>longitude : <c:out value="${dr.longitude}" /> </td>
-    <td>timestamp : <c:out value="${dr.timeStamp}" /> </td>
-</tr>
-<br>
-</c:forEach>
- -->
+<div style="text-align: left; margin-left: 5%; margin-right: 5%;
+    width: 90%; height: 40vh;">
+    <!-- Rent 정보  -->
+    <h3>주행 정보</h3>
+    <tr>
+        <td>사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</td> <hr>
+        <td>빌린 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></td> <hr>
+        <td>총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></td> <hr>
+    </tr>
+
+    <div style="text-align: center; ">
+        <button id="payBtn"  type="button" onclick="payAndReturn()"></button>
+    </div>
 </div>
 
 

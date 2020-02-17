@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sun.mail.iap.Response;
-
+import hae.basic.service.CarService;
 import hae.basic.service.DrivingInfoService;
 import hae.basic.service.RentService;
 import hae.basic.vo.DrivingInfoVO;
@@ -47,6 +46,9 @@ public class myPageController extends HController {
 
     @Resource(name = "rentService")
     private RentService rentService;
+    
+    @Resource(name = "carService")
+    private CarService carService;
       
     @RequestMapping(value = "/basic/mypage.do")
     public String rentList(HttpSession session, @ModelAttribute("userID") String userID,
@@ -57,6 +59,7 @@ public class myPageController extends HController {
         List<RentVO> rentList = rentService.selectRentListByUserID(userID);
 
         model.addAttribute("myRentList", rentList);
+        model.addAttribute("carList", carService.selectCarList());
         
         return "basic/mypage";
     }
