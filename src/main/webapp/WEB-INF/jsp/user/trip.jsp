@@ -24,30 +24,26 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
 var rentNo = "${rentInfo.rentNo }";
-function makeData() {
-    window.open("makeData.do?rentNo="+rentNo,"width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
-}
 </script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<h2 style="text-align: center;">주행 기록 확인</h2>
-<div align="right" style="margin: 5px;">
-<em><a href="javascript:makeData();"> Make Data </a></em>
-</div>
-<div id="map" style="width:90%;height: 60vh; left: 5%;"></div>
-
-<div style="text-align: left; margin-left: 5%; margin-right: 5%;
-    width: 90%; height: 40vh;">
-    <!-- Rent 정보  -->
-    <h3>주행 정보</h3>
-    <tr>
-        <td>사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</td> <hr>
-        <td>빌린 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></td> <hr>
-        <td>총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></td> <hr>
-    </tr>
-
-    <div style="text-align: center; ">
-        <button id="payBtn"  type="button" onclick="payAndReturn()"></button>
+<div class="card" style="margin: 3%; padding: 2%;">
+    <h2 class="card-title" style="text-align: center;">주행 기록 확인</h2>
+    <div id="map" style="width:100%;height: 60vh; "></div>
+    
+    <div class="card-body" style="width: 100%; height: 40vh; padding-bottom: 5%;">
+        <!-- Rent 정보  -->
+        <div class="card">
+            <div class="card-header">주행 정보</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</li> 
+                <li class="list-group-item">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></li> 
+                <li class="list-group-item">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rendEnd"></span></li> 
+                <li class="list-group-item">총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></li> 
+            </ul>
+            <button class="btn btn-primary" style="min-height: 45px;  width:100%; height: auto; font-size: 1.3em;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
+        </div>
     </div>
 </div>
 
