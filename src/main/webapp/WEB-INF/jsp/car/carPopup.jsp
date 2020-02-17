@@ -19,78 +19,85 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff"></script>
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function() {
-        setActiveStatus();
-    });
-</script>
-    <div class="nav-bar top-side">
-        <div class="float-left">
-            <button id="active-status" onclick="updateStatus()">
-                <i class="fas fa-power-off fa-3x"></i>
-            </button>
-        </div>
-        <table class="car-info-table float-left" border="1">
-            <caption style="text-align:left;">차 정보</caption>
-            <thead>
-                <tr>
-                    <th>차번호</th>
-                    <th>차크기</th>
-                    <th>차종</th>
-                    <th>인원</th>
-                    <th>가격</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="carNo">${ carInfo.carNo }</td>
-                    <td id="carSize">${ carInfo.carSize }</td>
-                    <td id="carType">${ carInfo.carType }</td>
-                    <td id="capacity">${ carInfo.capacity }</td>
-                    <td id="cost">${ carInfo.cost }</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="rent-info-table float-left" border="1">
-            <caption style="text-align:left;">대여 정보</caption>
-            <thead>
-                <tr>
-                    <th>대여번호</th>
-                    <th>대여자</th>
-                    <th>대여날짜</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="rentNo">${ rentInfo.rentNo }</td>
-                    <td id="userID">${ rentInfo.userID }</td>
-                    <td id="rentDate">${ rentInfo.rentDate }</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- ready options -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setActiveStatus();
+        });
+    </script>
     
-    <!-- Map -->
-    <div class="contents">
-        <!-- <div>
-            <button onclick="startDriving()">주행 시작</button>
-            <button onclick="endDriving()">주행 종료</button>
-        </div> -->
-        <div class="map_wrap">
-            <div id="mapWrapper"
-                style="width: 50%; height: 300px; float: left">
-                <div id="map" style="width: 100%; height: 100%"></div>
-                <!-- 지도를 표시할 div 입니다 -->
-            </div>
-            <div id="rvWrapper"
-                style="width: 50%; height: 300px; float: left">
-                <div id="roadview" style="width: 100%; height: 100%"></div>
-                <!-- 로드뷰를 표시할 div 입니다 -->
+    <div class="container-fluid">
+        <div class="row justify-content-center my-3">
+            <div class="col-10"> 
+                <div class="row justify-content-center my-3">
+                    <div class="col-2 text-center">
+                        <button type="button" class="btn btn-primary" id="active-status" onclick="updateStatus()">
+                            <i class="fas fa-power-off fa-3x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">차번호</th>
+                                <th scope="col">차크기</th>
+                                <th scope="col">차종</th>
+                                <th scope="col">인원</th>
+                                <th scope="col">가격</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="carNo">${ carInfo.carNo }</td>
+                                <td id="carSize">${ carInfo.carSize }</td>
+                                <td id="carType">${ carInfo.carType }</td>
+                                <td id="capacity">${ carInfo.capacity }</td>
+                                <td id="cost">${ carInfo.cost }</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">대여번호</th>
+                                <th scope="col">대여자</th>
+                                <th scope="col">대여날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="rentNo">${ rentInfo.rentNo }</td>
+                                <td id="userID">${ rentInfo.userID }</td>
+                                <td id="rentDate">${ rentInfo.rentDate }</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                
+                <!-- Map -->
+                <div class="map_wrap my-3">
+                    <div id="mapWrapper"
+                        style="width: 50%; height: 400px; float: left">
+                        <div id="map" style="width: 100%; height: 100%"></div>
+                        <!-- 지도를 표시할 div 입니다 -->
+                    </div>
+                    <div id="rvWrapper"
+                        style="width: 50%; height: 400px; float: left">
+                        <div id="roadview" style="width: 100%; height: 100%"></div>
+                        <!-- 로드뷰를 표시할 div 입니다 -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -145,7 +152,7 @@
     /* for coloring  */
     function setColor(as, startYn) {
         if (startYn == 'Y') {
-           as.style.color = "blue";
+           as.style.color = "white";
         } else if (startYn == 'N') {
            as.style.color = "black";
         }
@@ -270,103 +277,13 @@
 </script>
 
 <style>
-
-.contents {
-    clear:both;
-}
-
 .map_wrap {
     overflow: hidden;
-    height: 330px
-}
-
-.top-side {
-    z-index: 4;
-}
-
-.nav-bar {
-    clear: both;
-    min-height: 30px;
-    width:100%;
-    position: relative;
-}
-
-.rent-info-table {  
-    width:40%;
-}
-
-.car-info-table {
-    width:40%;
-}
-
-.float-left {
-    float: left;
-    padding: 3px 5px;
+    height: 400px;
 }
 
 #active-status {
-    margin: 0px auto;
-    width: 144px;
     color: gray;
-}
-
-/* Dropdown Button */
-.dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 400px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-component {
-    padding: 8px 16px;
-    float: left;
-}
-
-.dropdown-number {
-    font-weight: bold;
-}
-
-/* Links inside the dropdown */
-.dropdown-content .dropdown-item {
-    color: black;
-    padding: 0px 16px;
-    text-decoration: none;
-    height: 40px;
-    display: block;
-    both: clear
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content .dropdown-item:hover {
-    background-color: #ddd
-}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {
-    display: block;
 }
 </style>
 </body>
