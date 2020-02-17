@@ -58,8 +58,10 @@ public class CarPlatformController extends HController {
     private RentService rentService;
 
     @RequestMapping(value = "/main.do")
-    public String carMain(@ModelAttribute("carVO") CarVO carVO,
+    public String carMain(@RequestParam(value = "rentNo") String rentNo,
             Model model) throws Exception {
+        
+        logger.debug(rentNo);
         
         List<ActiveVO> carList = activeService.selectActiveList();
         

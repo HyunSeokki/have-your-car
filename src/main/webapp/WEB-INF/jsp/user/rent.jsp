@@ -17,6 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+
 <style>
 .btn1 {margin-left:90%;background-color: #3498db; border-bottom: 5px solid #2980B9; text-shadow: 0px -2px #2980B9; position: relative; padding: 10px 40px; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 15px; color: #FFF; text-decoration: none;}
 </style>
@@ -31,6 +33,13 @@ function goRoute(carNo)
     route.method = "post";
     route.submit();
 }
+
+/* 3초 후에 팝업 창 */
+$(document).ready(function() {
+    setTimeout(function() {
+        window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "_blank");
+    }, 3000);
+});
 </script>
 </head>
 <body>
