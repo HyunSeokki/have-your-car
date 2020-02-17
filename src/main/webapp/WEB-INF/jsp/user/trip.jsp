@@ -34,9 +34,10 @@ function makeData() {
 <div align="right" style="margin: 5px;">
 <em><a href="javascript:makeData();"> Make Data </a></em>
 </div>
-<div id="map" style="width:70%;height:500px; left: 15%;"></div>
+<div id="map" style="width:90%;height: 60vh; left: 5%;"></div>
 
-<div style="text-align: left; margin-left: 15%; margin-right: 15%;">
+<div style="text-align: left; margin-left: 5%; margin-right: 5%;
+    width: 90%; height: 40vh;">
     <!-- Rent 정보  -->
     <h3>주행 정보</h3>
     <tr>
@@ -45,8 +46,8 @@ function makeData() {
         <td>총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></td> <hr>
     </tr>
 
-    <div style="text-align: right;">
-    <button id="payBtn" type="button" onclick="payAndReturn()"></button>
+    <div style="text-align: center; ">
+        <button id="payBtn"  type="button" onclick="payAndReturn()"></button>
     </div>
 </div>
 
