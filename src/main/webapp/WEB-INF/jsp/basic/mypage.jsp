@@ -31,6 +31,11 @@
 
 <style>
     
+    body{
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    
     #title{
         text-align: center;
     }
@@ -43,7 +48,7 @@
             left: 0;
             top: 0;
             width: 100%; /* Full width */
-            height: 100%; /* Full height */
+            height: 100vh; /* Full height */
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -57,7 +62,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%; 
-            height: 850px;                       
+            height: 80vh;                       
         }
         
             .modal-dialog {
@@ -81,30 +86,34 @@
         
         #map_container{
             width: 100%;
-            height:100%;
+            height: 53%;
+            margin-top: 2%;
         }
         
-        #pageCtrl{
-            margin: 0.5%;
-            width: 3%;
-            height: 3%;
+        #icon{
+            margin: 1%;
+            width: 4%;
+            height: 4%;
         }
         
-    
+        .btn{
+            margin-top: 2.5%;
+        }
+        
 </style>
 
 </head>
 <body>
-<div id = "container">
+<div class = "container-fluid">
         <h1 id = "title">MyTrip</h1>
         <div id = ctrlContainer>
-            <img id ="pageCtrl" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
+            <img id ="icon" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
             onclick = "history.go(-1)">
-            <img id ="pageCtrl" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
-            <img id ="pageCtrl" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
+            <img id ="icon" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
+            <img id ="icon" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
             onclick = "location.href='./main.do'">
         </div>
-    
+   <div class = "table-responsive">
     <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
         <thead>
             <tr>
@@ -112,7 +121,7 @@
                 <th>차종</th>
                 <th>대여날짜</th>
                 <th>반납날짜</th>
-                <th>ID</th>
+                <th>사용자</th>
             </tr>
         </thead>
         <tbody>
@@ -127,7 +136,7 @@
                         varStatus="status">
                         <tr>
                             <td id = "rentNo"><c:out value="${result.rentNo }" /></td>
-                            <td id = "carNo">
+                            <td id = "carType">
                                 <c:forEach var="car" items="${carList }">
                                     <c:if test="${car.carNo eq result.carNo}">
                                         <c:out value="${car.carType}" />
@@ -142,6 +151,7 @@
             </c:choose>  
         </tbody>
     </table>
+   </div>
  
     <div id="myModal" class="modal">
      <div class="modal-dialog modal-dialog-centered" role="document">  
@@ -171,16 +181,8 @@
                  var bounds = new kakao.maps.LatLngBounds();
              </script>
         </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id = "close">Close</button>            
-        </div>
-       </div>
-    </div>   
-    </div>
-</div>
-
+        
 <script>
-
 $("#rentTable tr").click(function(){    
     var str = ""
     var tdArr = new Array(); // 배열 선언       
@@ -197,6 +199,7 @@ $("#rentTable tr").click(function(){
 
     // td.eq(index)를 통해 대여번호[0] 가져오기.
     var rentNo = td.eq(0).text();
+    
     if(isNaN(rentNo) == false)
     {
         $.ajax ({
@@ -206,7 +209,22 @@ $("#rentTable tr").click(function(){
             contentType : 'application/json; charset=utf-8',
             success : function(args) {
                 console.log('연결성공');
-                var trip = JSON.parse(args).data;                
+
+                var trip = JSON.parse(args).data;   
+                var carInfo =JSON.parse(args).data2;
+                
+                //차 정보 담기
+                var carType = carInfo.carType;
+                var carSize = carInfo.carSize;
+                var birth = carInfo.birth;
+                var capacity = carInfo.capacity;
+                var cost = carInfo.cost;
+                
+                document.getElementById("carN").innerHTML = carType;
+                document.getElementById("carS").innerHTML = carSize;
+                document.getElementById("carB").innerHTML = birth;
+                document.getElementById("carC").innerHTML = capacity;
+                document.getElementById("carCo").innerHTML = cost;
                 
                 //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
                 var linePath = new Array();
@@ -233,6 +251,7 @@ $("#rentTable tr").click(function(){
                 console.log("연결실패");
                 console.log(request);
             },
+            cache : false
         });
          
         //****Modal****//
@@ -271,5 +290,19 @@ $("#rentTable tr").click(function(){
     }
 });
 </script>   
+        <div class="card" style = "width: 100%;">
+         <div class="card-body">
+            <h5 class="card-title" id="carN"></h5>
+            <h6 class="card-subtitle mb-2 text-muted" id = "carS"></h6>
+            <span>연식: </span><span class="card-text" id = "carB"></span><br>
+            <span>수용인원: </span><span class="card-text" id = "carC"></span><span>명</span><br>
+            <span>비용/km: </span><span class="card-text" id = "carCo"></span><span>원</span><br>
+         </div>
+        </div>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id = "close">Close</button>            
+       </div>
+    </div>   
+    </div>
+</div>
 </body>
 </html>
