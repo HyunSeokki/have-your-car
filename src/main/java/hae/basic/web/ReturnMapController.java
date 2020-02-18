@@ -75,7 +75,7 @@ public class ReturnMapController extends HController{
     public String makeData(@RequestParam("rentNo") String rentNo,
             Model model) throws Exception {
         model.addAttribute("rentNo", rentNo);
-        return "user/makeData";
+        return "test/makeData";
     }
     
     @RequestMapping(value = "/basic/return.do")
@@ -99,6 +99,8 @@ public class ReturnMapController extends HController{
                 if(item.getReturnDate()==null)
                     rentOne = item;
             }
+            rentService.updateRent(rentOne);
+            rentOne = rentService.selectRent(rentOne.getRentNo());
             model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
             List<DrivingInfoVO> drv = drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo());
@@ -130,10 +132,9 @@ public class ReturnMapController extends HController{
     public String payAndReturn(@RequestParam int distance, @RequestParam String lat, 
             @RequestParam String lng, @RequestParam String rentNo, Model model ) throws Exception {   
         /*
-         * 이제 데이터 업데이트하는 부분을 작성하면 된다잉
+         * 데이터 업데이트
          */
         RentVO rentInfo = rentService.selectRent(rentNo);
-        rentService.updateRent(rentInfo);
         
         CarVO tempCar = carService.selectCar(rentInfo.getCarNo());
         tempCar.setLatitude(lat);

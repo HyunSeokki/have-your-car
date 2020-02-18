@@ -72,9 +72,9 @@ public class RentServiceImpl extends HService implements RentService {
      * @see hae.basic.service.RentService#selectRent(java.lang.String)
      */
     @Override
-    public RentVO selectRent(String seq) throws Exception {
+    public RentVO selectRent(String rentNo) throws Exception {
         // TODO Auto-generated method stub
-        return rentDAO.selectRent(seq);
+        return rentDAO.selectRent(rentNo);
     }
 
     /*
