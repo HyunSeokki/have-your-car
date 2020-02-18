@@ -17,6 +17,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
@@ -47,26 +48,30 @@ function login() {
 </script>
 </head>
 <body>
-
-<form:form commandName="userVO" id="loginForm" name="loginForm" class="form-horizontal" role="form">
-<table border="1">
-    <tr>
-        <td> 아이디 </td>
-        <td>
-            <form:input path="userID" name="userID" type="text"/>
-            <form:errors path="userID" />
-        </td>
-    </tr>
-    <tr>
-        <td> 비밀번호 </td>
-        <td>
-            <form:input path="userPWD" name="userPWD" type="password"/>
-            <form:errors path="userPWD" />
-        </td>
-    </tr>
-</table>
-</form:form>
-<button onclick="login()">로그인</button>
+<div class="container-fluid">
+    <div class="row align-items-center justify-content-center"  style="height:100vh;">
+        <div class="col-10 pb-5">
+            <div class="d-flex justify-content-center">
+                <img src="https://imgur.com/JIINNf7.png" alt="logo"/>
+            </div>
+            <form:form commandName="userVO" id="loginForm" name="loginForm" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label>아이디</label>
+                    <form:input path="userID" name="userID" type="text" class="form-control"/>
+                    <form:errors path="userID" />
+                </div>
+                <div class="form-group">
+                    <label>비밀번호</label>
+                    <form:input path="userPWD" name="userPWD" type="password" class="form-control"/>
+                    <form:errors path="userPWD" />
+                </div>    
+            </form:form>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="login()">로그인</button>
+            </div>
+        </div>
+    </div>
+</div>
 	
 </body>
 </html>
