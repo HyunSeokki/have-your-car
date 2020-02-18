@@ -68,10 +68,10 @@
             height: 80vh;                       
         }
         
-            .modal-dialog {
-                max-width: 900px;
-                margin: 1.75rem auto;
-            }
+         .modal-dialog {
+            max-width: 900px;
+            margin: 1.75rem auto;
+        }
         
         /* The Close Button */
         .close {
@@ -107,6 +107,22 @@
             margin-top: 2.5%;
         }
         
+          .carImage {
+            width: 41%;
+            height: 45%;
+            position: absolute;
+            top: 123%;
+            left: -36%;
+            margin-top: -148px;
+            margin-left: -27px;
+        }
+
+        
+        #imgContainer{
+             position:absolute;
+            width:100%;
+            height:100%
+        }
 </style>
 
 </head>
@@ -298,12 +314,19 @@ $("#rentTable tr").click(function(){
 });
 </script>   
         <div class="card" style = "width: 100%;">
-         <div class="card-body">
+         <div class="card-body row">
+         <div class = "col">
             <h5 class="card-title" id="carN"></h5>
             <h6 class="card-subtitle mb-2 text-muted" id = "carS"></h6>
             <span>연식: </span><span class="card-text" id = "carB"></span><br>
             <span>수용 인원: </span><span class="card-text" id = "carC"></span><span>명</span><br>
             <span>비용/km: </span><span class="card-text" id = "carCo"></span><span>원</span><br>
+          </div>
+          
+          
+          <div class = "col" id = "imgContainer">
+            <img src="<c:url value="/resources/img/sonata.jpg" />" class = "carImage" alt="소나타" />
+          </div>
          </div>
         </div>
         <button type="button" class="btn btn-primary" data-dismiss="modal" id = "close">Close</button>            
