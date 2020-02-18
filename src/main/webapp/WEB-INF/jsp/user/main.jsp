@@ -160,7 +160,13 @@ function off() {
         function closeOverlay(idx) 
         {
             overlay[idx].setMap(null);     
-        }                
+        } 
+        
+        function moveCenter(){
+            var moveLatLon = new kakao.maps.LatLng(lat, lon);
+            
+            map.panTo(moveLatLon);    
+        }
         
         function draw()
         {
@@ -253,11 +259,7 @@ function off() {
         
         get_loc(draw);
         
-        function moveCenter(){
-            var moveLatLon = new kakao.maps.LatLng(lat, lon);
-            
-            map.panTo(moveLatLon);    
-        }
+        
     </script>
 </body>
 </html>
