@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
 <%@ page session="true" %>
 <%-- 
     JSP Name : rent.jsp
@@ -18,10 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
-
-<style>
-.btn1 {margin-left:90%;background-color: #3498db; border-bottom: 5px solid #2980B9; text-shadow: 0px -2px #2980B9; position: relative; padding: 10px 40px; border-radius: 3px; font-family: 'Lato', sans-serif; font-size: 15px; color: #FFF; text-decoration: none;}
-</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script type="text/javaScript" language="javascript">
 function goRoute(carNo)
 {
@@ -40,47 +38,35 @@ $(document).ready(function() {
     setTimeout(function() {
         window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "car", 'width=1800, height=1000, status=no, menubar=no, toolbar=no, resizable=yes');
     }, 3000);
-});
+}); 
 </script>
 </head>
 <body>
-    <form name="data">
-        <input type="hidden" name="carNo"/>
-        <input type="hidden" name="rentNo"/>
-    </form>
-    <button class="btn1" type="button" onclick="goRoute('${carInfo.carNo}');">반납</button>
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center"  style="height:100vh;">
+            <div class="col-10">
+                <div class="row mb-3">
+                <div class="card" style="width:80vw;">
+                    <!-- 임의로 지정한 url -- car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
+                    <div class="card-body">
+                        <h5 class="card-title text-center font-weight-bold">대여No. ${ rentInfo.rentNo }</h5>
+                        <h5 class="card-title text-center font-weight-bold">${ rentInfo.rentDate }</h5>
+                    </div>
+                    <img src="<c:url value="/resources/img/key.png" />" class="card-img-bottom" alt="소나타"/>
+                </div>
+                </div>
+                <div class="row mt-3 justify-content-center"">
+                    <button class="btn btn-outline-primary btn-block btn-lg" type="button" onclick="goRoute('${carInfo.carNo}');">반납하기</button>
+                </div>
+            </div>
+        </div>
+        <form name="data">
+            <input type="hidden" name="carNo"/>
+            <input type="hidden" name="rentNo"/>
+        </form>
+        
+        
     
-    <Table>
-    <tr>
-        <th>항목</th>
-        <th>내용</th>
-    </tr>
-    <tr>
-        <th>모델명</th>
-        <td>${carInfo.carType}</td>
-    </tr>
-    <tr>
-        <th>차종</th>
-        <td>${carInfo.carSize}</td>
-    </tr>
-    <tr>
-        <th>총 주행거리</th>
-        <td>${carInfo.mileage}km</td>
-    </tr>
-    <tr>
-        <th>연식</th>
-        <td>${carInfo.birth}</td>
-    </tr>
-    <tr>
-        <th>수용인원</th>
-        <td>${carInfo.capacity}인승</td>
-    </tr>
-    <tr>
-        <th>km 당 가격</th>
-        <td>${carInfo.cost}원</td>
-    </tr>
-    </Table>
-    <br>
-         디지털카키를 받았습니다.    
+    </div>
 </body>
 </html>
