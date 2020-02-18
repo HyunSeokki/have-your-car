@@ -67,9 +67,9 @@ public class ReturnMapController extends HController{
     private DrivingInfoService drivingInfoService;
 
     @RequestMapping(value = "/basic/return.do")
-    public String goTrip(@RequestParam("carNo") String carNo,
+    public String goTrip(@RequestParam("carNo") String carNo, @RequestParam("rentNo") String rentNo,
             Model model) throws Exception {
-        logger.debug("진입");
+        logger.debug("진입 : " + carNo);
         // 시동이 꺼져 있는지 확인
         ActiveVO temp = activeService.selectActive(carNo);
         if(temp.getStartYn().equals("Y")) {
@@ -81,14 +81,9 @@ public class ReturnMapController extends HController{
             logger.debug("시동 꺼짐");
             // 시동이 꺼져있을 때
             // 렌트 정보 가져오기
-            List<RentVO> rent = rentService.selectRentListByCar(carNo);
-            RentVO rentOne = new RentVO();
-            for (RentVO item : rent) {
-                if(item.getReturnDate()==null)
-                    rentOne = item;
-            }
+            RentVO rentOne = rentService.selectRent(rentNo);
             rentService.updateRent(rentOne);
-            rentOne = rentService.selectRent(rentOne.getRentNo());
+            rentOne = rentService.selectRent(rentNo);
             model.addAttribute("rentInfo", rentOne);
             // 차량 주행정보 가져오기
             List<DrivingInfoVO> drv = drivingInfoService.selectDrivingInfoListByRentNo(rentOne.getRentNo());

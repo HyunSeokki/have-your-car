@@ -28,6 +28,7 @@ function goRoute(carNo)
     var route = document.data;
     
     route.carNo.value = carNo;
+    route.rentNo.value = "${rentInfo.rentNo}";
     
     route.action = "./return.do";
     route.method = "post";
@@ -45,6 +46,7 @@ $(document).ready(function() {
 <body>
     <form name="data">
         <input type="hidden" name="carNo"/>
+        <input type="hidden" name="rentNo"/>
     </form>
     <button class="btn1" type="button" onclick="goRoute('${carInfo.carNo}');">반납</button>
     
