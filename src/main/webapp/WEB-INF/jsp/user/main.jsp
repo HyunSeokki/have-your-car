@@ -63,40 +63,40 @@ function get_loc(callback)
 <body>
 <div class="container-fluid" style="height:100vh;">
     <div class="row"> 
-        <div id="map" style="width:100%;height:1024px;"></div>
+        <div id="map" style="width:480px;height:600px;"></div>
         <form name="data">
             <input type="hidden" name="carNo"/>
             <input type="hidden" name="userID"/>
         </form>
     </div>
-    <div class="row justify-content-center mt-5">
-        <h3 class="col-6 text-center">
+    <div class="row justify-content-center mt-4">
+        <h4 class="col-6 text-center">
             <span class="font-weight-bold"><%= session.getAttribute("user") %></span> 님 환영합니다.
-        </h3>
+        </h4>
     </div>
-    <div class="row justify-content-around mt-5">
-            <div class="col-2 text-center" onclick="location.href='./logout.do'">
+    <div class="row justify-content-around mt-4">
+            <div class="col-3 text-center" onclick="location.href='./logout.do'">
                 <div class="d-flex-inline">
-                    <i class="fas fa-sign-out-alt fa-3x"></i>
+                    <i class="fas fa-sign-out-alt fa-2x"></i>
                 </div>
                 <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">로그아웃</span>
-                </div>
-            </div>
-            <div class="col-2 text-center">
-                <div class="d-flex-inline">
-                    <i class="fas fa-map-marked-alt fa-3x"></i>
-                </div>
-                <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">I'm here!</span>
+                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">로그아웃</span>
                 </div>
             </div>
-            <div class="col-2 text-center" onclick="location.href='./mypage.do'">
+            <div class="col-3 text-center">
                 <div class="d-flex-inline">
-                    <i class="fas fa-user-circle fa-3x"></i>
+                    <i class="fas fa-map-marked-alt fa-2x"></i>
                 </div>
                 <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">마이페이지</span>
+                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">I'm here!</span>
+                </div>
+            </div>
+            <div class="col-3 text-center" onclick="location.href='./mypage.do'">
+                <div class="d-flex-inline">
+                    <i class="fas fa-user-circle fa-2x"></i>
+                </div>
+                <div class="d-flex-inline">
+                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">마이페이지</span>
                 </div>    
             </div>               
     </div>
@@ -155,7 +155,7 @@ function get_loc(callback)
             var content = '<div class="wrap">' + 
             '    <div class="info">' + 
             '        <div class="title">' + 
-            '            ${result.carType}' + 
+            '            <div>${result.carType}</div>' + 
             '            <div class="close" onclick="closeOverlay('+${status.index}+')" title="닫기"></div>' + 
             '        </div>' + 
             '        <div class="body">' + 
@@ -183,10 +183,12 @@ function get_loc(callback)
             kakao.maps.event.addListener(marker, 'click', function() {
                 if(clicked_marker != -1) {
                     closeOverlay(clicked_marker);
+                    map.panTo(new kakao.maps.LatLng(lat, lon))
                 }
                 if(clicked_marker != '${status.index}') {
                     clicked_marker = '${status.index}';
-                    overlay['${status.index}'].setMap(map);
+                    overlay[clicked_marker].setMap(map);
+                    map.panTo(overlay[clicked_marker].getPosition());
                 } else {
                     clicked_marker = -1;
                 }
