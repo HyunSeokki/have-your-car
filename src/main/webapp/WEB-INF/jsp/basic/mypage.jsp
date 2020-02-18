@@ -32,12 +32,15 @@
 <style>
     
     body{
+    -ms-overflow-style: none;
         margin-top: 5%;
         margin-bottom: 5%;
+        font-size: 0.8rem;
     }
     
     #title{
         text-align: center;
+        font-size: 5vh;
     }
     
     /* The Modal (background) */
@@ -91,9 +94,13 @@
         }
         
         #icon{
-            margin: 1%;
-            width: 4%;
-            height: 4%;
+            margin: 1vh;
+            width: 3vh;
+            height: 3vh;
+        }
+        
+        #ctrlContainer{
+            margin-bottom: 1vh;
         }
         
         .btn{
@@ -157,7 +164,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">  
       <div class="modal-content">
         <div class = "modal-header">
-            <h5 class="modal-title">해당 이동경로</h5>    
+            <h5 class="modal-title">RentInfo</h5>    
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
@@ -177,7 +184,7 @@
                  };
                  var map = new kakao.maps.Map(container, options);
                  container.style.width = '100%';
-                 container.style.height = '500px'; 
+                 container.style.height = '38vh'; 
                  var bounds = new kakao.maps.LatLngBounds();
              </script>
         </div>
@@ -295,7 +302,7 @@ $("#rentTable tr").click(function(){
             <h5 class="card-title" id="carN"></h5>
             <h6 class="card-subtitle mb-2 text-muted" id = "carS"></h6>
             <span>연식: </span><span class="card-text" id = "carB"></span><br>
-            <span>수용인원: </span><span class="card-text" id = "carC"></span><span>명</span><br>
+            <span>수용 인원: </span><span class="card-text" id = "carC"></span><span>명</span><br>
             <span>비용/km: </span><span class="card-text" id = "carCo"></span><span>원</span><br>
          </div>
         </div>
