@@ -104,6 +104,7 @@ function get_loc(callback)
 
 <script>
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+        var clicked_marker = -1;
         var overlay = new Array();
         
         function closeOverlay(idx) 
@@ -180,7 +181,15 @@ function get_loc(callback)
             
             // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
             kakao.maps.event.addListener(marker, 'click', function() {
-                overlay['${status.index}'].setMap(map);
+                if(clicked_marker != -1) {
+                    closeOverlay(clicked_marker);
+                }
+                if(clicked_marker != '${status.index}') {
+                    clicked_marker = '${status.index}';
+                    overlay['${status.index}'].setMap(map);
+                } else {
+                    clicked_marker = -1;
+                }
             });            
             
          // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
