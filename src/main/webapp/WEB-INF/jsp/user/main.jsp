@@ -132,7 +132,7 @@ function off() {
                     <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">로그아웃</span>
                 </div>
             </div>
-            <div class="col-3 text-center">
+            <div class="col-3 text-center" onclick="moveCenter();">
                 <div class="d-flex-inline">
                     <i class="fas fa-map-marked-alt fa-2x"></i>
                 </div>
@@ -155,11 +155,12 @@ function off() {
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         var clicked_marker = -1;
         var overlay = new Array();
+        var map;
         
         function closeOverlay(idx) 
         {
-                overlay[idx].setMap(null);     
-        }
+            overlay[idx].setMap(null);     
+        }                
         
         function draw()
         {
@@ -170,7 +171,7 @@ function off() {
                 level: 5 // 지도의 확대 레벨 
             }; 
             
-            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+            map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             
             var markerPosition = new kakao.maps.LatLng(lat, lon); 
             //var markerPosition = new kakao.maps.LatLng(37.506561, 127.05841800000002);
@@ -252,7 +253,11 @@ function off() {
         
         get_loc(draw);
         
-        
+        function moveCenter(){
+            var moveLatLon = new kakao.maps.LatLng(lat, lon);
+            
+            map.panTo(moveLatLon);    
+        }
     </script>
 </body>
 </html>
