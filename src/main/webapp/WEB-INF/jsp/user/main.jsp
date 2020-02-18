@@ -18,6 +18,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <title>Main title</title>
@@ -41,31 +42,69 @@ function get_loc(callback)
 {
     if (navigator.geolocation) {        
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function(position) { 
             lat = position.coords.latitude; // 위도
             lon = position.coords.longitude; // 경도
-            
             callback();       
-          });
+        }, function(position) { // 위치 정보 허용 안함
+            lat = 37.506561; // 위도
+            lon = 127.05841800000002; // 경도
+            callback();
+        });
         
-    } else {
+    } else { // geolocation 사용 불가
         lat = 37.506561; // 위도
         lon = 127.05841800000002; // 경도
-        
         callback();
     }
 }
 </script>
 </head>
 <body>
-<div class="container-fluid">        
-    <div id="map" style="width:100%;height:600px;"></div>
-    <form name="data">
-        <input type="hidden" name="carNo"/>
-        <input type="hidden" name="userID"/>
-    </form>
-    <script>
+<div class="container-fluid" style="height:100vh;">
+    <div class="row"> 
+        <div id="map" style="width:100%;height:1024px;"></div>
+        <form name="data">
+            <input type="hidden" name="carNo"/>
+            <input type="hidden" name="userID"/>
+        </form>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <h3 class="col-6 text-center">
+            <span class="font-weight-bold"><%= session.getAttribute("user") %></span> 님 환영합니다.
+        </h3>
+    </div>
+    <div class="row justify-content-around mt-5">
+            <div class="col-2 text-center" onclick="location.href='./logout.do'">
+                <div class="d-flex-inline">
+                    <i class="fas fa-sign-out-alt fa-3x"></i>
+                </div>
+                <div class="d-flex-inline">
+                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">로그아웃</span>
+                </div>
+            </div>
+            <div class="col-2 text-center">
+                <div class="d-flex-inline">
+                    <i class="fas fa-map-marked-alt fa-3x"></i>
+                </div>
+                <div class="d-flex-inline">
+                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">I'm here!</span>
+                </div>
+            </div>
+            <div class="col-2 text-center" onclick="location.href='./mypage.do'">
+                <div class="d-flex-inline">
+                    <i class="fas fa-user-circle fa-3x"></i>
+                </div>
+                <div class="d-flex-inline">
+                    <span class="badge badge-primary text-wrap" style="font-size: 1rem;">마이페이지</span>
+                </div>    
+            </div>               
+    </div>
+</div>
+
+<script>
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+        var clicked_marker = -1;
         var overlay = new Array();
         
         function closeOverlay(idx) 
@@ -142,7 +181,15 @@ function get_loc(callback)
             
             // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
             kakao.maps.event.addListener(marker, 'click', function() {
-                overlay['${status.index}'].setMap(map);
+                if(clicked_marker != -1) {
+                    closeOverlay(clicked_marker);
+                }
+                if(clicked_marker != '${status.index}') {
+                    clicked_marker = '${status.index}';
+                    overlay['${status.index}'].setMap(map);
+                } else {
+                    clicked_marker = -1;
+                }
             });            
             
          // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
@@ -152,24 +199,5 @@ function get_loc(callback)
         
         get_loc(draw);
     </script>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <span><%= session.getAttribute("user") %> 님 환영합니다.</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <button class="btn btn-primary" type="button" onclick="location.href='./logout.do'">로그아웃</button>
-            </div>
-            <div class="col-4">
-                <button class="btn btn-primary" type="button" onclick="location.href='./mypage.do'">My page</button>    
-            </div>               
-        </div>
-    </div>
-</div>
 </body>
 </html>
