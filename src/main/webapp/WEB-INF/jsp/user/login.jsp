@@ -52,7 +52,7 @@ function login() {
     <div class="row align-items-center justify-content-center"  style="height:100vh;">
         <div class="col-10 pb-5">
             <div class="d-flex justify-content-center">
-                <img src="https://imgur.com/JIINNf7.png" alt="logo"/>
+                <img src="<c:url value="/resources/img/logo.png" />" alt="logo"/>
             </div>
             <form:form commandName="userVO" id="loginForm" name="loginForm" class="form-horizontal" role="form">
                 <div class="form-group">
