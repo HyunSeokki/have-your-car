@@ -32,17 +32,17 @@ var rentNo = "${rentInfo.rentNo }";
     <h2 class="card-title" style="text-align: center;">주행 기록 확인</h2>
     <div id="map" style="width:100%;height: 60vh; "></div>
     
-    <div class="card-body" style="width: 100%; height: 40vh; padding-bottom: 5%;">
+    <div class="card-body" style="padding: 10px 0px 0px 0px; width: 100%; height: 40vh; ">
         <!-- Rent 정보  -->
-        <div class="card">
+        <div class="card" style="position: relative; height:100%;">
             <div class="card-header">주행 정보</div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</li> 
                 <li class="list-group-item">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></li> 
-                <li class="list-group-item">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rendEnd"></span></li> 
+                <li class="list-group-item">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentEnd"></span></li> 
                 <li class="list-group-item">총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></li> 
             </ul>
-            <button class="btn btn-primary" style="min-height: 45px;  width:100%; height: auto; font-size: 1.3em;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
+            <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
         </div>
     </div>
 </div>
@@ -56,12 +56,14 @@ var rentNo = "${rentInfo.rentNo }";
  */
 
 var rentDate = "${rentInfo.rentDate }";
+var rentEnd = "${rentInfo.returnDate}";
 var splitDate = function(date) {
     return date.substring(0,4)+"년 "+date.substring(4,6)+"월 "
     +date.substring(6,8)+"일 "+date.substring(8,10)+"시 "
     +date.substring(10,12)+"분 "+date.substring(12,14)+"초";
 }
 document.getElementById('rentDate').innerHTML = splitDate(rentDate);
+document.getElementById('rentEnd').innerHTML = splitDate(rentEnd);
 
 /*
  * 카카오 맵

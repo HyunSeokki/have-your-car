@@ -104,7 +104,6 @@
                    RETURN_DATE
               FROM CARRENTB
              WHERE RENT_NO = #{rentNo}
-            
         ]]>
     </select>
     
