@@ -38,7 +38,7 @@ function goRoute(carNo)
 /* 3초 후에 팝업 창 */
 $(document).ready(function() {
     setTimeout(function() {
-        window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "_blank");
+        window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "car", 'width=1800, height=1000, status=no, menubar=no, toolbar=no, resizable=yes');
     }, 3000);
 });
 </script>
