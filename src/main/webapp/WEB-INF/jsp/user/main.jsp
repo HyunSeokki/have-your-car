@@ -42,17 +42,19 @@ function get_loc(callback)
 {
     if (navigator.geolocation) {        
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function(position) { 
             lat = position.coords.latitude; // 위도
             lon = position.coords.longitude; // 경도
-            
             callback();       
-          });
+        }, function(position) { // 위치 정보 허용 안함
+            lat = 37.506561; // 위도
+            lon = 127.05841800000002; // 경도
+            callback();
+        });
         
-    } else {
+    } else { // geolocation 사용 불가
         lat = 37.506561; // 위도
         lon = 127.05841800000002; // 경도
-        
         callback();
     }
 }
