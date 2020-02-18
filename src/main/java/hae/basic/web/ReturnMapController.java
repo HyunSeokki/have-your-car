@@ -65,19 +65,7 @@ public class ReturnMapController extends HController{
     
     @Resource(name = "drivingInfoService")
     private DrivingInfoService drivingInfoService;
-    
-    @RequestMapping(value = "/basic/go.do")
-    public String goTest() throws Exception {
-        return "test/JunsTest";  
-    }
-    
-    @RequestMapping(value = "/basic/makeData.do")
-    public String makeData(@RequestParam("rentNo") String rentNo,
-            Model model) throws Exception {
-        model.addAttribute("rentNo", rentNo);
-        return "test/makeData";
-    }
-    
+
     @RequestMapping(value = "/basic/return.do")
     public String goTrip(@RequestParam("carNo") String carNo,
             Model model) throws Exception {
@@ -111,21 +99,6 @@ public class ReturnMapController extends HController{
             
             return "user/trip";
         }
-    }
-    
-    @RequestMapping(value= "/basic/insertTestSample.do")
-    @ResponseBody
-    public void logDatas(@RequestParam String lng, @RequestParam String lat, @RequestParam String rentNo,
-            Model model) throws Exception {
-        
-        DrivingInfoVO dvo = new DrivingInfoVO();
-        dvo.setLatitude(lat);
-        dvo.setLongitude(lng);
-        dvo.setRentNo(rentNo);
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-        String timestamp = format.format(System.currentTimeMillis());
-        dvo.setTimeStamp(timestamp);
-        drivingInfoService.insertDrivingInfo(dvo);
     }
     
     @RequestMapping(value = "/basic/payAndReturn.do")

@@ -19,7 +19,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-
 <title>결제 화면</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
@@ -110,6 +109,8 @@ document.getElementById("rentDistance").innerHTML = distance + "m";
 distance = Math.round(distance / 1000 );
 var cost = "${cost}"*1; // rent 정보에 저장된 비용
 cost = distance * cost;
+if(cost === 0)
+    cost = "${cost}"*1;
 document.getElementById("payBtn").innerHTML = "결제 금액 : "+ cost + "원 ";
 
 
@@ -118,8 +119,12 @@ map.setBounds(bounds);
 
 
 function payAndReturn(){
+    alert(cost + "원 결제가 완료되었습니다.");
     var payReturn = document.data;
     payReturn.distance.value = distance;
+    //37.507381428880635, 127.05895942121612
+    lastLat = "37.507381428880635";
+    lastLng = "127.05895942121612";
     payReturn.lat.value = lastLat;
     payReturn.lng.value = lastLng;
     payReturn.rentNo.value = rentNo;
