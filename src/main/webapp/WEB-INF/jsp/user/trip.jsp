@@ -121,8 +121,8 @@ function payAndReturn(){
     var payReturn = document.data;
     payReturn.distance.value = distance;
     //37.507381428880635, 127.05895942121612
-    lastLat = "37.507381428880635";
-    lastLng = "127.05895942121612";
+//    lastLat = "37.507381428880635";
+//    lastLng = "127.05895942121612";
     payReturn.lat.value = lastLat;
     payReturn.lng.value = lastLng;
     payReturn.rentNo.value = rentNo;
