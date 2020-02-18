@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <title>결제 화면</title>
+<style type="text/css">
+</style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
 var rentNo = "${rentInfo.rentNo }";
@@ -28,21 +30,17 @@ var rentNo = "${rentInfo.rentNo }";
 </head>
 <body>
 <div class="card" style="margin: 3%; padding: 2%;">
-    <h2 class="card-title" style="text-align: center;">주행 기록 확인</h2>
+    <h2 class="card-title" style="text-align: center; margin:20px; color: #013469;">주행 기록 확인</h2>
     <div id="map" style="width:100%;height: 60vh; "></div>
     
-    <div class="card-body" style="padding: 10px 0px 0px 0px; width: 100%; height: 40vh; ">
+    <div class="card-body" style="position:relative; padding: 30px 0px 0px 0px; width: 100%; height: 40vh; ">
         <!-- Rent 정보  -->
-        <div class="card" style="position: relative; height:100%;">
-            <div class="card-header">주행 정보</div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;${rentInfo.userID }</li> 
-                <li class="list-group-item">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDate"></span></li> 
-                <li class="list-group-item">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentEnd"></span></li> 
-                <li class="list-group-item">총 주행 거리&nbsp; &nbsp;&nbsp;:&nbsp;<span id="rentDistance"></span></li> 
-            </ul>
-            <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
-        </div>
+        <h4 style="color: #013469;">주행 정보</h4><hr>
+        <p  style="color: #013469;">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;${rentInfo.userID }</p> 
+        <p  style="color: #013469;">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDate"></span></p> 
+        <p  style="color: #013469;">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentEnd"></span></p> 
+        <p  style="color: #013469;">총 주행거리&nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDistance"></span></p> 
+        <hr><button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
     </div>
 </div>
 
