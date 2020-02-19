@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
+<%@ page session="true" %>
 
 <%-- 
     JSP Name : mypage.jsp
@@ -101,6 +102,7 @@
         
         #ctrlContainer{
             margin-bottom: 1vh;
+            clear: both;
         }
         
         .btn{
@@ -129,12 +131,15 @@
 <body>
 <div class = "container-fluid">
         <h1 id = "title">MyTrip</h1>
-        <div id = ctrlContainer>
-            <img id ="icon" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
-            onclick = "history.go(-1)">
-            <img id ="icon" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
-            <img id ="icon" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
-            onclick = "location.href='./main.do'">
+        <div id = "ctrlContainer" class="row justify-content-between">
+            <div class="col">
+                <img id ="icon" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
+                onclick = "history.go(-1)">
+                <img id ="icon" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
+                <img id ="icon" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
+                onclick = "location.href='./main.do'">
+            </div>
+            <p class="col text-right" style="margin:0.5rem;"><%= session.getAttribute("user") %>님, 안녕하세요.</p>
         </div>
    <div class = "table-responsive">
     <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
@@ -144,7 +149,7 @@
                 <th>차종</th>
                 <th>대여날짜</th>
                 <th>반납날짜</th>
-                <th>사용자</th>
+                <!-- <th>사용자</th> -->
             </tr>
         </thead>
         <tbody>
@@ -167,7 +172,7 @@
                                 </c:forEach></td>
                             <td id = "rentDate"><c:out value="${result.rentDate }" /></td>
                             <td id = "returnDate"><c:out value="${result.returnDate }" /></td>
-                            <td id = "userId"><c:out value="${result.userID }" /></td>              
+                            <%-- <td id = "userId"><c:out value="${result.userID }" /></td> --%>              
                         </tr>
                     </c:forEach>
                 </c:otherwise>
