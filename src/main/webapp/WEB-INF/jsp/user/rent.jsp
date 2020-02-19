@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
-<%@ page session="true" %>
 <%-- 
     JSP Name : rent.jsp
     Description : 설명을 기술합니다.
@@ -63,10 +62,7 @@ $(document).ready(function() {
         <form name="data">
             <input type="hidden" name="carNo"/>
             <input type="hidden" name="rentNo"/>
-        </form>
-        
-        
-    
+        </form>         
     </div>
 </body>
 </html>
