@@ -110,44 +110,48 @@ function off() {
         </div>
     </div>
 </div>
-<div class="container-fluid" style="height:100vh;">
-    <div class="row"> 
-        <div id="map" style="width:480px;height:600px;"></div>
+<div style="height:100vh; width:480px; position: relative;">
+    <div class="row" style="position: absolute; width: 480px; height: 700px; z-index: 1;"> 
+        <div id="map" style="width:100%;height:100%"></div>
         <form name="data">
             <input type="hidden" name="carNo"/>
             <input type="hidden" name="userID"/>
         </form>
     </div>
-    <div class="row justify-content-center mt-4">
-        <h4 class="col-6 text-center">
-            <span class="font-weight-bold"><%= session.getAttribute("user") %></span> 님 환영합니다.
-        </h4>
-    </div>
-    <div class="row justify-content-around mt-4">
-            <div class="col-3 text-center" onclick="location.href='./logout.do'">
-                <div class="d-flex-inline">
-                    <i class="fas fa-sign-out-alt fa-2x"></i>
-                </div>
-                <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">로그아웃</span>
-                </div>
+    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 30vh; z-index: 10; background-color: #fff; opacity: 0.9;">
+        <div style="width:480px; height:100%;">
+            <div class="row justify-content-center">
+                <h4 class="col-12 text-center mt-4">
+                    <span class="font-weight-bold"><%= session.getAttribute("user") %></span> 님 환영합니다.
+                </h4>
             </div>
-            <div class="col-3 text-center" onclick="moveCenter();">
-                <div class="d-flex-inline">
-                    <i class="fas fa-map-marked-alt fa-2x"></i>
+            <div class="row justify-content-around">
+                <div class="col-3 text-center" onclick="location.href='./logout.do'">
+                    <button class="d-flex-inline mt-4 btn" style="margin-bottom: 10px;">
+                        <i class="fas fa-sign-out-alt fa-3x"></i>
+                    </button>
+                    <div class="d-flex-inline">
+                        <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">로그아웃</span>
+                    </div>
                 </div>
-                <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">I'm here!</span>
+                <div class="col-3 text-center" onclick="moveCenter();">
+                    <button class="d-flex-inline mt-4 btn" style="margin-bottom: 10px;">
+                        <i class="fas fa-map-marked-alt fa-3x"></i>
+                    </button>
+                    <div class="d-flex-inline">
+                        <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">I'm here!</span>
+                    </div>
                 </div>
+                <div class="col-3 text-center" onclick="location.href='./mypage.do'">
+                    <button class="d-flex-inline mt-4 btn" style="margin-bottom: 10px;">
+                        <i class="fas fa-user-circle fa-3x"></i>
+                    </button>
+                    <div class="d-flex-inline">
+                        <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">마이페이지</span>
+                    </div>    
+                </div>               
             </div>
-            <div class="col-3 text-center" onclick="location.href='./mypage.do'">
-                <div class="d-flex-inline">
-                    <i class="fas fa-user-circle fa-2x"></i>
-                </div>
-                <div class="d-flex-inline">
-                    <span class="badge badge-primary text-wrap" style="font-size: 0.9rem;">마이페이지</span>
-                </div>    
-            </div>               
+        </div>
     </div>
 </div>
 
