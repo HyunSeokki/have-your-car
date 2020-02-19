@@ -61,14 +61,15 @@ function get_loc(callback)
     }
 }
 
-function on(carType, carSize, mileage, birth, capacity, cost) {
-    console.log(carType, carSize, mileage, birth, capacity, cost);
+function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
+    console.log(carType, carSize, mileage, birth, capacity, cost, imgSrc);
     $("#detailCarType").text(carType);
     $("#detailCarSize").text(carSize);
     $("#detailCarMileage").text(mileage + 'km');
     $("#detailCarBirth").text(birth.substr(0,7));
     $("#detailCarCapacity").text(capacity + '명');
     $("#detailCarCost").text(cost + '원/km');
+    $("#detailImgSrc").text(imgSrc);
     document.getElementById("overlay").style.display = "block";
 }
 
@@ -81,7 +82,7 @@ function off() {
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
         <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
-        <img src="<c:url value="/resources/img/sonata.jpg" />" class="card-img-top" alt="소나타"/>
+        <img src="<c:url value="detailImgSrc" />" class="card-img-top" alt="소나타"/>
         <div class="card-body">
             <h5 class="card-title" id="detailCarType"></h5>
             <table class="table">
@@ -229,7 +230,7 @@ function off() {
                 '               <div class="ellipsis">${result.carSize}</div>' + 
                 '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
                 '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
-                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\')">상세보기</button>' +
+                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
                 '                  <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
                 '               </div>'+
                 '           </div>' + 
