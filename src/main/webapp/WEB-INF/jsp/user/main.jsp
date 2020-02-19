@@ -119,7 +119,7 @@ function off() {
             <input type="hidden" name="userID"/>
         </form>
     </div>
-    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 30vh; z-index: 10; background-color: #fff; opacity: 0.9;">
+    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 30vh; z-index: 10; background-color: #fff; ">
         <div style="width:480px; height:100%;">
             <div class="row justify-content-center">
                 <h4 class="col-12 text-center mt-4">
