@@ -23,6 +23,7 @@
 <script type="text/javaScript" language="javascript"></script>
 <!-- jQuery  -->
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- bootstrap JS -->
 <script src =  "https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> 
@@ -30,8 +31,7 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<style>
-    
+<style>   
     body{
     -ms-overflow-style: none;
         margin-top: 5%;
@@ -94,10 +94,14 @@
             margin-top: 2%;
         }
         
-        #icon{
+        .icon{
+            color: #013469;
+            font-size: 2.5vh;
             margin: 1vh;
-            width: 3vh;
-            height: 3vh;
+        }
+        
+        .icon:hover{
+           color: #6799FF;
         }
         
         #ctrlContainer{
@@ -125,23 +129,29 @@
             width:100%;
             height:100%
         }
+
 </style>
 
 </head>
 <body>
 <div class = "container-fluid">
         <h1 id = "title">MyTrip</h1>
-        <div id = "ctrlContainer" class="row justify-content-between">
+
+        <div id=ctrlContainer class="row justify-content-between">
             <div class="col">
-                <img id ="icon" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
-                onclick = "history.go(-1)">
-                <img id ="icon" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
-                <img id ="icon" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
-                onclick = "location.href='./main.do'">
+
+                <i class="fas fa-arrow-left icon"
+                    onclick="history.go(-1)"></i> <i
+                    class="fas fa-car icon"></i> <i
+                    class="fas fa-home icon"
+                    onclick="location.href='./main.do'"></i>
             </div>
-            <p class="col text-right" style="margin:0.5rem;"><%= session.getAttribute("user") %>님, 안녕하세요.</p>
+            <p class="col text-right" style="margin: 0.5rem;"><%=session.getAttribute("user")%>님,
+                안녕하세요.
+            </p>
+
         </div>
-   <div class = "table-responsive">
+        <div class = "table-responsive">
     <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
         <thead>
             <tr>
@@ -185,7 +195,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">  
       <div class="modal-content">
         <div class = "modal-header">
-            <h5 class="modal-title">RentInfo</h5>    
+            <h5 class="modal-title"><i class="fas fa-check"></i> RentInfo</h5>    
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
@@ -335,7 +345,7 @@ $("#rentTable tr").click(function(){
           
           
           <div class = "col" id = "imgContainer">
-            <img id = "carImg" src = "" class = "carImage" alt="소나타" />
+            <img id = "carImg" src = "" class = "carImage" alt="car" />
           </div>
          </div>
         </div>
