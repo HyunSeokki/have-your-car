@@ -244,8 +244,8 @@ function off() {
                 '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
                 '               <div class="jibun ellipsis" id="addr"></div>'+
                 '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
-                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
-                '                  <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
+                '                  <button class="btn btn-outline-primary btn-sm" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
+                '                  <button class="btn btn-outline-primary btn-sm" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
                 '               </div>'+
                 '           </div>' + 
                 '        </div>' + 
