@@ -183,9 +183,9 @@
 
     // 마커 이미지를 생성합니다.
     var markImage = new kakao.maps.MarkerImage(
-            'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png',
-            new kakao.maps.Size(50, 40), {
-                offset : new kakao.maps.Point(15, 15)
+            '<c:url value="/${carInfo.imgSrc}"/>',
+            new kakao.maps.Size(60, 36), {
+                offset : new kakao.maps.Point(30, 30)
             });
 
     // 드래그가 가능한 마커를 생성합니다.

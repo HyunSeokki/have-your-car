@@ -193,8 +193,8 @@ function off() {
             
             // 자동차
             //var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(50, 30), // 마커이미지의 크기입니다
-            imageOption = {offset: new kakao.maps.Point(15, 15)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+            imageSize = new kakao.maps.Size(60, 36), // 마커이미지의 크기입니다
+            imageOption = {offset: new kakao.maps.Point(30, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             //imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
             //imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             
