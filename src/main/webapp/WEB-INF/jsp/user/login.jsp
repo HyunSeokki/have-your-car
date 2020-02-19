@@ -57,7 +57,7 @@ function login() {
             <form:form commandName="userVO" id="loginForm" name="loginForm" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label>아이디</label>
-                    <form:input path="userID" name="userID" type="text" class="form-control"/>
+                    <form:input path="userID" name="userID" type="text" class="form-control" />
                     <form:errors path="userID" />
                 </div>
                 <div class="form-group">
@@ -67,7 +67,7 @@ function login() {
                 </div>    
             </form:form>
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary" onclick="login()">로그인</button>
+                <button type="button" class="btn btn-primary" onclick="login()" style="width: 100%; min-height: 45px; margin-top: 15px; font-size: 1.2em;">로그인</button>
             </div>
         </div>
     </div>
