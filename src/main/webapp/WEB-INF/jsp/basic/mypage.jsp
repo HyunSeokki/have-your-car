@@ -31,6 +31,7 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <style>   
     body{
     -ms-overflow-style: none;
@@ -129,6 +130,13 @@
             width:100%;
             height:100%
         }
+        
+       thead{
+            background-color: #013469;
+            color: white;
+       }
+      
+
 
 </style>
 
@@ -152,7 +160,7 @@
 
         </div>
         <div class = "table-responsive">
-    <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
+    <table id="rentTable" width="90%" class="table table-hover text-center">
         <thead>
             <tr>
                 <th>대여번호</th>
