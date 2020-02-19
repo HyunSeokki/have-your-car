@@ -24,8 +24,13 @@
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>Main title</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+<<<<<<< Updated upstream
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d"></script>
 <script>
+=======
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
+<script type="text/javascript">
+>>>>>>> Stashed changes
 
 function goRent(carNo)
 {
@@ -183,6 +188,9 @@ function off() {
                 level: 5 // 지도의 확대 레벨 
             }; 
             
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+            
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             
             var markerPosition = new kakao.maps.LatLng(lat, lon); 
@@ -201,7 +209,15 @@ function off() {
             overlay = new Array();
             
             <c:forEach items="${resultList}" var="result" varStatus="status">
+<<<<<<< Updated upstream
             console.log('${result}')
+=======
+                function searchDetailAddrFromCoords(callback) {
+                    console.log("${result.longitude}, ${result.latitude}");
+                    // 좌표로 법정동 상세 주소 정보를 요청합니다
+                    geocoder.coord2Address("${result.longitude}","${result.latitude}", callback);
+                }
+>>>>>>> Stashed changes
                 //alert('${status.index}'); 
                  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -228,6 +244,7 @@ function off() {
                 '               <div class="desc" style="position: relative;">' + 
                 '               <div class="ellipsis">${result.carSize}</div>' + 
                 '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
+                '               <div class="jibun ellipsis" id="addr"></div>'+
                 '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
                 '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\')">상세보기</button>' +
                 '                  <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
@@ -246,12 +263,20 @@ function off() {
                 });
                 
                 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-                kakao.maps.event.addListener(marker, 'click', function() {
+                kakao.maps.event.addListener(marker, 'click', function(mouseClick) {
                     if(clicked_marker != -1) {
                         closeOverlay(clicked_marker);
                         //map.panTo(new kakao.maps.LatLng(lat, lon))
                     }
                     if(clicked_marker != '${status.index}') {
+                        // 주소값 가져오기
+                        searchDetailAddrFromCoords(function(result, status){
+                            if(status == kakao.maps.services.Status.OK){                             
+                                var detailAddr = result[0].address.address_name;
+                                document.getElementById('addr').innerHTML = detailAddr;
+                            }                    
+                        });
+                        
                         clicked_marker = '${status.index}';
                         overlay[clicked_marker].setMap(map);
                         map.panTo(overlay[clicked_marker].getPosition());
@@ -263,8 +288,8 @@ function off() {
              // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
             
             </c:forEach>
+           
         }
-        
         get_loc(draw);
         
         
