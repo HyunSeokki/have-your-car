@@ -18,7 +18,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>결제 화면</title>
 <style type="text/css">
 </style>
@@ -27,6 +26,7 @@
 var rentNo = "${rentInfo.rentNo }";
 </script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 </head>
 <body>
 <div class="card" style="margin: 3%; padding: 2%; height: 90vh;">
@@ -40,7 +40,7 @@ var rentNo = "${rentInfo.rentNo }";
         <p  style="margin-left: 5px; color: #013469;">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDate"></span></p> 
         <p  style="margin-left: 5px; color: #013469;">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentEnd"></span></p> 
         <p  style="margin-left: 5px; color: #013469;">총 주행거리&nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDistance"></span></p> 
-        <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn"  type="button" onclick="payAndReturn()"></button>
+        <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn" onclick="payAndReturn()"></button>
     </div>
 </div>
 
