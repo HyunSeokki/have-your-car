@@ -23,7 +23,8 @@
         <result property="capacity" column="capacity"/>    
         <result property="cost" column="cost"/>    
         <result property="latitude" column="latitude"/>    
-        <result property="longitude" column="longitude"/>    
+        <result property="longitude" column="longitude"/>
+        <result property="imgSrc" column="img_src"/>    
     </resultMap>
     
     <!--
@@ -46,7 +47,8 @@
                    B.CAPACITY,
                    B.COST, 
                    B.LATITUDE,
-                   B.LONGITUDE
+                   B.LONGITUDE,
+                   B.IMG_SRC
               FROM CARRENTB A, CARINFTB B, (SELECT MAX(AA.RENT_NO) RENT_NO,
                                        BB.CAR_NO
                                   FROM CARRENTB AA, CARINFTB BB
@@ -64,7 +66,8 @@
                    A.CAPACITY,
                    A.COST, 
                    A.LATITUDE,
-                   A.LONGITUDE
+                   A.LONGITUDE,
+                   A.IMG_SRC
               FROM CARINFTB A
              WHERE NOT EXISTS (SELECT CAR_NO B FROM CARRENTB B WHERE A.CAR_NO = B.CAR_NO)
         ]]>

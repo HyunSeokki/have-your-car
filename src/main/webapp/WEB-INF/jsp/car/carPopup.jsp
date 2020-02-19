@@ -88,12 +88,12 @@
                 <!-- Map -->
                 <div class="map_wrap my-3">
                     <div id="mapWrapper"
-                        style="width: 50%; height: 400px; float: left">
+                        style="width: 50%; height: 700px; float: left">
                         <div id="map" style="width: 100%; height: 100%"></div>
                         <!-- 지도를 표시할 div 입니다 -->
                     </div>
                     <div id="rvWrapper"
-                        style="width: 50%; height: 400px; float: left">
+                        style="width: 50%; height: 700px; float: left">
                         <div id="roadview" style="width: 100%; height: 100%"></div>
                         <!-- 로드뷰를 표시할 div 입니다 -->
                     </div>
@@ -138,11 +138,13 @@
                 if(activeStatus == "Y") {
                     alert("시동을 켰습니다. 지도를 움직여 주행을 시작하세요.")
                     map.setDraggable(true);
+                    map.setZoomable(true);
                     startDriving();
                 } else if(activeStatus == "N") {
                     endDriving();
                     alert("주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.")
                     map.setDraggable(false);
+                    map.setZoomable(false);
                     window.close();
                 }
             }
@@ -165,7 +167,7 @@
     mapCenter = new kakao.maps.LatLng("${carInfo.latitude}", "${carInfo.longitude}"), // 지도의 가운데 좌표
     mapOption = {
         center : mapCenter, // 지도의 중심좌표
-        level : 3,// 지도의 확대 레벨
+        level : 2,// 지도의 확대 레벨
         draggable : false
     };
 
@@ -181,9 +183,9 @@
 
     // 마커 이미지를 생성합니다.
     var markImage = new kakao.maps.MarkerImage(
-            'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png',
-            new kakao.maps.Size(50, 40), {
-                offset : new kakao.maps.Point(15, 15)
+            '<c:url value="/${carInfo.imgSrc}"/>',
+            new kakao.maps.Size(60, 36), {
+                offset : new kakao.maps.Point(30, 30)
             });
 
     // 드래그가 가능한 마커를 생성합니다.
@@ -279,7 +281,7 @@
 <style>
 .map_wrap {
     overflow: hidden;
-    height: 400px;
+    height: 700px;
 }
 
 #active-status {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
+<%@ page session="true" %>
 
 <%-- 
     JSP Name : mypage.jsp
@@ -22,6 +23,7 @@
 <script type="text/javaScript" language="javascript"></script>
 <!-- jQuery  -->
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- bootstrap JS -->
 <script src =  "https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> 
@@ -29,8 +31,7 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<style>
-    
+<style>   
     body{
     -ms-overflow-style: none;
         margin-top: 5%;
@@ -93,14 +94,19 @@
             margin-top: 2%;
         }
         
-        #icon{
+        .icon{
+            color: #013469;
+            font-size: 2.5vh;
             margin: 1vh;
-            width: 3vh;
-            height: 3vh;
+        }
+        
+        .icon:hover{
+           color: #6799FF;
         }
         
         #ctrlContainer{
             margin-bottom: 1vh;
+            clear: both;
         }
         
         .btn{
@@ -123,20 +129,29 @@
             width:100%;
             height:100%
         }
+
 </style>
 
 </head>
 <body>
 <div class = "container-fluid">
         <h1 id = "title">MyTrip</h1>
-        <div id = ctrlContainer>
-            <img id ="icon" alt="back" src= "https://cdn0.iconfinder.com/data/icons/typicons-2/24/arrow-back-outline-512.png"
-            onclick = "history.go(-1)">
-            <img id ="icon" alt="car" src= "https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/car-512.png">
-            <img id ="icon" alt="home" src= "https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-home-512.png"
-            onclick = "location.href='./main.do'">
+
+        <div id=ctrlContainer class="row justify-content-between">
+            <div class="col">
+
+                <i class="fas fa-arrow-left icon"
+                    onclick="history.go(-1)"></i> <i
+                    class="fas fa-car icon"></i> <i
+                    class="fas fa-home icon"
+                    onclick="location.href='./main.do'"></i>
+            </div>
+            <p class="col text-right" style="margin: 0.5rem;"><%=session.getAttribute("user")%>님,
+                안녕하세요.
+            </p>
+
         </div>
-   <div class = "table-responsive">
+        <div class = "table-responsive">
     <table id="rentTable" width="90%" class="table table-bordered table-hover text-center">
         <thead>
             <tr>
@@ -144,7 +159,7 @@
                 <th>차종</th>
                 <th>대여날짜</th>
                 <th>반납날짜</th>
-                <th>사용자</th>
+                <!-- <th>사용자</th> -->
             </tr>
         </thead>
         <tbody>
@@ -167,7 +182,7 @@
                                 </c:forEach></td>
                             <td id = "rentDate"><c:out value="${result.rentDate }" /></td>
                             <td id = "returnDate"><c:out value="${result.returnDate }" /></td>
-                            <td id = "userId"><c:out value="${result.userID }" /></td>              
+                            <%-- <td id = "userId"><c:out value="${result.userID }" /></td> --%>              
                         </tr>
                     </c:forEach>
                 </c:otherwise>
@@ -180,7 +195,7 @@
      <div class="modal-dialog modal-dialog-centered" role="document">  
       <div class="modal-content">
         <div class = "modal-header">
-            <h5 class="modal-title">RentInfo</h5>    
+            <h5 class="modal-title"><i class="fas fa-check"></i> RentInfo</h5>    
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
@@ -234,6 +249,7 @@ $("#rentTable tr").click(function(){
                 console.log('연결성공');
 
                 var trip = JSON.parse(args).data;   
+                console.log(trip);
                 var carInfo =JSON.parse(args).data2;
                 
                 //차 정보 담기
@@ -242,12 +258,16 @@ $("#rentTable tr").click(function(){
                 var birth = carInfo.birth;
                 var capacity = carInfo.capacity;
                 var cost = carInfo.cost;
+                var carImgSrc = carInfo.imgSrc;
                 
                 document.getElementById("carN").innerHTML = carType;
                 document.getElementById("carS").innerHTML = carSize;
-                document.getElementById("carB").innerHTML = birth;
+                document.getElementById("carB").innerHTML = birth.split(" ")[0];
                 document.getElementById("carC").innerHTML = capacity;
                 document.getElementById("carCo").innerHTML = cost;
+                
+                $('#carImg').attr('src','<c:url value="/'+carImgSrc+'"/>');
+                
                 
                 //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
                 var linePath = new Array();
@@ -325,7 +345,7 @@ $("#rentTable tr").click(function(){
           
           
           <div class = "col" id = "imgContainer">
-            <img src="<c:url value="/resources/img/sonata.jpg" />" class = "carImage" alt="소나타" />
+            <img id = "carImg" src = "" class = "carImage" alt="car" />
           </div>
          </div>
         </div>

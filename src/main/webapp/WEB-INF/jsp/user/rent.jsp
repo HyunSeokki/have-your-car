@@ -36,13 +36,13 @@ function goRoute(carNo)
 /* 3초 후에 팝업 창 */
 $(document).ready(function() {
     setTimeout(function() {
-        window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "car", 'width=1800, height=1000, status=no, menubar=no, toolbar=no, resizable=yes');
+        window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "", "channelmode=yes");
     }, 3000);
 }); 
 </script>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="height:100vh;">
         <div class="row align-items-center justify-content-center"  style="height:100vh;">
             <div class="col-10">
                 <div class="row mb-3 justify-content-center">

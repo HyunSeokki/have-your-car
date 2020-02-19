@@ -23,7 +23,8 @@
         <result property="capacity" column="capacity"/>    
         <result property="cost" column="cost"/>    
         <result property="latitude" column="latitude"/>    
-        <result property="longitude" column="longitude"/>    
+        <result property="longitude" column="longitude"/>
+        <result property="imgSrc" column="img_src"/>     
     </resultMap>
 
     <!-- 자동차 정보 삽입 -->
@@ -85,6 +86,7 @@
             , cost
             , latitude
             , longitude
+            , img_src
         FROM CARINFTB
         WHERE car_no = #{carNo}
     ]]>             
@@ -102,6 +104,7 @@
             , cost
             , latitude
             , longitude
+            , img_src
         FROM CARINFTB
     ]]> 
     </select>

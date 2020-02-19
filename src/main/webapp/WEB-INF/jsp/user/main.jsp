@@ -61,14 +61,14 @@ function get_loc(callback)
     }
 }
 
-function on(carType, carSize, mileage, birth, capacity, cost) {
-    console.log(carType, carSize, mileage, birth, capacity, cost);
+function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
     $("#detailCarType").text(carType);
     $("#detailCarSize").text(carSize);
     $("#detailCarMileage").text(mileage + 'km');
     $("#detailCarBirth").text(birth.substr(0,7));
     $("#detailCarCapacity").text(capacity + '명');
     $("#detailCarCost").text(cost + '원/km');
+    $("#detailCarImgSrc").attr('src', '<c:url value="/'+imgSrc+'"/>');
     document.getElementById("overlay").style.display = "block";
 }
 
@@ -80,10 +80,10 @@ function off() {
 <body>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
-        <!-- 임의로 지정한 url -- car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
-        <img src="<c:url value="/resources/img/sonata.jpg" />" class="card-img-top" alt="소나타"/>
+        <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
+        <img src="#" class="card-img-top" id="detailCarImgSrc" alt="자동차사진" style="width:60%; margin:30px auto 10px auto;">
         <div class="card-body">
-            <h5 class="card-title" id="detailCarType"></h5>
+            <h5 class="card-title font-weight-bold" id="detailCarType"></h5>
             <table class="table">
                 <tbody>
                     <tr>
@@ -195,9 +195,9 @@ function off() {
             marker.setMap(map);
             
             // 자동차
-            var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(50, 40), // 마커이미지의 크기입니다
-            imageOption = {offset: new kakao.maps.Point(15, 15)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+            //var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
+            imageSize = new kakao.maps.Size(60, 36), // 마커이미지의 크기입니다
+            imageOption = {offset: new kakao.maps.Point(30, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             //imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
             //imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             
@@ -209,9 +209,10 @@ function off() {
                     // 좌표로 법정동 상세 주소 정보를 요청합니다
                     geocoder.coord2Address("${result.longitude}","${result.latitude}", callback);
                 }
+
                 //alert('${status.index}'); 
                  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
-                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                var markerImage = new kakao.maps.MarkerImage("<c:url value="/${result.imgSrc}"/>", imageSize, imageOption),
                     markerPosition = new kakao.maps.LatLng('${result.latitude}', '${result.longitude}'); // 마커가 표시될 위치입니다
                 
                 // 마커를 생성합니다
@@ -230,14 +231,14 @@ function off() {
                 '        </div>' + 
                 '        <div class="body">' + 
                 '            <div class="img">' +
-                '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                '                <img src="<c:url value="/${result.imgSrc}"/>" width="100">' +
                 '           </div>' + 
                 '               <div class="desc" style="position: relative;">' + 
                 '               <div class="ellipsis">${result.carSize}</div>' + 
                 '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
                 '               <div class="jibun ellipsis" id="addr"></div>'+
                 '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
-                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\')">상세보기</button>' +
+                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
                 '                  <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
                 '               </div>'+
                 '           </div>' + 
