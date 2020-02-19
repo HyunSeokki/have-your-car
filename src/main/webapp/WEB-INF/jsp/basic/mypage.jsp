@@ -234,6 +234,7 @@ $("#rentTable tr").click(function(){
                 console.log('연결성공');
 
                 var trip = JSON.parse(args).data;   
+                console.log(trip);
                 var carInfo =JSON.parse(args).data2;
                 
                 //차 정보 담기
@@ -242,12 +243,16 @@ $("#rentTable tr").click(function(){
                 var birth = carInfo.birth;
                 var capacity = carInfo.capacity;
                 var cost = carInfo.cost;
+                var carImgSrc = carInfo.imgSrc;
                 
                 document.getElementById("carN").innerHTML = carType;
                 document.getElementById("carS").innerHTML = carSize;
                 document.getElementById("carB").innerHTML = birth;
                 document.getElementById("carC").innerHTML = capacity;
                 document.getElementById("carCo").innerHTML = cost;
+                
+                $('#carImg').attr('src','<c:url value="/'+carImgSrc+'"/>');
+                
                 
                 //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
                 var linePath = new Array();
@@ -325,7 +330,7 @@ $("#rentTable tr").click(function(){
           
           
           <div class = "col" id = "imgContainer">
-            <img src="<c:url value="/resources/img/sonata.jpg" />" class = "carImage" alt="소나타" />
+            <img id = "carImg" src = "" class = "carImage" alt="소나타" />
           </div>
          </div>
         </div>
