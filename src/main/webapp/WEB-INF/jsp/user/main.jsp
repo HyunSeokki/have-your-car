@@ -203,12 +203,11 @@ function off() {
             
             overlay = new Array();
             
+            function searchDetailAddrFromCoords(lon, lat, callback) {
+                geocoder.coord2Address(lon,lat, callback);
+            }
+            
             <c:forEach items="${resultList}" var="result" varStatus="status">
-                function searchDetailAddrFromCoords(callback) {
-                    console.log("${result.longitude}, ${result.latitude}");
-                    // 좌표로 법정동 상세 주소 정보를 요청합니다
-                    geocoder.coord2Address("${result.longitude}","${result.latitude}", callback);
-                }
 
                 //alert('${status.index}'); 
                  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
@@ -262,7 +261,7 @@ function off() {
                     }
                     if(clicked_marker != '${status.index}') {
                         // 주소값 가져오기
-                        searchDetailAddrFromCoords(function(result, status){
+                        searchDetailAddrFromCoords('${result.longitude}', '${result.latitude}',function(result, status){
                             if(status == kakao.maps.services.Status.OK){                             
                                 var detailAddr = result[0].address.address_name;
                                 document.getElementById('addr').innerHTML = detailAddr;
