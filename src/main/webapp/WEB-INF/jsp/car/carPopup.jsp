@@ -88,12 +88,12 @@
                 <!-- Map -->
                 <div class="map_wrap my-3">
                     <div id="mapWrapper"
-                        style="width: 50%; height: 400px; float: left">
+                        style="width: 50%; height: 700px; float: left">
                         <div id="map" style="width: 100%; height: 100%"></div>
                         <!-- 지도를 표시할 div 입니다 -->
                     </div>
                     <div id="rvWrapper"
-                        style="width: 50%; height: 400px; float: left">
+                        style="width: 50%; height: 700px; float: left">
                         <div id="roadview" style="width: 100%; height: 100%"></div>
                         <!-- 로드뷰를 표시할 div 입니다 -->
                     </div>
@@ -138,11 +138,13 @@
                 if(activeStatus == "Y") {
                     alert("시동을 켰습니다. 지도를 움직여 주행을 시작하세요.")
                     map.setDraggable(true);
+                    map.setZoomable(true);
                     startDriving();
                 } else if(activeStatus == "N") {
                     endDriving();
                     alert("주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.")
                     map.setDraggable(false);
+                    map.setZoomable(false);
                     window.close();
                 }
             }
@@ -165,7 +167,7 @@
     mapCenter = new kakao.maps.LatLng("${carInfo.latitude}", "${carInfo.longitude}"), // 지도의 가운데 좌표
     mapOption = {
         center : mapCenter, // 지도의 중심좌표
-        level : 3,// 지도의 확대 레벨
+        level : 2,// 지도의 확대 레벨
         draggable : false
     };
 
@@ -279,7 +281,7 @@
 <style>
 .map_wrap {
     overflow: hidden;
-    height: 400px;
+    height: 700px;
 }
 
 #active-status {

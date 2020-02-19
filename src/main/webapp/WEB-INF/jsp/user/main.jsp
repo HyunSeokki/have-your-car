@@ -79,7 +79,7 @@ function off() {
 <body>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
-        <!-- 임의로 지정한 url -- car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
+        <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
         <img src="<c:url value="/resources/img/sonata.jpg" />" class="card-img-top" alt="소나타"/>
         <div class="card-body">
             <h5 class="card-title" id="detailCarType"></h5>
