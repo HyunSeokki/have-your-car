@@ -225,12 +225,14 @@ function off() {
                 '            <div class="img">' +
                 '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
                 '           </div>' + 
-                '            <div class="desc">' + 
-                '                <div class="ellipsis">${result.carSize}</div>' + 
-                '                <div class="jibun ellipsis">${result.capacity}인승</div>' +
-                '                <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\')">상세보기</button>' +
-                '                <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
-                '            </div>' + 
+                '               <div class="desc" style="position: relative;">' + 
+                '               <div class="ellipsis">${result.carSize}</div>' + 
+                '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
+                '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
+                '                  <button class="btn btn-outline-primary" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\')">상세보기</button>' +
+                '                  <button class="btn btn-outline-primary" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
+                '               </div>'+
+                '           </div>' + 
                 '        </div>' + 
                 '    </div>'
                 ;
