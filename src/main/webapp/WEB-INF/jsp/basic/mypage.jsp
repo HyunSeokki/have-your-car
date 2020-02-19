@@ -262,7 +262,7 @@ $("#rentTable tr").click(function(){
                 
                 document.getElementById("carN").innerHTML = carType;
                 document.getElementById("carS").innerHTML = carSize;
-                document.getElementById("carB").innerHTML = birth;
+                document.getElementById("carB").innerHTML = birth.split(" ")[0];
                 document.getElementById("carC").innerHTML = capacity;
                 document.getElementById("carCo").innerHTML = cost;
                 
