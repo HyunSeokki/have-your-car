@@ -25,7 +25,7 @@
 <title>Main title</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d"></script>
-<script>
+<script type="text/javascript">
 
 function goRent(carNo)
 {
@@ -62,14 +62,13 @@ function get_loc(callback)
 }
 
 function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
-    console.log(carType, carSize, mileage, birth, capacity, cost, imgSrc);
     $("#detailCarType").text(carType);
     $("#detailCarSize").text(carSize);
     $("#detailCarMileage").text(mileage + 'km');
     $("#detailCarBirth").text(birth.substr(0,7));
     $("#detailCarCapacity").text(capacity + '명');
     $("#detailCarCost").text(cost + '원/km');
-    $("#detailImgSrc").text(imgSrc);
+    $("#detailCarImgSrc").attr('src', '<c:url value="/'+imgSrc+'"/>');
     document.getElementById("overlay").style.display = "block";
 }
 
@@ -82,9 +81,9 @@ function off() {
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
         <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
-        <img src="<c:url value="detailImgSrc" />" class="card-img-top" alt="소나타"/>
+        <img src="#" class="card-img-top" id="detailCarImgSrc" alt="자동차사진" style="width:60%; margin:30px auto 10px auto;">
         <div class="card-body">
-            <h5 class="card-title" id="detailCarType"></h5>
+            <h5 class="card-title font-weight-bold" id="detailCarType"></h5>
             <table class="table">
                 <tbody>
                     <tr>
@@ -193,8 +192,8 @@ function off() {
             marker.setMap(map);
             
             // 자동차
-            var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(50, 40), // 마커이미지의 크기입니다
+            //var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
+            imageSize = new kakao.maps.Size(50, 30), // 마커이미지의 크기입니다
             imageOption = {offset: new kakao.maps.Point(15, 15)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             //imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
             //imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -202,10 +201,9 @@ function off() {
             overlay = new Array();
             
             <c:forEach items="${resultList}" var="result" varStatus="status">
-            console.log('${result}')
                 //alert('${status.index}'); 
                  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
-                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                var markerImage = new kakao.maps.MarkerImage("<c:url value="/${result.imgSrc}"/>", imageSize, imageOption),
                     markerPosition = new kakao.maps.LatLng('${result.latitude}', '${result.longitude}'); // 마커가 표시될 위치입니다
                 
                 // 마커를 생성합니다
@@ -224,7 +222,7 @@ function off() {
                 '        </div>' + 
                 '        <div class="body">' + 
                 '            <div class="img">' +
-                '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+                '                <img src="<c:url value="/${result.imgSrc}"/>" width="100">' +
                 '           </div>' + 
                 '               <div class="desc" style="position: relative;">' + 
                 '               <div class="ellipsis">${result.carSize}</div>' + 
