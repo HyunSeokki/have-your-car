@@ -163,8 +163,9 @@ function off() {
         } 
         
         function moveCenter(){
+            if(clicked_marker != -1)
+                closeOverlay(clicked_marker);
             var moveLatLon = new kakao.maps.LatLng(lat, lon);
-            
             map.panTo(moveLatLon);    
         }
         
@@ -241,7 +242,7 @@ function off() {
                 kakao.maps.event.addListener(marker, 'click', function() {
                     if(clicked_marker != -1) {
                         closeOverlay(clicked_marker);
-                        map.panTo(new kakao.maps.LatLng(lat, lon))
+                        //map.panTo(new kakao.maps.LatLng(lat, lon))
                     }
                     if(clicked_marker != '${status.index}') {
                         clicked_marker = '${status.index}';
