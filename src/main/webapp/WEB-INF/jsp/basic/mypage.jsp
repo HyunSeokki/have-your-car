@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
 <%@ page session="true" %>
-
+<%
+    String id = (String)session.getAttribute("user");
+    
+    if(id == null || id.equals("")){
+        response.sendRedirect("index.do");
+    }
+%>
 <%-- 
     JSP Name : mypage.jsp
     Description : 마이페이지 jsp(자신의 대여 리스트 확인)

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
 <%@ page session="true" %>
+<%
+    String id = (String)session.getAttribute("user");
+    
+    if(id == null || id.equals("")){
+        response.sendRedirect("index.do");
+    }
+%>
 <%-- 
     JSP Name : main.jsp
     Description : 설명을 기술합니다.
