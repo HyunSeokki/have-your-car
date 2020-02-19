@@ -24,13 +24,8 @@
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>Main title</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
-<<<<<<< Updated upstream
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d"></script>
-<script>
-=======
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
->>>>>>> Stashed changes
 
 function goRent(carNo)
 {
@@ -209,15 +204,11 @@ function off() {
             overlay = new Array();
             
             <c:forEach items="${resultList}" var="result" varStatus="status">
-<<<<<<< Updated upstream
-            console.log('${result}')
-=======
                 function searchDetailAddrFromCoords(callback) {
                     console.log("${result.longitude}, ${result.latitude}");
                     // 좌표로 법정동 상세 주소 정보를 요청합니다
                     geocoder.coord2Address("${result.longitude}","${result.latitude}", callback);
                 }
->>>>>>> Stashed changes
                 //alert('${status.index}'); 
                  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
