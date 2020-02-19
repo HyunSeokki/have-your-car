@@ -39,6 +39,7 @@ function login() {
             if(response == false) {
                 alert("비밀번호가 틀렸습니다.");
                 document.loginForm.reset();
+                document.loginForm.userID.focus();
             } else {
                 document.loginForm.action = "<c:url value='/basic/login.do'/>";
                 document.loginForm.submit();
@@ -63,7 +64,7 @@ function login() {
                 </div>
                 <div class="form-group">
                     <label>비밀번호</label>
-                    <form:input path="userPWD" name="userPWD" type="password" class="form-control"/>
+                    <form:input path="userPWD" name="userPWD" type="password" class="form-control" onkeypress="if(event.keyCode == 13){ login(); return; }"/>
                     <form:errors path="userPWD" />
                 </div>    
             </form:form>
