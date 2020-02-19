@@ -71,6 +71,7 @@ var linePath = new Array();
 var lastLat = 0;
 var lastLng = 0;
 
+
 <c:forEach var="dr" items="${drv }">
 var temp = new kakao.maps.LatLng("${dr.latitude}", "${dr.longitude}");
 linePath.push(temp);
