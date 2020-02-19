@@ -34,20 +34,20 @@ function goRoute(carNo)
 }
 
 /* 3초 후에 팝업 창 */
-/* $(document).ready(function() {
+$(document).ready(function() {
     setTimeout(function() {
         window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "car", 'width=1800, height=1000, status=no, menubar=no, toolbar=no, resizable=yes');
     }, 3000);
-});  */
+}); 
 </script>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center"  style="height:100vh;">
             <div class="col-10">
-                <div class="row mb-3">
+                <div class="row mb-3 justify-content-center">
                 <div class="card" style="width:80vw;">
-                    <!-- 임의로 지정한 url -- car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
+                    <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
                     <div class="card-body">
                         <h5 class="card-title text-center font-weight-bold">대여No. ${ rentInfo.rentNo }</h5>
                         <h5 class="card-title text-center font-weight-bold">${ rentInfo.rentDate }</h5>
@@ -55,8 +55,8 @@ function goRoute(carNo)
                     <img src="<c:url value="/resources/img/key.gif" />" class="card-img-bottom" alt="소나타"/>
                 </div>
                 </div>
-                <div class="row mt-3 justify-content-center"">
-                    <button class="btn btn-outline-primary btn-block btn-lg" type="button" onclick="goRoute('${carInfo.carNo}');">반납하기</button>
+                <div class="row mt-3 justify-content-center">
+                    <button class="btn btn-outline-primary btn-block btn-lg" type="button" onclick="goRoute('${carInfo.carNo}');" style="width:80vw;">반납하기</button>
                 </div>
             </div>
         </div>
