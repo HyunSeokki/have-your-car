@@ -18,7 +18,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
+<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>결제 화면</title>
 <style type="text/css">
 </style>
