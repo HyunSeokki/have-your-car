@@ -56,7 +56,7 @@ $(document).ready(function() {
                 </div>
                 </div>
                 <div class="row mt-3 justify-content-center">
-                    <button class="btn btn-outline-primary btn-block btn-lg" type="button" onclick="goRoute('${carInfo.carNo}');" style="width:80vw;">반납하기</button>
+                    <button class="btn btn-primary btn-block btn-lg" type="button" onclick="goRoute('${carInfo.carNo}');" style="width:80vw;">반납하기</button>
                 </div>
             </div>
         </div>
