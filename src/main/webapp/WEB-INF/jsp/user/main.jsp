@@ -87,9 +87,19 @@ function off() {
 function myFunction() {
    // document.getElementById('loader-map').style.zIndex = 1;
    // document.getElementById('loader-map').style.display = "none";
+    
+    setTimeout(function() {
+        $(".animate-bottom").css({
+            'display' : 'block',
+            'animation-name' : 'animatebottom',
+            'animation-duration': '1s'
+        })
+    }, 600);
+
     $('#loader-map').stop(true).animate({'opacity' : 0}, 600, function() {
         $(this).css({'display' : 'none', 'z-index' : '1'})
-    })
+    });
+    
 }
 </script>
 </head>

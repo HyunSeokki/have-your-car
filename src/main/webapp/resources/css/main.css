@@ -30,6 +30,7 @@
   border-top: 16px solid #013469; */
 /*   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite; */
+  -webkit-animation: move 1s infinite;
   animation: move 1s infinite;
 }
 
@@ -62,6 +63,11 @@
     100% {left:70%; }
 }
 
+@-webkit-keyframes move {
+    0% {left:30%; }
+    100% {left:70%; }
+}
+
 
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -77,8 +83,7 @@
   position: relative;
   -webkit-animation-name: animatebottom;
   -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
+  display: none;
 }
 
 @-webkit-keyframes animatebottom {
