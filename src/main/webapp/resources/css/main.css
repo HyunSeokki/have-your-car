@@ -17,17 +17,18 @@
 .row {margin:0px;}
 #loader {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 50%;
   z-index: 3;
   width: 120px;
   height: 120px;
   margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
+ /*  border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid #013469;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
+  border-top: 16px solid #013469; */
+/*   -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite; */
+  animation: move 0.5s infinite;
 }
 
 #overlay {
@@ -52,6 +53,11 @@
   color: white;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
+}
+
+@keyframes move {
+    0% {left:45%; }
+    100% {left:65%; }
 }
 
 
