@@ -29,6 +29,37 @@ var rentNo = "${rentInfo.rentNo }";
 </head>
 <body>
 <div class="card" style="margin: 3%; padding: 2%; height: 90vh;">
+    <div style="margin:5px 0px; color: #013469; font-size:1.5rem;" class="font-weight-bold align-self-center">
+        <div class="title-in-card">여행 기록</div>
+    </div>
+    <div id="map" style="width:100%;height: 60vh; border-radius: 5px;"></div>
+    <div class="card-body" style="position:relative; padding: 10px 0px 0px 0px; width: 100%; height: 40vh; ">
+        <!-- Rent 정보  -->
+        <div style="color: #013469; font-size:1.3rem; padding-bottom:0.37rem;" class="font-weight-bold text-center">
+            <span class="title-in-card">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주행 정보&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+        <table class="table table-borderless">
+            <tr>
+                <th>사용자 ID</th>
+                <td>${rentInfo.userID }</td>
+            </tr>
+            <tr>
+                <th>시작 시간</th>
+                <td id="rentDate"></td>
+            </tr>
+            <tr>
+                <th>종료 시간</th>
+                <td id="rentEnd"></td>
+            </tr>
+            <tr>
+                <th>총 주행거리</th>
+                <td id="rentDistance"></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn" onclick="payAndReturn()"></button>
+    </div>
+</div>
+<%-- <div class="card" style="margin: 3%; padding: 2%; height: 90vh;">
     <h4 style="border-radius: 5px; padding:5px; margin:10px 0px; color: #fff; background-color: #013469;">여행 기록</h4>
     <div id="map" style="width:100%;height: 60vh; border-radius: 5px;"></div>
     
@@ -41,7 +72,7 @@ var rentNo = "${rentInfo.rentNo }";
         <p  style="margin-left: 5px; color: #013469;">총 주행거리&nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDistance"></span></p> 
         <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn" onclick="payAndReturn()"></button>
     </div>
-</div>
+</div> --%>
 
 
 <!-- 카카오 지도 그리는 스크립트 -->
@@ -109,7 +140,7 @@ var cost = "${cost}"*1; // rent 정보에 저장된 비용
 cost = distance * cost;
 if(cost === 0)
     cost = "${cost}"*1;
-document.getElementById("payBtn").innerHTML = "결제 금액 : "+ cost + "원 ";
+document.getElementById("payBtn").innerHTML = "결제 금액 : <span class='font-weight-bold'>"+ cost + "</span>원 ";
 
 
 polyline.setMap(map);  
@@ -139,6 +170,16 @@ function payAndReturn(){
         <input type="hidden" name="lng"/>
         <input type="hidden" name="rentNo"/>
 </form>
+<style>
+    .table tr {
+        line-height : 1;
+    }
+    .title-in-card {
+        border-bottom:2px solid #013469; 
+        width:10rem; 
+        text-align:center
+    }
+</style>
 </body>
 </html>
 
