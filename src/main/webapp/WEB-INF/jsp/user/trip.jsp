@@ -150,7 +150,7 @@ map.setBounds(bounds);
 
 function payAndReturn(){
     swal("Thank you", cost + "원 결제가 완료되었습니다.", "success");
-    $(".swal-button-container").click(function() {
+    $("body").click(function() {
         var payReturn = document.data;
         payReturn.distance.value = distance;
         payReturn.lat.value = lastLat;

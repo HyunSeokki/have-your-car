@@ -40,7 +40,7 @@ function login() {
         success : function(response){
             if(response == false) {
                 swal("Wrong Password", "비밀번호가 틀렸습니다.", "error");
-                $(".swal-button-container").click(function() {
+                $("body").click(function() {
                     document.loginForm.reset();
                     document.loginForm.userID.focus();
                 }); 
