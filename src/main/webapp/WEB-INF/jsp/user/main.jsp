@@ -3,7 +3,6 @@
 <%@ page session="true" %>
 <%
     String id = (String)session.getAttribute("user");
-    
     if(id == null || id.equals("")){
         response.sendRedirect("index.do");
     }
@@ -51,7 +50,6 @@ var lat, lon;
 function get_loc(callback)
 {
     if (navigator.geolocation) {        
-        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(function(position) { 
             lat = position.coords.latitude; // 위도
             lon = position.coords.longitude; // 경도
@@ -85,9 +83,6 @@ function off() {
 }
 
 function myFunction() {
-   // document.getElementById('loader-map').style.zIndex = 1;
-   // document.getElementById('loader-map').style.display = "none";
-    
     setTimeout(function() {
         $(".animate-bottom").css({
             'display' : 'block',
@@ -121,7 +116,6 @@ function myFunction() {
 </div>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
-        <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
         <img src="#" class="card-img-top" id="detailCarImgSrc" alt="자동차사진" style="width:60%; margin:30px auto 10px auto;">
         <div class="card-body">
             <h5 class="card-title font-weight-bold" id="detailCarType"></h5>
@@ -199,7 +193,6 @@ function myFunction() {
 </div>
 
 <script>
-    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         var clicked_marker = -1;
         var overlay = new Array();
         var map;
@@ -224,7 +217,6 @@ function myFunction() {
                 level: 5 // 지도의 확대 레벨 
             }; 
             
-            // 주소-좌표 변환 객체를 생성합니다
             var geocoder = new kakao.maps.services.Geocoder();
             
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -233,12 +225,8 @@ function myFunction() {
             var marker = new kakao.maps.Marker({ position:markerPosition });
             marker.setMap(map);
             
-            // 자동차
-            //var imageSrc = 'https://cdn0.iconfinder.com/data/icons/isometric-city-basic-transport/48/car-front-01-512.png', // 마커이미지의 주소입니다
             imageSize = new kakao.maps.Size(60, 36), // 마커이미지의 크기입니다
             imageOption = {offset: new kakao.maps.Point(30, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-            //imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-            //imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
             
             overlay = new Array();
             
@@ -290,22 +278,16 @@ function myFunction() {
                 '    </div>'
                 ;
             
-                // 마커 위에 커스텀오버레이를 표시합니다
-                // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
                 overlay['${status.index}'] = new kakao.maps.CustomOverlay({
                     content: content,
-                    //map: map, // 주석처리할 것
                     position: marker.getPosition()       
                 });
                 
-                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
                 kakao.maps.event.addListener(marker, 'click', function(mouseClick) {
                     if(clicked_marker != -1) {
                         closeOverlay(clicked_marker);
-                        //map.panTo(new kakao.maps.LatLng(lat, lon))
                     }
                     if(clicked_marker != '${status.index}') {
-                        // 주소값 가져오기
                         searchDetailAddrFromCoords('${result.longitude}', '${result.latitude}',function(result, status){
                             if(status == kakao.maps.services.Status.OK){                             
                                 var detailAddr = result[0].address.address_name;
@@ -321,8 +303,6 @@ function myFunction() {
                     }
                 });            
                 
-             // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-            
             </c:forEach>
            
         }

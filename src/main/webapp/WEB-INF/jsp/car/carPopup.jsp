@@ -139,7 +139,7 @@
                 setColor(as, activeStatus);
                 if(activeStatus == "Y") {
                     swal("Turn on!", "시동을 켰습니다. 지도를 움직여 주행을 시작하세요.", "success");
-                    $("body").click(function() {
+                    $(".swal-overlay").click(function() {
                         map.setDraggable(true);
                         map.setZoomable(true);
                         startDriving();
@@ -147,7 +147,7 @@
                 } else if(activeStatus == "N") {
                     endDriving();
                     swal("Turn off!", "주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.", "success");
-                    $("body").click(function() {
+                    $(".swal-overlay").click(function() {
                         map.setDraggable(false);
                         map.setZoomable(false);
                         window.close();

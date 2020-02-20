@@ -19,7 +19,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javaScript" language="javascript">
 swal("Warning!", "시동을 끈 후 다시 시도해주세요.", "warning");
-$("body").click(function() {
+$(".swal-overlay").click(function() {
     history.back();
 }); 
 </script>

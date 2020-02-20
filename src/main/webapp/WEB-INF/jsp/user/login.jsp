@@ -40,10 +40,11 @@ function login() {
         success : function(response){
             if(response == false) {
                 swal("Wrong Password", "비밀번호가 틀렸습니다.", "error");
-                $("body").click(function() {
+                $(".swal-overlay").click(function() {
                     document.loginForm.reset();
                     document.loginForm.userID.focus();
-                }); 
+                });
+                
             } else {
                 document.loginForm.action = "<c:url value='/basic/login.do'/>";
                 document.loginForm.submit();
