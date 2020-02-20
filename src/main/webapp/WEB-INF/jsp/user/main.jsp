@@ -84,15 +84,12 @@ function off() {
 }
 
 function myFunction() {
-    document.getElementById('loader-map').style.display="none";
-    document.getElementById('load-map').style.display="block";
+    document.getElementById('loader-map').style.zIndex = 1;
+    document.getElementById('loader-map').style.display = "none";
 }
 </script>
 </head>
-<body onload="myFunction()">
-<div class="row" id="loader-map" style="display: block; position: absolute; width: 480px; height: 700px; z-index: 2;">
-        <div id="loader"></div>
-</div>
+<body>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
         <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
@@ -126,8 +123,11 @@ function myFunction() {
         </div>
     </div>
 </div>
-<div id="load-map" style="height:100vh; width:480px; position: relative; display:none;">
-    <div class="row" style="position: absolute; width: 480px; height: 700px; z-index: 1;"> 
+<div  style="height:100vh; width:480px; position: relative;">
+    <div class="row" id="loader-map" style="position: absolute; width: 480px; height: 700px; z-index: 2;">
+            <div id="loader"></div>
+    </div>
+    <div id="load-map" class="row" style="position: absolute; width: 480px; height: 700px; z-index: 1;"> 
         <div id="map" style="width:100%;height:100%"></div>
         <form name="data">
             <input type="hidden" name="carNo"/>
@@ -224,6 +224,7 @@ function myFunction() {
                 if(status == kakao.maps.services.Status.OK){                             
                     var detailAddr = result[0].address.address_name;
                     document.getElementById('myLocation').innerHTML = detailAddr;
+                    myFunction();
                 } 
             });
             
