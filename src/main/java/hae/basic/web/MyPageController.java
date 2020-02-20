@@ -43,7 +43,7 @@ import net.sf.json.JSONObject;
  */
 
 @Controller
-public class myPageController extends HController {
+public class MyPageController extends HController {
 
     @Resource(name = "rentService")
     private RentService rentService;
@@ -62,7 +62,7 @@ public class myPageController extends HController {
         model.addAttribute("myRentList", rentList);
         model.addAttribute("carList", carService.selectCarList());
         
-        return "basic/mypage";
+        return "user/mypage";
     }
     
     @Resource(name = "drivingInfoService")
