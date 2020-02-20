@@ -34,7 +34,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
-
 function goRent(carNo)
 {
     var rent = document.data;
@@ -84,19 +83,16 @@ function off() {
     document.getElementById("overlay").style.display = "none";
 }
 
-var myVar;
-
 function myFunction() {
-  myVar = setTimeout(showPage, 3500);
-}
-
-function showPage() {
     document.getElementById('loader-map').style.display="none";
     document.getElementById('load-map').style.display="block";
 }
 </script>
 </head>
 <body onload="myFunction()">
+<div class="row" id="loader-map" style="display: block; position: absolute; width: 480px; height: 700px; z-index: 2;">
+        <div id="loader"></div>
+</div>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
         <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
@@ -130,11 +126,8 @@ function showPage() {
         </div>
     </div>
 </div>
-<div style="height:100vh; width:480px; position: relative;">
-    <div class="row" id="loader-map" style="position: absolute; width: 480px; height: 700px; z-index: 2;">
-        <div id="loader"></div>
-    </div>
-    <div class="row" id="load-map" style="display:none; position: absolute; width: 480px; height: 700px; z-index: 1;"> 
+<div id="load-map" style="height:100vh; width:480px; position: relative; display:none;">
+    <div class="row" style="position: absolute; width: 480px; height: 700px; z-index: 1;"> 
         <div id="map" style="width:100%;height:100%"></div>
         <form name="data">
             <input type="hidden" name="carNo"/>
