@@ -72,7 +72,7 @@ function get_loc(callback)
 function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
     $("#detailCarType").text(carType);
     $("#detailCarSize").text(carSize);
-    $("#detailCarMileage").text(mileage + 'km');
+    $("#detailCarMileage").text(Math.round(mileage) + 'km');
     $("#detailCarBirth").text(birth.substr(0,7));
     $("#detailCarCapacity").text(capacity + '명');
     $("#detailCarCost").text(cost + '원/km');

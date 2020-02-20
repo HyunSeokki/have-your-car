@@ -104,9 +104,9 @@ var polyline = new kakao.maps.Polyline({
 // 움직인 거리(단위: m), km단위로 반올림
 var distance = Math.round(polyline.getLength());
 document.getElementById("rentDistance").innerHTML = distance + "m";
-distance = Math.round(distance / 1000 );
+distance = (distance / 1000);
 var cost = "${cost}"*1; // rent 정보에 저장된 비용
-cost = distance * cost;
+cost = Math.round(distance) * cost;
 if(cost === 0)
     cost = "${cost}"*1;
 document.getElementById("payBtn").innerHTML = "결제 금액 : "+ cost + "원 ";
@@ -124,7 +124,7 @@ function payAndReturn(){
         payReturn.lat.value = lastLat;
         payReturn.lng.value = lastLng;
         payReturn.rentNo.value = rentNo;
-        
+
         payReturn.action = "./payAndReturn.do";
         payReturn.method = "post";
         payReturn.submit();
