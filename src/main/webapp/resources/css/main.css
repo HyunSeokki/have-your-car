@@ -28,7 +28,7 @@
   border-top: 16px solid #013469; */
 /*   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite; */
-  animation: move 0.5s infinite;
+  animation: move 1s infinite;
 }
 
 #overlay {
@@ -56,8 +56,8 @@
 }
 
 @keyframes move {
-    0% {left:45%; }
-    100% {left:65%; }
+    0% {left:30%; }
+    100% {left:70%; }
 }
 
 
