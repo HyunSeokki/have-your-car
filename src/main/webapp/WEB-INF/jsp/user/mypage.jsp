@@ -43,126 +43,10 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/mypage.css" />" rel="stylesheet">
 <style>
-body {
-    -ms-overflow-style: none;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    font-size: 0.8rem;
-}
-
-#title {
-    text-align: center;
-    font-size: 5vh;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100vh; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    -ms-overflow-style: none; // IE에서 스크롤바 감춤 background-color : #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    height: 80vh;
-}
-
-.modal-dialog {
-    max-width: 900px;
-    margin: 1.75rem auto;
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover, .close:focus {
-    color: #4374D9;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#map_container {
-    width: 100%;
-    height: 53%;
-    margin-top: 2%;
-}
-
-.icon {
-    color: #013469;
-    font-size: 2.5vh;
-    margin: 1vh;
-}
-
-.icon:hover {
-    color: #6799FF;
-}
-
-#ctrlContainer {
-    margin-bottom: 1vh;
-    clear: both;
-}
-
-.btn-close {
-    margin-top: 2.5%;
-}
-
-.carImage {
-    width: 41%;
-    height: 45%;
-    position: absolute;
-    top: 123%;
-    left: -36%;
-    margin-top: -148px;
-    margin-left: -27px;
-}
-
-#imgContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%
-}
-
-thead {
-    background-color: #013469;
-    color: white;
-    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
-}
-
-tbody {
-    display:block;
-    height:520px;
-    overflow:auto;
-}
-
-thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
-}
-
-.btn-icon-mypage {
-    padding: 0px;   
-}
 
 </style>
 
@@ -378,11 +262,11 @@ thead, tbody tr {
                                 <h6 class="card-subtitle mb-2 text-muted" id="carS"></h6>
                                 <span>연식: </span>
                                 <span class="card-text" id="carB"></span><br> 
-                                <span>수용 인원: </span>
+                                <span >수용 인원: </span>
                                 <span class="card-text" id="carC"></span>
-                                <span>명</span><br>
-                                <span>비용/km: </span>
-                                <span class="card-text" id="carCo"></span><span>원</span><br>
+                                <span >명</span><br>
+                                <span >비용/km: </span>
+                                <span class="card-text " id="carCo"></span><span>원</span><br>
                             </div>
 
                             <div class="col" id="imgContainer">

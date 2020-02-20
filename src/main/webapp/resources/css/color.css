@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
-.badge-primary{background-color: #013469;}
+.badge-primary{background-color: #013469; }
 .text-primary{color: #000 !important;}
-.btn-primary {background-color: #013469; border-color: #013469;}
-.btn-outline-primary{border-color: #013469; color: #013469; }
-
+.btn-primary {background-color: #013469; border-color: #013469;  }
+.btn-outline-primary{border-color: #013469; color: #013469;  }
+body {font-family: "Nanum Gothic", sans-serif;}
 

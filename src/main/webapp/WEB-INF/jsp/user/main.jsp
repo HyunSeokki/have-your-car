@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <title>Main title</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -149,7 +150,7 @@ function myFunction() {
             <input type="hidden" name="userID"/>
         </form>
     </div>
-    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 25vh; z-index: 10; background-color: #fff; ">
+    <div class="animate-bottom" style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 25vh; z-index: 10; background-color: #fff; ">
         <div style="width:480px; height:100%;">
             <div class="row justify-content-center">
                 <h4 class="col-12 text-center mt-4">
@@ -271,8 +272,8 @@ function myFunction() {
                 '               <div class="jibun ellipsis">${result.capacity}인승</div>' +
                 '               <div class="jibun ellipsis" id="addr"></div>'+
                 '               <div style="position: absolute; bottom: 10px; right: 10px;">'+
-                '                  <button class="btn btn-outline-primary btn-sm" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
-                '                  <button class="btn btn-outline-primary btn-sm" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
+                '                  <button class="btn btn-outline-primary btn-sm sm-btn" type="button" onclick="on(\'${result.carType}\', \'${result.carSize}\', \'${result.mileage}\',\'${result.birth}\', \'${result.capacity}\', \'${result.cost}\', \'${result.imgSrc}\')">상세보기</button>' +
+                '                  <button class="btn btn-outline-primary btn-sm sm-btn" type="button" onclick="goRent('+${result.carNo}+');">대여 신청</button>' +
                 '               </div>'+
                 '           </div>' + 
                 '        </div>' + 
