@@ -35,7 +35,6 @@ function goRoute(carNo)
     route.submit();
 }
 
-/* 3초 후에 팝업 창 */
 $(document).ready(function() {
     setTimeout(function() {
         window.open("/have/car/main.do?rentNo="+"${rentInfo.rentNo}", "", "channelmode=yes");
@@ -49,7 +48,6 @@ $(document).ready(function() {
             <div class="col-10">
                 <div class="row mb-3 justify-content-center">
                 <div class="card" style="width:80vw;">
-                    <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
                     <div class="card-body">
                         <h5 class="card-title text-center font-weight-bold">대여No. ${ rentInfo.rentNo }</h5>
                         <h5 class="card-title text-center font-weight-bold">${ rentInfo.rentDate }</h5>

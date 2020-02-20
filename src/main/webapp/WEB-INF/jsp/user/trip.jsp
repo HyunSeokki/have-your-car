@@ -60,28 +60,10 @@ var rentNo = "${rentInfo.rentNo }";
         <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn" onclick="payAndReturn()"></button>
     </div>
 </div>
-<%-- <div class="card" style="margin: 3%; padding: 2%; height: 90vh;">
-    <h4 style="border-radius: 5px; padding:5px; margin:10px 0px; color: #fff; background-color: #013469;">여행 기록</h4>
-    <div id="map" style="width:100%;height: 60vh; border-radius: 5px;"></div>
-    
-    <div class="card-body" style="position:relative; padding: 10px 0px 0px 0px; width: 100%; height: 40vh; ">
-        <!-- Rent 정보  -->
-        <h5 style="border-radius: 5px; padding:5px; color: #fff; background-color: #013469; margin-bottom: 10px;">주행 정보</h5>
-        <p  style="margin-left: 5px; color: #013469;">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;${rentInfo.userID }</p> 
-        <p  style="margin-left: 5px; color: #013469;">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDate"></span></p> 
-        <p  style="margin-left: 5px; color: #013469;">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentEnd"></span></p> 
-        <p  style="margin-left: 5px; color: #013469;">총 주행거리&nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDistance"></span></p> 
-        <button class="btn btn-primary" style="position:absolute; min-height: 45px;  width:100%; height: auto; font-size: 1.2em; bottom: 0px;" id="payBtn" onclick="payAndReturn()"></button>
-    </div>
-</div> --%>
-
 
 <!-- 카카오 지도 그리는 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ec55985aa8acb748cd1f62c730db1a4"></script>
 <script type="text/javascript">
-/*
- * String Data 재조립
- */
 
 var rentDate = "${rentInfo.rentDate }";
 var rentEnd = "${rentInfo.returnDate}";
@@ -111,17 +93,14 @@ lastLat = "${dr.latitude}";
 lastLng = "${dr.longitude}";
 </c:forEach>
 
-// 지도 초기값 보여주기
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(37.507381428880635, 127.05895942121612), // 지도의 중심좌표
         level: 5 // 지도의 확대 레벨
     };
 
-// 지도 그리기
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-// 선 그리기
 var polyline = new kakao.maps.Polyline({
     path: linePath, // 선을 구성하는 좌표배열 입니다
     strokeWeight: 5, // 선의 두께 입니다
@@ -130,9 +109,6 @@ var polyline = new kakao.maps.Polyline({
     strokeStyle: 'solid' // 선의 스타일입니다
 });
 
-/*
- * kakao 거리 계산으로 distance for pay Cost 구하기
- */
 // 움직인 거리(단위: m), km단위로 반올림
 var distance = Math.round(polyline.getLength());
 document.getElementById("rentDistance").innerHTML = distance + "m";
@@ -150,7 +126,7 @@ map.setBounds(bounds);
 
 function payAndReturn(){
     swal("Thank you", cost + "원 결제가 완료되었습니다.", "success");
-    $(".swal-button-container").click(function() {
+    $(".swal-overlay").click(function() {
         var payReturn = document.data;
         payReturn.distance.value = distance;
         payReturn.lat.value = lastLat;

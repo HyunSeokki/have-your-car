@@ -159,13 +159,10 @@
                             // 현재 클릭된 Row(<tr>)
                             var tr = $(this);
                             var td = tr.children();
-                            // tr.text()를 통해 클릭된 모든 값을 가져온다.
-                            // 반복문을 이용해서 배열에 값 담기
                             td.each(function(i) {
                                 tdArr.push(td.eq(i).text());
                             });
 
-                            // td.eq(index)를 통해 대여번호[0] 가져오기.
                             var rentNo = td.eq(0).text();
 
                             if (isNaN(rentNo) == false) {
@@ -177,7 +174,6 @@
                                     success : function(args) {
                                         var trip = JSON.parse(args).data;
                                         var carInfo = JSON.parse(args).data2;
-                                        //차 정보 담기
                                         var carType = carInfo.carType;
                                         var carSize = carInfo.carSize;
                                         var birth = carInfo.birth;
@@ -191,7 +187,6 @@
                                         document.getElementById("carCo").innerHTML = cost;
                                         $('#carImg').attr('src', '<c:url value="/'+carImgSrc+'"/>');
                                         
-                                        //선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
                                         var linePath = new Array();
                                         for (var i = 0; i < Object.keys(trip).length; i++) {
                                             var temp = new kakao.maps.LatLng(trip[i].latitude, trip[i].longitude);
@@ -199,7 +194,6 @@
                                             bounds.extend(temp);
                                         }
 
-                                        // 지도에 표시할 선을 생성합니다
                                         var polyline = new kakao.maps.Polyline(
                                             {
                                                 path : linePath,
@@ -208,7 +202,6 @@
                                                 strokeOpacity : 0.7,
                                                 strokeStyle : 'solid'
                                             });
-                                        // 지도에 선을 표시합니다 
                                         polyline.setMap(map);
                                         map.setBounds(bounds);
                                     },
@@ -219,24 +212,18 @@
                                     cache : false
                                 });
 
-                                //****Modal****//
                                 var modal = document.getElementById("myModal");
 
-                                //모달이 보임.
                                 modal.style.display = 'block';
                                 map.relayout();
-                                //모달 가져옴
                                 var modal = document.getElementById('myModal');
-                                //모달을 닫을 span가져옴
                                 var span = document.getElementsByClassName("close")[0];
-                                //<span> (x) 눌렀을 때, 모달을 닫음
                                 span.onclick = function() {
                                     map = new kakao.maps.Map(container,options);
                                     bounds = new kakao.maps.LatLngBounds();
                                     modal.style.display = "none";
                                 }
 
-                                //<close> 버튼 눌렀을 때, 모달을 닫음
                                 var close = document.getElementById('close');
                                 close.onclick = function() {
                                     map = new kakao.maps.Map(container,options);
@@ -244,7 +231,6 @@
                                     modal.style.display = "none";
                                 }
 
-                                //모달 밖을 눌렀을때도 창이 닫힘
                                 window.onclick = function(event) {
                                     if (event.target == modal) {
                                         map = new kakao.maps.Map(container,options);
