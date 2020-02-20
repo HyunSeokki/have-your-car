@@ -9,12 +9,14 @@
 .info .close:hover {cursor: pointer;}
 .info .body {position: relative;overflow: hidden; height:112px;}
 .info .desc {position: relative;margin: 13px 0 0 115px;height: 90px;}
-.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 1.2em;}
-.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 1.2em; }
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;  }
 .info .img {position: absolute;top: 6px;left: 5px;width: 107px;line-height: 86px;border: 1px solid #ddd;color: #888;overflow: hidden;}
 .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-.info .link {color: #5085BB;}
+.info .link {color: #5085BB; }
 .row {margin:0px;}
+.sm-btn {font-size: 1.0em; padding: 0px 5px; margin-right: 10px;}
+
 #loader {
   position: absolute;
   left: 50%;
