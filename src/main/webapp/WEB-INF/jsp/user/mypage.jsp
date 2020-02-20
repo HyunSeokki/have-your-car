@@ -145,6 +145,19 @@ body {
 thead {
     background-color: #013469;
     color: white;
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
+tbody {
+    display:block;
+    height:520px;
+    overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
 }
 
 .btn-icon-mypage {
@@ -175,7 +188,7 @@ thead {
             </p>
 
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" style = "border-bottom: solid 1px; margin: 0px; padding: 0px; border-color: #CCCEDB;">
             <table id="rentTable" width="90%"
                 class="table table-hover text-center">
                 <thead>
