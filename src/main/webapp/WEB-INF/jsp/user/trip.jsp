@@ -29,12 +29,12 @@ var rentNo = "${rentInfo.rentNo }";
 </head>
 <body>
 <div class="card" style="margin: 3%; padding: 2%; height: 90vh;">
-    <h4 style="border-radius: 5px; padding:5px; margin:10px 0px; color: #fff; background-color: #013469; opacity:0.6;">여행 기록</h4>
+    <h4 style="border-radius: 5px; padding:5px; margin:10px 0px; color: #fff; background-color: #013469;">여행 기록</h4>
     <div id="map" style="width:100%;height: 60vh; border-radius: 5px;"></div>
     
     <div class="card-body" style="position:relative; padding: 10px 0px 0px 0px; width: 100%; height: 40vh; ">
         <!-- Rent 정보  -->
-        <h5 style="border-radius: 5px; padding:5px; color: #fff; background-color: #013469; opacity:0.6; margin-bottom: 10px;">주행 정보</h5>
+        <h5 style="border-radius: 5px; padding:5px; color: #fff; background-color: #013469; margin-bottom: 10px;">주행 정보</h5>
         <p  style="margin-left: 5px; color: #013469;">사용자 ID&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;${rentInfo.userID }</p> 
         <p  style="margin-left: 5px; color: #013469;">시작 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentDate"></span></p> 
         <p  style="margin-left: 5px; color: #013469;">종료 시간&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;>>&nbsp;<span id="rentEnd"></span></p> 
