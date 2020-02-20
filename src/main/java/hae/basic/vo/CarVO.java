@@ -24,7 +24,7 @@ public class CarVO {
     int carNo;
     String carSize;
     String carType;
-    int mileage;
+    float mileage;
     String birth;
     int capacity;
     int cost;
@@ -71,13 +71,13 @@ public class CarVO {
     /**
      * @return the mileage
      */
-    public int getMileage() {
+    public float getMileage() {
         return mileage;
     }
     /**
      * @param mileage the mileage to set
      */
-    public void setMileage(int mileage) {
+    public void setMileage(float mileage) {
         this.mileage = mileage;
     }
     /**

@@ -103,7 +103,7 @@ public class ReturnMapController extends HController {
     }
 
     @RequestMapping(value = "/basic/payAndReturn.do")
-    public String payAndReturn(@RequestParam int distance, @RequestParam String lat, @RequestParam String lng,
+    public String payAndReturn(@RequestParam float distance, @RequestParam String lat, @RequestParam String lng,
             @RequestParam String rentNo, Model model) throws Exception {
         /*
          * 데이터 업데이트

@@ -34,7 +34,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
-
 function goRent(carNo)
 {
     var rent = document.data;
@@ -72,7 +71,7 @@ function get_loc(callback)
 function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
     $("#detailCarType").text(carType);
     $("#detailCarSize").text(carSize);
-    $("#detailCarMileage").text(mileage + 'km');
+    $("#detailCarMileage").text(Math.round(mileage) + 'km');
     $("#detailCarBirth").text(birth.substr(0,7));
     $("#detailCarCapacity").text(capacity + '명');
     $("#detailCarCost").text(cost + '원/km');
@@ -83,9 +82,17 @@ function on(carType, carSize, mileage, birth, capacity, cost, imgSrc) {
 function off() {
     document.getElementById("overlay").style.display = "none";
 }
+
+function myFunction() {
+    document.getElementById('loader-map').style.display="none";
+    document.getElementById('load-map').style.display="block";
+}
 </script>
 </head>
-<body>
+<body onload="myFunction()">
+<div class="row" id="loader-map" style="display: block; position: absolute; width: 480px; height: 700px; z-index: 2;">
+        <div id="loader"></div>
+</div>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">
         <!-- 임의로 지정한 url car에 경로 설정하고 디비에 넣을 경우, on 함수에서 같이 수정한다.-->
@@ -119,7 +126,7 @@ function off() {
         </div>
     </div>
 </div>
-<div style="height:100vh; width:480px; position: relative;">
+<div id="load-map" style="height:100vh; width:480px; position: relative; display:none;">
     <div class="row" style="position: absolute; width: 480px; height: 700px; z-index: 1;"> 
         <div id="map" style="width:100%;height:100%"></div>
         <form name="data">
@@ -127,16 +134,17 @@ function off() {
             <input type="hidden" name="userID"/>
         </form>
     </div>
-    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 30vh; z-index: 10; background-color: #fff; ">
+    <div style="border-radius: 30px 30px 0px 0px; position:absolute; bottom:0px;  width: 480px; height: 25vh; z-index: 10; background-color: #fff; ">
         <div style="width:480px; height:100%;">
             <div class="row justify-content-center">
                 <h4 class="col-12 text-center mt-4">
-                    <span class="font-weight-bold" style="color: #013469;"><%= session.getAttribute("user") %></span> 님 환영합니다.
+                                                환영합니다 <span class="font-weight-bold" style="color: #013469;"><%= session.getAttribute("user") %></span> 님
                 </h4>
+                <p style="color: grey; font-style: italic;">현재 위치 : <span id="myLocation"></span></p>
             </div>
             <div class="row justify-content-around">
                 <button class="col-3 text-center btn" onclick="location.href='./logout.do'">
-                    <div class="d-flex-inline mt-4" >
+                    <div class="d-flex-inline" >
                         <i class="fas fa-sign-out-alt fa-2x text-primary"></i>
                     </div>
                     <div class="d-flex-inline">
@@ -144,7 +152,7 @@ function off() {
                     </div>
                 </button>
                 <button class="col-3 text-center btn" onclick="moveCenter();">
-                    <div class="d-flex-inline mt-4" >
+                    <div class="d-flex-inline" >
                         <i class="fas fa-map-marked-alt fa-2x text-primary"></i>
                     </div>
                     <div class="d-flex-inline">
@@ -152,7 +160,7 @@ function off() {
                     </div>
                 </button>
                 <button class="col-3 text-center btn" onclick="location.href='./mypage.do'">
-                    <div class="d-flex-inline mt-4" >
+                    <div class="d-flex-inline" >
                         <i class="fas fa-user-circle fa-2x text-primary"></i>
                     </div>
                     <div class="d-flex-inline">
@@ -172,7 +180,7 @@ function off() {
         
         function closeOverlay(idx) 
         {
-            overlay[idx].setMap(null);     
+            overlay[idx].setMap(null);    
         } 
         
         function moveCenter(){
@@ -187,7 +195,6 @@ function off() {
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = { 
                 center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
-                //center: new kakao.maps.LatLng(37.506561, 127.05841800000002), // 지도의 중심좌표
                 level: 5 // 지도의 확대 레벨 
             }; 
             
@@ -197,9 +204,7 @@ function off() {
             map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
             
             var markerPosition = new kakao.maps.LatLng(lat, lon); 
-            //var markerPosition = new kakao.maps.LatLng(37.506561, 127.05841800000002);
             var marker = new kakao.maps.Marker({ position:markerPosition });
-            
             marker.setMap(map);
             
             // 자동차
@@ -214,6 +219,14 @@ function off() {
             function searchDetailAddrFromCoords(lon, lat, callback) {
                 geocoder.coord2Address(lon,lat, callback);
             }
+            
+            searchDetailAddrFromCoords(lon, lat, function(result, status) {
+                if(status == kakao.maps.services.Status.OK){                             
+                    var detailAddr = result[0].address.address_name;
+                    document.getElementById('myLocation').innerHTML = detailAddr;
+                } 
+            });
+            
             
             <c:forEach items="${resultList}" var="result" varStatus="status">
 
@@ -286,6 +299,7 @@ function off() {
             </c:forEach>
            
         }
+        
         get_loc(draw);
         
         
