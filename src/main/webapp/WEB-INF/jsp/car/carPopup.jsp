@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -136,16 +138,20 @@
             success : function(activeStatus) {
                 setColor(as, activeStatus);
                 if(activeStatus == "Y") {
-                    alert("시동을 켰습니다. 지도를 움직여 주행을 시작하세요.")
-                    map.setDraggable(true);
-                    map.setZoomable(true);
-                    startDriving();
+                    swal("Turn on!", "시동을 켰습니다. 지도를 움직여 주행을 시작하세요.", "success");
+                    $(".swal-button-container").click(function() {
+                        map.setDraggable(true);
+                        map.setZoomable(true);
+                        startDriving();
+                    }); 
                 } else if(activeStatus == "N") {
                     endDriving();
-                    alert("주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.")
-                    map.setDraggable(false);
-                    map.setZoomable(false);
-                    window.close();
+                    swal("Turn off!", "주행을 끝내고 시동을 껐습니다. 시스템을 종료합니다.", "success");
+                    $(".swal-button-container").click(function() {
+                        map.setDraggable(false);
+                        map.setZoomable(false);
+                        window.close();
+                    }); 
                 }
             }
         });
@@ -266,7 +272,7 @@
 
     function endDriving() {
         if (logDataInterval === undefined)
-            alert('아직 주행이 시작되지 않았습니다. 주행을 시작하세요!');
+            swal("Warning!", "아직 주행이 시작되지 않았습니다. 주행을 시작하세요!", "warning");
         else {
             clearInterval(logDataInterval);
             clearInterval(sendDataInterval);

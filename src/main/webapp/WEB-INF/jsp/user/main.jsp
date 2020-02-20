@@ -31,6 +31,7 @@
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>Main title</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
 
@@ -216,12 +217,9 @@ function off() {
             
             <c:forEach items="${resultList}" var="result" varStatus="status">
 
-                //alert('${status.index}'); 
-                 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다            
                 var markerImage = new kakao.maps.MarkerImage("<c:url value="/${result.imgSrc}"/>", imageSize, imageOption),
                     markerPosition = new kakao.maps.LatLng('${result.latitude}', '${result.longitude}'); // 마커가 표시될 위치입니다
                 
-                // 마커를 생성합니다
                 var marker = new kakao.maps.Marker({
                     position: markerPosition, 
                     image: markerImage // 마커이미지 설정 

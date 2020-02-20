@@ -20,12 +20,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <script type="text/javaScript" language="javascript">
 function login() {
     var id = document.getElementById("userID").value;
     var pw = document.getElementById("userPWD").value;
-    
     $.ajax({
         type : "POST", //전송방식을 지정한다 (POST,GET)
         url : "verifyLogin.do",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
@@ -37,9 +37,11 @@ function login() {
         },
         success : function(response){
             if(response == false) {
-                alert("비밀번호가 틀렸습니다.");
-                document.loginForm.reset();
-                document.loginForm.userID.focus();
+                swal("Wrong Password", "비밀번호가 틀렸습니다.", "error");
+                $(".swal-button-container").click(function() {
+                    document.loginForm.reset();
+                    document.loginForm.userID.focus();
+                }); 
             } else {
                 document.loginForm.action = "<c:url value='/basic/login.do'/>";
                 document.loginForm.submit();

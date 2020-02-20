@@ -19,8 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>결제 화면</title>
-<style type="text/css">
-</style>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javaScript" language="javascript">
 var rentNo = "${rentInfo.rentNo }";
@@ -118,19 +117,18 @@ map.setBounds(bounds);
 
 
 function payAndReturn(){
-    alert(cost + "원 결제가 완료되었습니다.");
-    var payReturn = document.data;
-    payReturn.distance.value = distance;
-    //37.507381428880635, 127.05895942121612
-//    lastLat = "37.507381428880635";
-//    lastLng = "127.05895942121612";
-    payReturn.lat.value = lastLat;
-    payReturn.lng.value = lastLng;
-    payReturn.rentNo.value = rentNo;
-    
-    payReturn.action = "./payAndReturn.do";
-    payReturn.method = "post";
-    payReturn.submit();
+    swal("Thank you", cost + "원 결제가 완료되었습니다.", "success");
+    $(".swal-button-container").click(function() {
+        var payReturn = document.data;
+        payReturn.distance.value = distance;
+        payReturn.lat.value = lastLat;
+        payReturn.lng.value = lastLng;
+        payReturn.rentNo.value = rentNo;
+        
+        payReturn.action = "./payAndReturn.do";
+        payReturn.method = "post";
+        payReturn.submit();
+    }); 
 }
 
 
