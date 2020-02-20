@@ -50,11 +50,11 @@ public interface RentService {
     
     /**
      * 대여정보 상세 조회
-     * @param seq
+     * @param rentNo
      * @return
      * @throws Exception
      */
-    RentVO selectRent(String seq) throws Exception;
+    RentVO selectRent(String rentNo) throws Exception;
     
     /**
      * 대여정보 전체 조회
@@ -80,4 +80,6 @@ public interface RentService {
      */
     List<RentVO> selectRentListByUserID(String userID) throws Exception;
     
+    
+    RentVO selectRentByCarNo(String carNo) throws Exception;
 }

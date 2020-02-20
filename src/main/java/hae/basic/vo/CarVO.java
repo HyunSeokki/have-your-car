@@ -24,12 +24,14 @@ public class CarVO {
     int carNo;
     String carSize;
     String carType;
-    int mileage;
+    float mileage;
     String birth;
     int capacity;
     int cost;
     String latitude;
     String longitude;
+    String imgSrc;
+    
     /**
      * @return the carNo
      */
@@ -69,13 +71,13 @@ public class CarVO {
     /**
      * @return the mileage
      */
-    public int getMileage() {
+    public float getMileage() {
         return mileage;
     }
     /**
      * @param mileage the mileage to set
      */
-    public void setMileage(int mileage) {
+    public void setMileage(float mileage) {
         this.mileage = mileage;
     }
     /**
@@ -138,6 +140,18 @@ public class CarVO {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+    /**
+     * @return the imgSrc
+     */
+    public String getImgSrc() {
+        return imgSrc;
+    }
+    /**
+     * @param imgSrc the imgSrc to set
+     */
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
     /*
      * @see java.lang.Object#toString()
      */
@@ -145,7 +159,7 @@ public class CarVO {
     public String toString() {
         return "CarVO [carNo=" + carNo + ", carSize=" + carSize + ", carType=" + carType + ", mileage=" + mileage
                 + ", birth=" + birth + ", capacity=" + capacity + ", cost=" + cost + ", latitude=" + latitude
-                + ", longitude=" + longitude + "]";
+                + ", longitude=" + longitude + ", imgSrc=" + imgSrc + "]";
     }
 
 

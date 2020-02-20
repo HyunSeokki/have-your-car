@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import hae.basic.service.CarService;
 import hae.basic.service.MapService;
 import hae.basic.service.RentService;
 import hae.basic.vo.CarVO;
@@ -49,21 +50,34 @@ public class MapController extends HController{
     @Resource(name = "rentService")
     private RentService rentService;
     
-    @RequestMapping(value = "/main.do")
+    @Resource(name = "carService")
+    private CarService carService;
+    
+    @RequestMapping(value = "/basic/main.do")
     public String main(Model model) throws Exception {
         
-        List<CarVO> sampleList = mapService.selectPossibleCar();
-        //System.out.println(sampleList.toString());
-        model.addAttribute("resultList", sampleList);
-        return "basic/main";
+        List<CarVO> resultList = mapService.selectPossibleCar();
+        
+        model.addAttribute("resultList", resultList);
+        return "user/main";
     }
     
-    @RequestMapping(value = "/rent.do")
+    @RequestMapping(value = "/basic/rent.do")
     public String rent(@ModelAttribute("rentVO") RentVO rentVO, 
             Model model) throws Exception {
         
-        rentService.insertRent(rentVO);
+        CarVO carInfo = carService.selectCar(rentVO.getCarNo());
+        RentVO rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
         
-        return "basic/rent";
+        if(rentInfo == null)
+        {
+            rentService.insertRent(rentVO);  
+            rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
+        }
+        
+        model.addAttribute("carInfo",carInfo);
+        model.addAttribute("rentInfo",rentInfo);
+
+        return "user/rent";
     }
 }

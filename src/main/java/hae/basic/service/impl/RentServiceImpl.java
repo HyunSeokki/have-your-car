@@ -56,7 +56,7 @@ public class RentServiceImpl extends HService implements RentService {
     @Override
     public void updateRent(RentVO vo) throws Exception {
         // TODO Auto-generated method stub
-        rentDAO.insertRent(vo);
+        rentDAO.updateRent(vo);
     }
 
     /*
@@ -72,9 +72,9 @@ public class RentServiceImpl extends HService implements RentService {
      * @see hae.basic.service.RentService#selectRent(java.lang.String)
      */
     @Override
-    public RentVO selectRent(String seq) throws Exception {
+    public RentVO selectRent(String rentNo) throws Exception {
         // TODO Auto-generated method stub
-        return rentDAO.selectRent(seq);
+        return rentDAO.selectRent(rentNo);
     }
 
     /*
@@ -114,6 +114,15 @@ public class RentServiceImpl extends HService implements RentService {
         }
         
         return temp;
+    }
+
+    /*
+     * @see hae.basic.service.RentService#selectRentByCarNo(java.lang.String)
+     */
+    @Override
+    public RentVO selectRentByCarNo(String carNo) throws Exception {
+        // TODO Auto-generated method stub
+        return rentDAO.selectRentByCarNo(carNo);
     }
 
 }

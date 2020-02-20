@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hae.basic.service.UserService;
 import hae.basic.vo.UserVO;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * <pre>
@@ -52,7 +54,7 @@ public class LoginPlatformController extends HController {
         
         model.addAttribute("userVO", userVO);
         
-        return "basic/login";
+        return "user/login";
     }
     
     @RequestMapping(value = "/basic/verifyLogin.do")
@@ -87,7 +89,13 @@ public class LoginPlatformController extends HController {
         }            
         
         session.setAttribute("user", userVO.getUserID());
-        return "test/loginTestMain";
+        return "redirect:/basic/main.do";
+    }
+    
+    @RequestMapping(value = "/basic/logout.do", method = RequestMethod.GET)
+    public String logoutProcess(HttpSession session) throws Exception {
+        session.removeAttribute("user");
+        return "redirect:/basic/index.do";
     }
     
     // 가져온 JSON 형식의 Request를 Map 형태로 변환해주는 메소드

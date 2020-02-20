@@ -75,6 +75,14 @@ public class DrivingInfoVO {
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
+    /*
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "DrivingInfoVO [rentNo=" + rentNo + ", latitude=" + latitude + ", longitude=" + longitude
+                + ", timeStamp=" + timeStamp + "]";
+    }
 
 	
 }

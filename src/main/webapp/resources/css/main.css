@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+body {-ms-overflow-style:none;}
+.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 137px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 286px;height: 137px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding-left: 5px; height: 30px;background: #337ab7;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold; color:white;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden; height:112px;}
+.info .desc {position: relative;margin: 13px 0 0 115px;height: 90px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 1.2em; }
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;  }
+.info .img {position: absolute;top: 6px;left: 5px;width: 107px;line-height: 86px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB; }
+.row {margin:0px;}
+.sm-btn {font-size: 1.0em; padding: 0px 5px; margin-right: 10px;}
+
+#loader {position: absolute; left: 45%; top: 50%; z-index: 3; width: 120px; height: 120px; margin: -75px 0 0 -75px; -webkit-animation: move 1s infinite; animation: move 1s infinite;}
+#overlay { position: fixed; display: none; width: 100%; height: 100%;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.5);z-index: 20;cursor: pointer;}
+#text{position: absolute;top: 50%;left: 50%;font-size: 50px;color: white;transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);}
+
+@keyframes move { 0% {left:30%; } 100% {left:70%; }}
+@-webkit-keyframes move { 0% {left:30%; } 100% {left:70%; }}
+.animate-bottom { position: relative; -webkit-animation-name: animatebottom; -webkit-animation-duration: 1s; display: none;}
+@-webkit-keyframes animatebottom { from { bottom:-100px; opacity:0 } to { bottom:0px; opacity:1 }}
+@keyframes animatebottom { from{ bottom:-100px; opacity:0 } to{ bottom:0; opacity:1 }}
+
+

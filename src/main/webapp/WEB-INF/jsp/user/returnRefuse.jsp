@@ -16,9 +16,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javaScript" language="javascript">
-alert('시동을 끈 후 다시 시도해주세요.');
-history.back();
+swal("Warning!", "시동을 끈 후 다시 시도해주세요.", "warning");
+$(".swal-overlay").click(function() {
+    history.back();
+}); 
 </script>
 </head>
 <body>
