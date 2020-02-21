@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+body {-ms-overflow-style:none;}
+.wrap {border-radius:50px; position: absolute;left: 100px;bottom: 30px;width: 100px;height: 25px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.info .title {padding-bottom:2px;height: 25px;background: #fff;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold; color:#000; text-align:center;}
+.info .body {position: relative;overflow: hidden; height:112px;}
+
+

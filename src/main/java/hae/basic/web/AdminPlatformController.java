@@ -1,5 +1,8 @@
 package hae.basic.web;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import able.com.web.HController;
@@ -7,6 +10,11 @@ import able.com.web.HController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import hae.basic.service.CarService;
+import hae.basic.service.RentService;
+import hae.basic.vo.CarVO;
+import hae.basic.vo.RentVO;
 
 /**
  * <pre>
@@ -31,9 +39,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/admin")
 public class AdminPlatformController extends HController {
     
+    @Resource(name = "carService")
+    CarService carService;
+    
+    @Resource(name = "rentService")
+    RentService rentService;
+    
     @RequestMapping(value = "/main.do")
     public String adminForm(HttpSession session, Model model) throws Exception { // admin mainpage
         
+        List<CarVO> carList = carService.selectCarList();
+        List<RentVO> rentList = rentService.selectRentList();
+        
+        model.addAttribute("carList", carList);
+        model.addAttribute("rentList", rentList);
         
         return "admin/main";
     }
