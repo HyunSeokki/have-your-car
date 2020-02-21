@@ -89,6 +89,10 @@ public class LoginPlatformController extends HController {
         }            
         
         session.setAttribute("user", userVO.getUserID());
+        
+        if(userVO.getUserID().equals("admin")) {// admin일 경우
+            return "redirect:/admin/main.do";
+        }
         return "redirect:/basic/main.do";
     }
     
