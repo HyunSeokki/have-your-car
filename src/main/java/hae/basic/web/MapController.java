@@ -3,6 +3,7 @@ package hae.basic.web;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import able.com.web.HController;
 
@@ -10,14 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import hae.basic.service.CarService;
 import hae.basic.service.MapService;
 import hae.basic.service.RentService;
 import hae.basic.vo.CarVO;
 import hae.basic.vo.RentVO;
-import hae.basic.vo.UserVO;
 
 
 /**
@@ -63,8 +62,7 @@ public class MapController extends HController{
     }
     
     @RequestMapping(value = "/basic/rent.do")
-    public String rent(@ModelAttribute("rentVO") RentVO rentVO, 
-            Model model) throws Exception {
+    public String rent(@ModelAttribute("rentVO") RentVO rentVO, Model model, HttpSession session) throws Exception {
         
         CarVO carInfo = carService.selectCar(rentVO.getCarNo());
         RentVO rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
@@ -73,6 +71,9 @@ public class MapController extends HController{
         {
             rentService.insertRent(rentVO);  
             rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
+        } else if(rentInfo.getUserID() != session.getAttribute("user") ) {
+            model.addAttribute("message", "duplicate");
+            return "redirect:/basic/main.do";
         }
         
         model.addAttribute("carInfo",carInfo);

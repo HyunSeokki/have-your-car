@@ -1,3 +1,4 @@
+<%@page import="javax.enterprise.inject.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/include/declare.jspf" %>
 <%@ page session="true" %>
@@ -34,6 +35,16 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+    var message = '<%= request.getParameter("message") %>';
+    if( message == 'duplicate' ) {
+        swal("Already Rented!", "이미 대여된 차량입니다. 다시 선택해주세요.", "error");
+        $(".swal-overlay").click(function() {
+            <% request.setAttribute("message", ""); %>
+        });
+    }
+    
+})
 function goRent(carNo)
 {
     var rent = document.data;
