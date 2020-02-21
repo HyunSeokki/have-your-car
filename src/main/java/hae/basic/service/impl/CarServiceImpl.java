@@ -82,4 +82,13 @@ public class CarServiceImpl extends HService implements CarService{
         // TODO Auto-generated method stub
         return carDAO.selectCarList();
     }
+    
+    /*
+     * @see hae.basic.service.CarService#selectCarStandard(hae.basic.vo.CarVO)
+     */
+    @Override
+    public List<CarVO> selectStandard() throws Exception {
+        // TODO Auto-generated method stub
+        return carDAO.selectCarStandard();
+    }
 }
