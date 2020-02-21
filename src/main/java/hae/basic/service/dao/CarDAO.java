@@ -38,5 +38,6 @@ public interface CarDAO {
     void updateCar(CarVO vo);
     /* 자동차 정보 삭제 */
     void deleteCar(String carNo);
-
+    /* 자동차 표준 가져오기 */
+    List<CarVO> selectCarStandard();
 }
