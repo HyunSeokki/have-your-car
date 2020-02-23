@@ -107,10 +107,6 @@
             $("#overlay${rent.carNo}").text('${rent.userID}');
         </c:forEach>
         
-        $(document).ready(function() {
-            //setCurrentPosition();
-        });
-        
         var getPositionInterval;
         function setCurrentPosition() {
             getPositionInterval = setInterval(function() {
@@ -133,22 +129,32 @@
                     var carList = JSON.parse(args).carList;
                     var rentList = JSON.parse(args).rentList;
                     
-                    for(var car in carList) {
+                    for(var index in carList) {
+                        var car = carList[index];
+                        $("#overlay"+car.carNo).text('');
                         if(markers[car.carNo].getPosition().getLat() != car.latitue || markers[car.carNo].getPosition().getLng() != car.longitude) {
                             markers[car.carNo].setPosition(new kakao.maps.LatLng(car.latitude, car.longitude));
                             overlay[car.carNo].setPosition(markers[car.carNo].getPosition());
                         }
-                        else { // 움직이지 않았으면 text는 빈값
-                            $("#overlay"+car.carNo).text('');
-                        }
                     }
                     
-                    for(var rent in rentList) {
+                    for(var index in rentList) {
+                        var rent = rentList[index];
                         $("#overlay"+rent.carNo).text(rent.userID);
                     }
                 }
             });
         }
+        /* 페이지 벗어날 때 Interval clear */
+        jQuery(window).blur(function() {
+            if(getPositionInterval !== undefined)
+                clearInterval(getPositionInterval);
+        });
+        /* 페이지 들어오면 set Interval */
+        jQuery(window).focus(function() {
+            clearInterval(getPositionInterval);
+            setCurrentPosition();
+        })
     </script>
 </body>
 </html>

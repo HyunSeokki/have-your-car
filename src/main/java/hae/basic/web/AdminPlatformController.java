@@ -3,6 +3,7 @@ package hae.basic.web;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import able.com.web.HController;
@@ -10,11 +11,13 @@ import able.com.web.HController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hae.basic.service.CarService;
 import hae.basic.service.RentService;
 import hae.basic.vo.CarVO;
 import hae.basic.vo.RentVO;
+import net.sf.json.JSONObject;
 
 /**
  * <pre>
@@ -55,6 +58,21 @@ public class AdminPlatformController extends HController {
         model.addAttribute("rentList", rentList);
         
         return "admin/main";
+    }
+    
+    @RequestMapping(value = "/getCurrentPosition.do")
+    @ResponseBody
+    public String getCurrentPosition(HttpServletResponse res) throws Exception {
+        res.setContentType("text/html; charset=UTF-8");
+
+        List<CarVO> carList = carService.selectCarList();
+        List<RentVO> rentList = rentService.selectRentList();
+
+        JSONObject jo = new JSONObject();
+        jo.put("carList", carList);
+        jo.put("rentList", rentList);
+        
+        return jo.toString();   
     }
     
     @RequestMapping(value = "/register.do") 
