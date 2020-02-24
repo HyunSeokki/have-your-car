@@ -64,6 +64,9 @@ public interface RentService {
      */
     List<RentVO> selectRentList() throws Exception;
     
+    /* 이미 대여중인 렌트리스트 */
+    List<RentVO> selectRentedList() throws Exception;
+
     /**
      * 대여정보 차 번호로 조회
      * @param String

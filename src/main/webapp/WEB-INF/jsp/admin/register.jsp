@@ -40,7 +40,8 @@
 <script type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>carRegister</title>
 <style>
 body{
@@ -82,23 +83,30 @@ thead, tbody tr {
 <body>
     <div class="container-fluid" style="height: 100vh; width: 100%;">
      <!-- navigation bar -->
-        <nav class="navbar navbar-expand navbar-light bg-light">
-            <a class="navbar-brand" href="#">WeCar🚗</a>
-            <button class="navbar-toggler" type="button"
-                data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse"
-                id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">차량등록
-                        <span class="sr-only">(current)</span>
-                    </a> <a class="nav-item nav-link" href="main.do">Home</a>
-                </div>
+        <div class="row justify-content-around">
+            <div class="col-4 title-common" style="color: #013469!important; clear:both;">
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a style="color:#013469;" href="../basic/logout.do">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                            <div class="badge" style="display: block;">로그아웃</div>
+                        </a>
+                    </div>
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a style="color:#013469;" href="main.do">
+                            <i class="fas fa-home fa-2x"></i>
+                            <div class="badge" style="display: block;">HOME</div>
+                        </a>
+                    </div>
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a style="color:#013469;" href="#">
+                            <i class="fas fa-car fa-2x"></i>
+                            <div class="badge" style="display: block;">차량등록</div>
+                        </a>
+                    </div>
             </div>
-        </nav>
+            <div class="col-4 text-center  title-common title-board">Admin DashBoard</div>
+            <div class="col-4"></div>
+        </div>
         <!-- 차량등록 테이블 -->
         <div class="row" >
             <div class="table-responsive col"
