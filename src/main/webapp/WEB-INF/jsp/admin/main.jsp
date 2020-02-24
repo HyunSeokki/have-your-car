@@ -31,14 +31,15 @@
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
-
-<title>Insert title here</title>
+<link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
+<title>WeCar DashBoard</title>
 </head>
 <body>
     <!-- ${carList}, ${rentList} are needed -->
     <div class="container-fluid">
         <!-- navigation bar -->
-        <nav class="navbar navbar-expand navbar-light bg-light">
+        <div id="title-board">Admin DashBoard</div>
+        <nav class="navbar navbar-expand navbar-light bg-light" id="title-bar">
             <a class="navbar-brand" href="#">WeCar🚗</a>
             <button class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -54,6 +55,7 @@
                     </a> <a class="nav-item nav-link" href="register.do">차량등록</a>
                 </div>
             </div>
+            <div id="status-user">현재 운행 중인 차량 수 :&nbsp;<span id="user-num">0</span></div>
         </nav>
 
         <!-- map -->
@@ -73,6 +75,7 @@
         
         var markers = new Array();
         var overlay = new Array();
+        var userNum = 0;
         
         <c:forEach items="${carList}" var="car">
             var markerImage = new kakao.maps.MarkerImage("<c:url value="/${car.imgSrc}"/>", imageSize, imageOption),
@@ -94,6 +97,13 @@
                 '            <div id="overlay${car.carNo}"></div>' + 
                 '        </div>' + 
                 '    </div>' + 
+                '</div>' + 
+                '<div class="wrapTime">' + 
+                '   <div class="info"> ' + 
+                '       <div class="title">' + 
+                '           <div id="time${car.carNo}"></div>' + 
+                '       </div>' +
+                '   </div>' + 
                 '</div>';
                 
             overlay['${car.carNo}'] = new kakao.maps.CustomOverlay({
@@ -105,6 +115,7 @@
         </c:forEach>
         <c:forEach items="${rentList}" var="rent">
             $("#overlay${rent.carNo}").text('${rent.userID}');
+            $("#time${rent.carNo}").text('');
         </c:forEach>
         
         var getPositionInterval;
@@ -132,16 +143,38 @@
                     for(var index in carList) {
                         var car = carList[index];
                         $("#overlay"+car.carNo).text('');
+                        $("#time"+car.carNo).text('');
                         if(markers[car.carNo].getPosition().getLat() != car.latitue || markers[car.carNo].getPosition().getLng() != car.longitude) {
                             markers[car.carNo].setPosition(new kakao.maps.LatLng(car.latitude, car.longitude));
                             overlay[car.carNo].setPosition(markers[car.carNo].getPosition());
                         }
                     }
+                    /*     $("#time${rent.carNo}").text('${rent.rentDate}');
+                     */
                     
+                    var now = new Date().getTime();
+           
                     for(var index in rentList) {
                         var rent = rentList[index];
-                        $("#overlay"+rent.carNo).text(rent.userID);
+                        var dateString = rent.rentDate;
+                        var convert = dateString.substring(0,4) + "/" + dateString.substring(4,6) +
+                        "/" + dateString.substring(6,8) + " " + dateString.substring(8,10) + ":" + 
+                        dateString.substring(10,12) + ":" + dateString.substring(12,14);
+                        var getDate = new Date(convert).getTime();
+                        var strPeriod = now - getDate;
+                        var pDay = strPeriod / (60*60*24*1000);
+                        var strDay = Math.floor(pDay);
+                        var pHour = (strPeriod - (strDay * (60*60*24*1000))) / (60*60*1000);
+                        var strHour = Math.floor(pHour);
+                        var strMinute = Math.floor((strPeriod - (strDay * (60*60*24*1000)) - (strHour * (60*60*1000))) / (60*1000));
+                        var timeText = "방금";
+                        if(strHour>0) timeText = strHour+"시간, "+strMinute+"분 경과";
+                        else if(strHour==0 && strMinute>0) timeText = strMinute+"분 경과";                        $("#overlay"+rent.carNo).text(rent.userID);
+                        $("#time"+rent.carNo).text(timeText);
                     }
+                    
+                    document.getElementById("user-num").innerHTML = rentList.length;
+                    
                 }
             });
         }
