@@ -9,10 +9,14 @@ import able.com.web.HController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hae.basic.service.CarService;
 import hae.basic.vo.CarVO;
+import hae.basic.vo.DrivingInfoVO;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * <pre>
@@ -56,9 +60,17 @@ public class AdminPlatformController extends HController {
     }
     
     @RequestMapping(value = "/registerCar.do") 
-    public String register(Model model) throws Exception { // admin car register form
+    public String register(@RequestBody String jsonData, Model model) throws Exception { // admin car register form
+        JSONObject carInfo = JSONObject.fromObject(jsonData);
         
-       
-        return "admin/register";
+        CarVO carVO = new CarVO();
+        carVO.setCarType(carInfo.getString("carType"));
+        carVO.setLatitude(carInfo.getString("latitude"));
+        carVO.setLongitude(carInfo.getString("longitude"));
+
+        System.out.println(carVO);
+        //carService.insertCar(carVO);
+
+        return "redirect:admin/register";
     }
 }

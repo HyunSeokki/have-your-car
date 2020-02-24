@@ -94,10 +94,8 @@ thead, tbody tr {
                         </tr>
                     </thead>
                     <tbody>
-                    <script>var carType = '';</script>
                         <c:forEach var="carList" items="${resultList}"  varStatus="status">
                             <tr value = "${carList.carType }">
-                            <script>carType = '${carList.carType }';</script>
                                 <td><img src="<c:url value="/${carList.imgSrc}"/>" width="100"></td>
                                 <td><c:out value="${carList.carType }" /></td>
                                 <td><c:out value="${carList.carSize }" /></td>
@@ -118,11 +116,11 @@ thead, tbody tr {
                 <div id="clickLatlng"></div><br>
                 
                 <script>
-                    var lat = 0;
-                    var lng = 0;
+                    var lat = 37.506561;
+                    var lng = 127.05841800000002;
                     var mapContainer = document.getElementById('map'),
                         mapOption = { 
-                            center: new kakao.maps.LatLng(33.450701, 126.570667),
+                            center: new kakao.maps.LatLng(37.506561, 127.05841800000002),
                             level: 3
                         };
                     
@@ -165,7 +163,7 @@ thead, tbody tr {
                       
                       //carType, lat, lng
                       var registCar = {
-                              carType : carType,
+                              carType : carInfo,
                               latitude : lat,
                               longitude: lng
                       }
@@ -173,7 +171,7 @@ thead, tbody tr {
                       //carType, lat, lng JSON 전송
                       var jsonData = JSON.stringify(registCar);
                       $.ajax({
-                          url : "register.do",
+                          url : "./registerCar.do",
                           dataType : "text",
                           contentType : "application/json; charset=UTF-8",
                           type : "POST",

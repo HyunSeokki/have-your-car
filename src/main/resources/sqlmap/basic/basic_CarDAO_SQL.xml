@@ -50,10 +50,10 @@
                  IMG_SRC,
                  0,
                  TO_CHAR(SYSDATE,'YYYY/MM' )|| '01',
-                 '0',
-                 '0'
+                 #{latitude},
+                 #{longitude}
             FROM CARSTDTB
-           WHERE CAR_TYPE = '쏘나타';
+           WHERE CAR_TYPE = #{carType}
             ]]>      
     </insert>
 
@@ -119,7 +119,7 @@
                 CAPACITY,
                 COST,
                 IMG_SRC
-           FROM CARINFTB
+           FROM CARSTDTB
            ORDER BY CAR_TYPE
     ]]> 
     </select>
