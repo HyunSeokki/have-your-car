@@ -127,11 +127,12 @@ thead, tbody tr {
             
             <!-- 카카오맵 위도, 경도  -->
             <div class="col" style = "border-bottom: solid 1px; border-color: #CCCEDB;">
-                <div id="map" style="width: 100%; height: 500px;"></div>
-                <p>
-                    <a>차량이 위치할 곳을 선택해주세요.</a>
+                 <p style = "display: block; text-align: center;">
+                    <a>차량이 위치할 곳을 선택해주세요</a>
                 </p>
-                <div id="clickLatlng"></div><br>
+                <div id="map" style="width: 100%; height: 500px;"></div>
+
+                <div id="clickLatlng" style = "text-align: center; padding-top: 15px;"></div><br>
                 
                 <script>
                     var lat = 37.506561;
@@ -199,6 +200,7 @@ thead, tbody tr {
                           data : jsonData,
                           success : function() {
                               console.log(jsonData);
+                              swal("Success!", "차량이 입력되었습니다", "success");
                           },
                           cache : false,
                           error : function(message) {
@@ -213,7 +215,7 @@ thead, tbody tr {
         </div>
         <div style = "text-align: center;">
         <button id = "btnClick" type="button" class="btn btn-primary btn" 
-            style = "margin-top: 25px; width: 20vh; background-color: #013469">차량 등록</button>
+            style = "margin-top: 20px; width: 20vh; background-color: #013469">차량 등록</button>
         </div>
       </div>
 </body>
