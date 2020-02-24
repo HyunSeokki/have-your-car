@@ -59,7 +59,7 @@ th{
 }
 tbody {
     display: block;
-    height: 520px;
+    height: 515px;
     overflow: auto;
 }
 
@@ -77,11 +77,29 @@ thead, tbody tr {
 </head>
 
 <body>
-    <div class="container-fluid" style="height: 100vh; width: 80%;";>
+    <div class="container-fluid" style="height: 100vh; width: 100%;">
+     <!-- navigation bar -->
+        <nav class="navbar navbar-expand navbar-light bg-light">
+            <a class="navbar-brand" href="#">WeCar🚗</a>
+            <button class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse"
+                id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="register.do">차량등록
+                        <span class="sr-only">(current)</span>
+                    </a> <a class="nav-item nav-link" href="#">Home</a>
+                </div>
+            </div>
+        </nav>
         <!-- 차량등록 테이블 -->
-        <div class="row justify-content-md-center" >
+        <div class="row" >
             <div class="table-responsive col"
-                style="border-bottom: solid 1px; margin: 0px; padding: 0px; border-color: #CCCEDB;">
+                style="border-bottom: solid 1px; margin: 0px; padding-left: 15px; border-color: #CCCEDB;">
                 <table id="carTable" width="90%"
                     class="table table-hover text-center">
                     <thead>
@@ -94,10 +112,8 @@ thead, tbody tr {
                         </tr>
                     </thead>
                     <tbody>
-                    <script>var carType = '';</script>
                         <c:forEach var="carList" items="${resultList}"  varStatus="status">
-                            <tr value = "${carList.carType }">
-                            <script>carType = '${carList.carType }';</script>
+                            <tr value = "${carList.carType }";>
                                 <td><img src="<c:url value="/${carList.imgSrc}"/>" width="100"></td>
                                 <td><c:out value="${carList.carType }" /></td>
                                 <td><c:out value="${carList.carSize }" /></td>
@@ -110,10 +126,10 @@ thead, tbody tr {
             </div>
             
             <!-- 카카오맵 위도, 경도  -->
-            <div class="col">
+            <div class="col" style = "border-bottom: solid 1px; border-color: #CCCEDB;">
                 <div id="map" style="width: 100%; height: 500px;"></div>
                 <p>
-                    <a>차량이 위치할 곳을 클릭해주세요.</a>
+                    <a>차량이 위치할 곳을 선택해주세요.</a>
                 </p>
                 <div id="clickLatlng"></div><br>
                 
@@ -122,7 +138,7 @@ thead, tbody tr {
                     var lng = 0;
                     var mapContainer = document.getElementById('map'),
                         mapOption = { 
-                            center: new kakao.maps.LatLng(33.450701, 126.570667),
+                            center: new kakao.maps.LatLng(37.50778564360947 , 127.06138859060171 ),
                             level: 3
                         };
                     
@@ -161,11 +177,14 @@ thead, tbody tr {
                   
                   $('#btnClick').click(function(e){
                       var selectedRow = getSelectedRow();
-                      var carInfo = selectedRow.attr('value'); //차종
-                      
+                      var carInfo = '';
+                      carInfo = selectedRow.attr('value'); //차종
+                      if(carInfo == ''){
+                          swal("Empty carInfo", "차량을 선택해주세요", "error");
+                      }
                       //carType, lat, lng
                       var registCar = {
-                              carType : carType,
+                              carType : carInfo,
                               latitude : lat,
                               longitude: lng
                       }
@@ -190,8 +209,12 @@ thead, tbody tr {
                   });
                });
              </script>
-              <button id = "btnClick" type="button" class="btn btn-primary btn">등록</button>
            </div>
         </div>
+        <div style = "text-align: center;">
+        <button id = "btnClick" type="button" class="btn btn-primary btn" 
+            style = "margin-top: 25px; width: 20vh; background-color: #013469">차량 등록</button>
+        </div>
+      </div>
 </body>
 </html>
