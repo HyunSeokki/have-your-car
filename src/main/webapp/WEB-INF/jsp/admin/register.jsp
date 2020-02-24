@@ -200,7 +200,7 @@ thead, tbody tr {
                           data : jsonData,
                           success : function() {
                               console.log(jsonData);
-                              swal("Success!", "차량이 입력되었습니다", "success");
+                              swal("Success!", "차량이 등록되었습니다.", "success");
                           },
                           cache : false,
                           error : function(message) {

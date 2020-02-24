@@ -62,7 +62,7 @@ public class AdminPlatformController extends HController {
     
     @ResponseBody
     @RequestMapping(value = "/registerCar.do") 
-    public String register(@RequestBody String jsonData, Model model) throws Exception { // admin car register form
+    public void register(@RequestBody String jsonData, Model model) throws Exception { // admin car register form
         JSONObject carInfo = JSONObject.fromObject(jsonData);
         
         CarVO carVO = new CarVO();
@@ -70,9 +70,6 @@ public class AdminPlatformController extends HController {
         carVO.setLatitude(carInfo.getString("latitude"));
         carVO.setLongitude(carInfo.getString("longitude"));
 
-        System.out.println(carVO);
         carService.insertCar(carVO);
-
-        return "redirect:admin/register";
     }
 }
