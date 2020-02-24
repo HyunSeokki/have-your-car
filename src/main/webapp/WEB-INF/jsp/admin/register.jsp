@@ -90,9 +90,9 @@ thead, tbody tr {
             <div class="collapse navbar-collapse"
                 id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="register.do">차량등록
+                    <a class="nav-item nav-link active" href="#">차량등록
                         <span class="sr-only">(current)</span>
-                    </a> <a class="nav-item nav-link" href="#">Home</a>
+                    </a> <a class="nav-item nav-link" href="main.do">Home</a>
                 </div>
             </div>
         </nav>
