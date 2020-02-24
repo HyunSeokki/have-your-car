@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hae.basic.service.CarService;
 import hae.basic.vo.CarVO;
@@ -59,6 +60,7 @@ public class AdminPlatformController extends HController {
         return "admin/register";
     }
     
+    @ResponseBody
     @RequestMapping(value = "/registerCar.do") 
     public String register(@RequestBody String jsonData, Model model) throws Exception { // admin car register form
         JSONObject carInfo = JSONObject.fromObject(jsonData);
@@ -69,7 +71,7 @@ public class AdminPlatformController extends HController {
         carVO.setLongitude(carInfo.getString("longitude"));
 
         System.out.println(carVO);
-        //carService.insertCar(carVO);
+        carService.insertCar(carVO);
 
         return "redirect:admin/register";
     }
