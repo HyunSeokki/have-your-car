@@ -43,6 +43,9 @@
 
 <title>carRegister</title>
 <style>
+body{
+    -ms-overflow-style: none;
+}
 #title {
     text-align: center;
 }
@@ -127,13 +130,11 @@ thead, tbody tr {
             
             <!-- 카카오맵 위도, 경도  -->
             <div class="col" style = "border-bottom: solid 1px; border-color: #CCCEDB;">
-                 <p style = "display: block; text-align: center;">
-                    <a>차량이 위치할 곳을 선택해주세요</a>
+                 <p style = "display: block; text-align: left;">
+                    <i class="fas fa-map-marker-alt" style = "color: #013469"></i><a style = "font-weight: bolder">    차량이 위치할 곳을 선택해주세요</a>
                 </p>
+                <div id="clickLatlng"></div><br>
                 <div id="map" style="width: 100%; height: 500px;"></div>
-
-                <div id="clickLatlng" style = "text-align: center; padding-top: 15px;"></div><br>
-                
                 <script>
                     var lat = 37.506561;
                     var lng = 127.05841800000002;
