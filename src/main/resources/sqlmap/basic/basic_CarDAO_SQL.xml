@@ -92,6 +92,7 @@
             , img_src
         FROM CARINFTB
         WHERE car_no = #{carNo}
+        ORDER BY car_no
     ]]>             
     </select>
 
@@ -109,6 +110,7 @@
             , longitude
             , img_src
         FROM CARINFTB
+        ORDER BY car_no
     ]]> 
     </select>
     

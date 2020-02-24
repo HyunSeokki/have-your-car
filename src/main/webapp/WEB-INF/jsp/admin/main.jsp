@@ -30,6 +30,9 @@
 <script type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d2e76e198ea746100bd7b39503009ff"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <title>WeCar DashBoard</title>
@@ -38,26 +41,57 @@
     <!-- ${carList}, ${rentList} are needed -->
     <div class="container-fluid">
         <!-- navigation bar -->
-        <div id="title-board">Admin DashBoard</div>
-        <nav class="navbar navbar-expand navbar-light bg-light" id="title-bar">
-            <a class="navbar-brand" href="#">WeCar🚗</a>
-            <button class="navbar-toggler" type="button"
-                data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse"
-                id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a> <a class="nav-item nav-link" href="register.do">차량등록</a>
-                </div>
+        <div class="row justify-content-around">
+            <div class="col-4 title-common" style="color: #013469!important; clear:both;">
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a class="active" style="color:#013469;" href="../basic/logout.do">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                            <div class="badge" style="display: block;">로그아웃</div>
+                        </a>
+                    </div>
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a class="active" style="color:#013469;" href="#">
+                            <i class="fas fa-home fa-2x"></i>
+                            <div class="badge" style="display: block;">HOME</div>
+                        </a>
+                    </div>
+                    <div class="text-center" style="float:left; padding:0px 10px;">
+                        <a class="active" style="color:#013469;" href="register.do">
+                            <i class="fas fa-car fa-2x"></i>
+                            <div class="badge" style="display: block;">차량등록</div>
+                        </a>
+                    </div>
             </div>
-            <div id="status-user">현재 운행 중인 차량 수 :&nbsp;<span id="user-num">0</span></div>
-        </nav>
-
+            <div class="col-4 text-center  title-common title-board">Admin DashBoard</div>
+            <div class="col-4 align-self-center text-right pr-5" id="status-user" style="clear:both; font-size:1.5rem">현재 운행 중인 차량 수 :&nbsp;<span id="user-num">0</span>
+                <span class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" style="color:#fff; background-color:#013469;"></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0px; left:auto; font-size:1.5rem; width:250px">
+                        <table class="table table-hover" style="color:#013469;">
+                          <thead>
+                            <tr>
+                              <th scope="col">No.</th>
+                              <th scope="col">차 이름</th>
+                              <th scope="col">대여자</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <c:forEach items="${carList}" var="car">
+                                <tr onclick="mapGetCenter('${car.carNo}')" style="cursor:pointer;">
+                                  <th>${ car.carNo }</th>
+                                  <td>${ car.carType }</td>
+                                  <td id="rentUser${car.carNo}"></td>
+                                </tr>
+                            </c:forEach>
+                          </tbody>
+                        </table>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
         <!-- map -->
         <div id="map" style="width: 100%; height: 800px;"></div>
     </div>
@@ -115,6 +149,7 @@
         </c:forEach>
         <c:forEach items="${rentList}" var="rent">
             $("#overlay${rent.carNo}").text('${rent.userID}');
+            $("#rentUser${rent.carNo}").text('${rent.userID}');
             $("#time${rent.carNo}").text('');
         </c:forEach>
         
@@ -144,13 +179,12 @@
                         var car = carList[index];
                         $("#overlay"+car.carNo).text('');
                         $("#time"+car.carNo).text('');
+                        $("#rentUser"+car.carNo).text('');
                         if(markers[car.carNo].getPosition().getLat() != car.latitue || markers[car.carNo].getPosition().getLng() != car.longitude) {
                             markers[car.carNo].setPosition(new kakao.maps.LatLng(car.latitude, car.longitude));
                             overlay[car.carNo].setPosition(markers[car.carNo].getPosition());
                         }
                     }
-                    /*     $("#time${rent.carNo}").text('${rent.rentDate}');
-                     */
                     
                     var now = new Date().getTime();
            
@@ -169,8 +203,11 @@
                         var strMinute = Math.floor((strPeriod - (strDay * (60*60*24*1000)) - (strHour * (60*60*1000))) / (60*1000));
                         var timeText = "방금";
                         if(strHour>0) timeText = strHour+"시간, "+strMinute+"분 경과";
-                        else if(strHour==0 && strMinute>0) timeText = strMinute+"분 경과";                        $("#overlay"+rent.carNo).text(rent.userID);
+                        else if(strHour==0 && strMinute>0) timeText = strMinute+"분 경과";                        
+                        $("#overlay"+rent.carNo).text(rent.userID);
                         $("#time"+rent.carNo).text(timeText);
+                        $("#rentUser"+rent.carNo).text(rent.userID);
+
                     }
                     
                     document.getElementById("user-num").innerHTML = rentList.length;
@@ -188,6 +225,11 @@
             clearInterval(getPositionInterval);
             setCurrentPosition();
         })
+        
+        function mapGetCenter(carNo) {
+            map.setLevel(5);
+            map.panTo(markers[carNo].getPosition());
+        }
     </script>
 </body>
 </html>

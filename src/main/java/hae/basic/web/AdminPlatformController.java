@@ -53,7 +53,8 @@ public class AdminPlatformController extends HController {
     public String adminForm(HttpSession session, Model model) throws Exception { // admin mainpage
         
         List<CarVO> carList = carService.selectCarList();
-        List<RentVO> rentList = rentService.selectRentList();
+        // 대여중인 렌트카들을 가져와야함.
+        List<RentVO> rentList = rentService.selectRentedList();
         
         model.addAttribute("carList", carList);
         model.addAttribute("rentList", rentList);
@@ -63,11 +64,11 @@ public class AdminPlatformController extends HController {
     
     @RequestMapping(value = "/getCurrentPosition.do")
     @ResponseBody
-    public String getCurrentPosition(HttpServletResponse res) throws Exception {
+    public String getCurrentPosition(HttpServletResponse res, Model model) throws Exception {
         res.setContentType("text/html; charset=UTF-8");
 
         List<CarVO> carList = carService.selectCarList();
-        List<RentVO> rentList = rentService.selectRentList();
+        List<RentVO> rentList = rentService.selectRentedList();
 
         JSONObject jo = new JSONObject();
         jo.put("carList", carList);
