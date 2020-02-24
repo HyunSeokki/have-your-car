@@ -73,8 +73,7 @@
 
         </div>
         <div class="table-responsive" style = "border-bottom: solid 1px; margin: 0px; padding: 0px; border-color: #CCCEDB;">
-            <table id="rentTable" width="90%"
-                class="table table-hover text-center">
+            <table id="rentTable" width="90%" class="table table-hover text-center">
                 <thead>
                     <tr>
                         <th>대여번호</th>

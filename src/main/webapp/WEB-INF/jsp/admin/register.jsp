@@ -50,54 +50,148 @@
 thead {
     background-color: #013469;
     color: white;
-    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+    width: calc(100% - 1em);
+        /* scrollbar is average 1em/16px width, remove it from thead width */
 }
 
+th{
+    text-align: center;
+}
 tbody {
-    display:block;
-    height:520px;
-    overflow:auto;
+    display: block;
+    height: 520px;
+    overflow: auto;
 }
 
 thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
+
+.row tbody tr.highlight td {
+  background-color: #ccc;
+}
+
 </style>
 </head>
 
 <body>
-    <div class="container-fluid" style="height: 100vh";>
-        <h1 id="title">차량등록</h1>
-        
+    <div class="container-fluid" style="height: 100vh; width: 80%;";>
         <!-- 차량등록 테이블 -->
-        <table id="carTable" width="90%"
-            class="table table-hover text-center">
-            <thead>
-                <tr>
-                    <th>추가 차량 선택</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="carList" items="${resultList}" varStatus="status">
-                      <tr>
-                        <td id="car">
-                            <div id = "carImage">
-                                <img src="<c:url value="/${carList.imgSrc}"/>" width="100">
-                            </div>
-                            <div id = "carInfo">
-                                <c:out value="${carList.carType }" />
-                                <c:out value="${carList.carSize }" />
-                                <c:out value="${carList.birth }" />
-                                <c:out value="${carList.capacity }" />
-                                <c:out value="${carList.cost }" />
-                            </div>   
-                        </td>
-                      </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+        <div class="row justify-content-md-center" >
+            <div class="table-responsive col"
+                style="border-bottom: solid 1px; margin: 0px; padding: 0px; border-color: #CCCEDB;">
+                <table id="carTable" width="90%"
+                    class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>이미지</th>
+                            <th>모델명</th>
+                            <th>차종류</th>
+                            <th>수용인원</th>
+                            <th>km/비용</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <script>var carType = '';</script>
+                        <c:forEach var="carList" items="${resultList}"  varStatus="status">
+                            <tr value = "${carList.carType }">
+                            <script>carType = '${carList.carType }';</script>
+                                <td><img src="<c:url value="/${carList.imgSrc}"/>" width="100"></td>
+                                <td><c:out value="${carList.carType }" /></td>
+                                <td><c:out value="${carList.carSize }" /></td>
+                                <td><c:out value="${carList.capacity }" /></td>
+                                <td><c:out value="${carList.cost }" /></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 카카오맵 위도, 경도  -->
+            <div class="col">
+                <div id="map" style="width: 100%; height: 500px;"></div>
+                <p>
+                    <a>차량이 위치할 곳을 클릭해주세요.</a>
+                </p>
+                <div id="clickLatlng"></div><br>
+                
+                <script>
+                    var lat = 0;
+                    var lng = 0;
+                    var mapContainer = document.getElementById('map'),
+                        mapOption = { 
+                            center: new kakao.maps.LatLng(33.450701, 126.570667),
+                            level: 3
+                        };
+                    
+                    var map = new kakao.maps.Map(mapContainer, mapOption);
+                    
+                    var marker = new kakao.maps.Marker({ 
+                        position: map.getCenter() 
+                    }); 
+                    
+                    marker.setMap(map);
+                    
+                    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+                        var latlng = mouseEvent.latLng; 
+                        marker.setPosition(latlng);
+                        
+                        lat = latlng.getLat();
+                        lng = latlng.getLng();
+                        
+                        var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이며, ';
+                        message += '경도는 ' + latlng.getLng() + ' 입니다.';
+                        
+                        var resultDiv = document.getElementById('clickLatlng'); 
+                        resultDiv.innerHTML = message;
+                    });
+                
+               //차량선택   
+                $(function() {
+                  $('#carTable').on('click', 'tbody tr', function(event) {
+                    $(this).addClass('highlight').siblings().removeClass('highlight');
+                    $(this).addClass('selected').siblings().removeClass('selected');
+                  });
+    
+                  var getSelectedRow = function() {
+                    return $('table > tbody > tr.selected');
+                  }
+                  
+                  $('#btnClick').click(function(e){
+                      var selectedRow = getSelectedRow();
+                      var carInfo = selectedRow.attr('value'); //차종
+                      
+                      //carType, lat, lng
+                      var registCar = {
+                              carType : carType,
+                              latitude : lat,
+                              longitude: lng
+                      }
+                      
+                      //carType, lat, lng JSON 전송
+                      var jsonData = JSON.stringify(registCar);
+                      $.ajax({
+                          url : "register.do",
+                          dataType : "text",
+                          contentType : "application/json; charset=UTF-8",
+                          type : "POST",
+                          data : jsonData,
+                          success : function() {
+                              console.log(jsonData);
+                          },
+                          cache : false,
+                          error : function(message) {
+                              console.log(message);
+                              console.log("통신실패");
+                          }
+                      });
+                  });
+               });
+             </script>
+              <button id = "btnClick" type="button" class="btn btn-primary btn">등록</button>
+           </div>
+        </div>
 </body>
 </html>
