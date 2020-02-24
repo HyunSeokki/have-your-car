@@ -10,6 +10,7 @@ import able.com.web.HController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -76,9 +77,23 @@ public class AdminPlatformController extends HController {
     }
     
     @RequestMapping(value = "/register.do") 
-    public String registerForm(Model model) throws Exception { // admin car register form
+    public String registerForm(Model model) throws Exception { // admin car register form        
+        List<CarVO> resultList = carService.selectStandard();
         
+        model.addAttribute("resultList", resultList);
         return "admin/register";
     }
     
+    @ResponseBody
+    @RequestMapping(value = "/registerCar.do") 
+    public void register(@RequestBody String jsonData, Model model) throws Exception { // admin car register form
+        JSONObject carInfo = JSONObject.fromObject(jsonData);
+        
+        CarVO carVO = new CarVO();
+        carVO.setCarType(carInfo.getString("carType"));
+        carVO.setLatitude(carInfo.getString("latitude"));
+        carVO.setLongitude(carInfo.getString("longitude"));
+
+        carService.insertCar(carVO);
+    }
 }
