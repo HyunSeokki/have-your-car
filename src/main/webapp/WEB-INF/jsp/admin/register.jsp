@@ -122,7 +122,7 @@ thead, tbody tr {
                             <th>km/비용</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height:72vh;">
                         <c:forEach var="carList" items="${resultList}"  varStatus="status">
                             <tr value = "${carList.carType }">
                                 <td><img src="<c:url value="/${carList.imgSrc}"/>" width="100"></td>
@@ -141,8 +141,9 @@ thead, tbody tr {
                  <p style = "display: block; text-align: left;">
                     <i class="fas fa-map-marker-alt" style = "color: #013469"></i><a style = "font-weight: bolder">    차량이 위치할 곳을 선택해주세요</a>
                 </p>
-                <div id="clickLatlng"></div><br>
-                <div id="map" style="width: 100%; height: 650px;"></div>
+                <div id="clickLatlng">&nbsp;</div>
+                <br>
+                <div id="map" style="width: 100%; height: 85%;"></div>
                 <script>
                     var lat = 37.506561;
                     var lng = 127.05841800000002;

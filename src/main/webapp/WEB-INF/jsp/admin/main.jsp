@@ -39,7 +39,7 @@
 </head>
 <body>
     <!-- ${carList}, ${rentList} are needed -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="overflow:hidden">
         <!-- navigation bar -->
         <div class="row justify-content-around" style="margin-top:10px;">
             <div class="col-4 title-common" style="color: #013469!important; clear:both;">
@@ -68,13 +68,13 @@
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" style="color:#fff; background-color:#013469;"></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0px; left:auto; font-size:1.5rem; width:250px">
+                    <div class="table-responsive dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0px; left:auto; font-size:1.5rem; width:250px">
                         <table class="table table-hover" style="color:#013469;">
                           <thead>
                             <tr>
-                              <th scope="col">No.</th>
-                              <th scope="col">차 이름</th>
-                              <th scope="col">대여자</th>
+                              <th style="width:20%;">No.</th>
+                              <th>차 이름</th>
+                              <th>대여자</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -227,9 +227,25 @@
         })
         
         function mapGetCenter(carNo) {
-            map.setLevel(5);
+            map.setLevel(2);
             map.panTo(markers[carNo].getPosition());
         }
     </script>
+    <style type="text/css">
+tbody {
+    display:block;
+    height:520px;
+    overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+tbody th {
+    width:20%;
+}
+</style>
 </body>
 </html>

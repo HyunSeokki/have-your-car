@@ -107,6 +107,19 @@ function myFunction() {
     
 }
 </script>
+<style>
+tbody {
+    display:block;
+    height:520px;
+    overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+</style>
 </head>
 <body>
 <div class="row" id="loader-map" style="position: absolute; width: 100vw; height: 100vh; z-index: 15; background-color:white; text-align:center;">

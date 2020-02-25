@@ -8,13 +8,13 @@ body {
     border-radius: 50px;
     padding: 0px 2px;
     position: absolute;
-    left: 40px;
-    bottom: 30px;
+    left: 45px;
+    bottom: 25px;
     height: 25px;
     margin-left: -144px;
     text-align: left;
     overflow: hidden;
-    font-size: 12px;
+    font-size: 11pt;
     font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
     line-height: 1.5;
     text-shadow: -2px 0 #013469, 0 2px #013469, 2px 0 #013469, 0 -2px #013469;
