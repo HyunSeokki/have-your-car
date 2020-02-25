@@ -149,7 +149,7 @@ thead, tbody tr {
             </div>
 </div>
 <div id="overlay" onclick="off()">
-    <div class="card" style="width:80vw; top:10vh; left:10vw;">
+    <div class="card" style="width:80vw; top:10vh; left:10vw; height:60vh;">
         <img src="#" class="card-img-top" id="detailCarImgSrc" alt="자동차사진" style="width:60%; margin:30px auto 10px auto;">
         <div class="card-body">
             <h5 class="card-title font-weight-bold" id="detailCarType"></h5>
