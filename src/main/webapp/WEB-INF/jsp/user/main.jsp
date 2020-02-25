@@ -123,7 +123,18 @@ function myFunction() {
                     </g>
                 </svg>
             </div>
-            <span style="position: absolute; left:36%; top:48%; font-size:2rem; font-weight:bold; color:#013469;">Loading ...</span>
+            <div style="position: absolute; left:36%; top:48%; font-size:2rem; font-weight:bold; color:#013469; clear:both;">
+                <div id="L" style="float:left">L</div>
+                <div id="o" style="float:left">o</div>
+                <div id="a" style="float:left">a</div>
+                <div id="d" style="float:left">d</div>
+                <div id="i" style="float:left">i</div>
+                <div id="n" style="float:left">n</div>
+                <div id="g" style="float:left">g</div>
+                <div id="dot1" style="float:left">.</div>
+                <div id="dot2" style="float:left">.</div>
+                <div id="dot3" style="float:left">.</div>
+            </div>
 </div>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">

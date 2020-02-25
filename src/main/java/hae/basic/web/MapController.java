@@ -52,11 +52,6 @@ public class MapController extends HController{
     @Resource(name = "carService")
     private CarService carService;
     
-    @RequestMapping(value = "/basic/loadingTest.do")
-    public String loadingTest() throws Exception {
-        return "test/loadingTest";
-    }
-    
     @RequestMapping(value = "/basic/main.do")
     public String main(Model model) throws Exception {
         
