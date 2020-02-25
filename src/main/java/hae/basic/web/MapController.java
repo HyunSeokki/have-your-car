@@ -76,7 +76,7 @@ public class MapController extends HController{
         {
             rentService.insertRent(rentVO);  
             rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
-        } else if(rentInfo.getUserID() != session.getAttribute("user") ) {
+        } else if( !rentInfo.getUserID().equals(session.getAttribute("user")) ) {
             model.addAttribute("message", "duplicate");
             return "redirect:/basic/main.do";
         }
