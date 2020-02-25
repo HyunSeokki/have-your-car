@@ -83,7 +83,7 @@ thead, tbody tr {
 <body>
     <div class="container-fluid" style="height: 100vh; width: 100%;">
      <!-- navigation bar -->
-        <div class="row justify-content-around">
+        <div class="row justify-content-around" style="margin-top:10px;">
             <div class="col-4 title-common" style="color: #013469!important; clear:both;">
                     <div class="text-center" style="float:left; padding:0px 10px;">
                         <a style="color:#013469;" href="../basic/logout.do">
@@ -108,7 +108,7 @@ thead, tbody tr {
             <div class="col-4"></div>
         </div>
         <!-- 차량등록 테이블 -->
-        <div class="row" >
+        <div class="row" style="height:80vh;">
             <div class="table-responsive col"
                 style="border-bottom: solid 1px; margin: 0px; padding-left: 15px; border-color: #CCCEDB;">
                 <table id="carTable" width="90%"
@@ -142,7 +142,7 @@ thead, tbody tr {
                     <i class="fas fa-map-marker-alt" style = "color: #013469"></i><a style = "font-weight: bolder">    차량이 위치할 곳을 선택해주세요</a>
                 </p>
                 <div id="clickLatlng"></div><br>
-                <div id="map" style="width: 100%; height: 500px;"></div>
+                <div id="map" style="width: 100%; height: 650px;"></div>
                 <script>
                     var lat = 37.506561;
                     var lng = 127.05841800000002;

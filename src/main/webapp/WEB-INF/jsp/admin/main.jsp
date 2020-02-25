@@ -41,7 +41,7 @@
     <!-- ${carList}, ${rentList} are needed -->
     <div class="container-fluid">
         <!-- navigation bar -->
-        <div class="row justify-content-around">
+        <div class="row justify-content-around" style="margin-top:10px;">
             <div class="col-4 title-common" style="color: #013469!important; clear:both;">
                     <div class="text-center" style="float:left; padding:0px 10px;">
                         <a class="active" style="color:#013469;" href="../basic/logout.do">

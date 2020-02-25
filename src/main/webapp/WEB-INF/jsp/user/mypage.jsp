@@ -92,7 +92,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="result" items="${myRentList}" varStatus="status">
-                                <tr>
+                                <tr style="cursor:pointer;">
                                     <td id="rentNo"><c:out value="${result.rentNo }" /></td>
                                     <td id="carType">
                                     <c:forEach var="car" items="${carList }">
