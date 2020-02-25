@@ -36,14 +36,13 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    var message = '<%= request.getParameter("message") %>';
+    var message = '${message}';
     if( message == 'duplicate' ) {
         swal("Already Rented!", "이미 대여된 차량입니다. 다시 선택해주세요.", "error");
         $(".swal-overlay").click(function() {
             <% request.setAttribute("message", ""); %>
         });
     }
-    
 })
 function goRent(carNo)
 {
