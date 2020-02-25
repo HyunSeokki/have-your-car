@@ -68,11 +68,11 @@
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" style="color:#fff; background-color:#013469;"></button>
-                    <div class="table-responsive dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0px; left:auto; font-size:1.5rem; width:250px">
+                    <div class="table-responsive dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0px; left:auto; font-size:1.5rem; width:400px">
                         <table class="table table-hover" style="color:#013469;">
                           <thead>
                             <tr>
-                              <th style="width:20%;">No.</th>
+                              <th style="width:15%;">No.</th>
                               <th>차 이름</th>
                               <th>대여자</th>
                             </tr>
@@ -157,7 +157,7 @@
         function setCurrentPosition() {
             getPositionInterval = setInterval(function() {
                 getCurrentPosition();
-            }, 1000);
+            }, 500);
         }
 
         function getCurrentPosition() {
@@ -244,7 +244,7 @@ thead, tbody tr {
     table-layout:fixed;
 }
 tbody th {
-    width:20%;
+    width:15%;
 }
 </style>
 </body>

@@ -244,7 +244,7 @@
             };
             
             insertDrivingInfo(intervalPosition);
-        }, 1000);
+        }, 500);
     }
 
     function insertDrivingInfo(intervalPosition) {
