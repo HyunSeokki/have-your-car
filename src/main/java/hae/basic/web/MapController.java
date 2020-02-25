@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hae.basic.service.CarService;
 import hae.basic.service.MapService;
@@ -62,17 +63,18 @@ public class MapController extends HController{
     }
     
     @RequestMapping(value = "/basic/rent.do")
-    public String rent(@ModelAttribute("rentVO") RentVO rentVO, Model model, HttpSession session) throws Exception {
+    public String rent(@ModelAttribute("rentVO") RentVO rentVO, Model model, HttpSession session, RedirectAttributes ratr) throws Exception {
+        
+        logger.debug("rent is here!!!" + rentVO.toString());
         
         CarVO carInfo = carService.selectCar(rentVO.getCarNo());
         RentVO rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
         
-        if(rentInfo == null)
-        {
+        if(rentInfo == null) {
             rentService.insertRent(rentVO);  
             rentInfo = rentService.selectRentByCarNo(rentVO.getCarNo());
         } else if( !rentInfo.getUserID().equals(session.getAttribute("user")) ) {
-            model.addAttribute("message", "duplicate");
+            ratr.addFlashAttribute("message", "duplicate");
             return "redirect:/basic/main.do";
         }
         

@@ -62,6 +62,12 @@ public interface CarService {
      * @throws Exception
      */
     List<CarVO> selectCarList() throws Exception;
-  
-    
+        
+    /**
+     * 자동차 표준 조회
+     * @param vo
+     * @return
+     * @throws Exception
+     */
+    List<CarVO> selectStandard() throws Exception;     
 }

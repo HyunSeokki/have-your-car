@@ -230,9 +230,7 @@
         });
     }
 
-    var drivingInfo = new Array();
-    var logDataInterval, sendDataInterval;
-
+    var logDataInterval;
     
     function startDriving() {
         logDataInterval = setInterval(function() {
@@ -241,18 +239,16 @@
                 rentNo : "${rentInfo.rentNo}",
                 latitude : markerPosition.getLat(),
                 longitude : markerPosition.getLng(),
-                timeStamp : new Date().getTime()
+                timeStamp : new Date().getTime(),
+                carNo : "${rentInfo.carNo}"
             };
-            drivingInfo.push(intervalPosition);
+            
+            insertDrivingInfo(intervalPosition);
         }, 1000);
-
-        sendDataInterval = setInterval(insertDrivingInfo, 60001);
     }
 
-    function insertDrivingInfo() {
-        var jsonData = JSON.stringify(drivingInfo);
-        console.log(jsonData);
-        drivingInfo = new Array(); // 초기화
+    function insertDrivingInfo(intervalPosition) {
+        var jsonData = JSON.stringify(intervalPosition);
 
         $.ajax({
             url : "insertDrivingInfo.do",
@@ -275,11 +271,6 @@
             swal("Warning!", "아직 주행이 시작되지 않았습니다. 주행을 시작하세요!", "warning");
         else {
             clearInterval(logDataInterval);
-            clearInterval(sendDataInterval);
-
-            if (drivingInfo.length != 0) {
-                insertDrivingInfo();
-            }
         }
     }
 </script>

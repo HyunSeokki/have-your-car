@@ -111,24 +111,27 @@ public class CarPlatformController extends HController {
         return activeVO.getStartYn();
     }
     
-    @RequestMapping(value="/insertDrivingInfo.do", method=RequestMethod.POST)
+    @RequestMapping(value = "/insertDrivingInfo.do", method = RequestMethod.POST)
     @ResponseBody
-    public void insertDrivingInfo( HttpServletRequest request, @RequestBody String jsonData ) throws Exception {
-          List<JSONObject> drivingInfo = JSONArray.fromObject(jsonData);  
-          for(JSONObject div : drivingInfo) {
-              
-              DrivingInfoVO dvin = new DrivingInfoVO();
-              dvin.setRentNo(div.getString("rentNo"));
-              dvin.setLatitude(div.getString("latitude"));
-              dvin.setLongitude(div.getString("longitude"));
-              dvin.setTimeStamp(div.getString("timeStamp"));
-              
-              logger.debug(dvin.toString());
-              
-              drivingInfoService.insertDrivingInfo(dvin);
-              
-          }
+    public void insertDrivingInfo(HttpServletRequest request, @RequestBody String jsonData) throws Exception {
+        JSONObject drivingInfo = JSONObject.fromObject(jsonData);
+        
+        if(drivingInfo != null) {
+            DrivingInfoVO dvin = new DrivingInfoVO();
+            dvin.setRentNo(drivingInfo.getString("rentNo"));
+            dvin.setLatitude(drivingInfo.getString("latitude"));
+            dvin.setLongitude(drivingInfo.getString("longitude"));
+            dvin.setTimeStamp(drivingInfo.getString("timeStamp"));
+            
+            logger.debug(dvin.toString());
+            drivingInfoService.insertDrivingInfo(dvin);
+            
+            CarVO cvo = carService.selectCar(drivingInfo.getString("carNo"));
+            cvo.setLatitude(drivingInfo.getString("latitude"));
+            cvo.setLongitude(drivingInfo.getString("longitude"));
+            carService.updateCar(cvo);
+        }
+     
     }
-
 
 }

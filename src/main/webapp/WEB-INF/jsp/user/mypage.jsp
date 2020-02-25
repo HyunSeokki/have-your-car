@@ -73,8 +73,7 @@
 
         </div>
         <div class="table-responsive" style = "border-bottom: solid 1px; margin: 0px; padding: 0px; border-color: #CCCEDB;">
-            <table id="rentTable" width="90%"
-                class="table table-hover text-center">
+            <table id="rentTable" width="90%" class="table table-hover text-center">
                 <thead>
                     <tr>
                         <th>대여번호</th>
@@ -93,7 +92,7 @@
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="result" items="${myRentList}" varStatus="status">
-                                <tr>
+                                <tr style="cursor:pointer;">
                                     <td id="rentNo"><c:out value="${result.rentNo }" /></td>
                                     <td id="carType">
                                     <c:forEach var="car" items="${carList }">

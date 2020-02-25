@@ -3,6 +3,7 @@ package hae.basic.web;
 import java.io.BufferedReader;
 import java.security.MessageDigest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import hae.basic.service.RentService;
 import hae.basic.service.UserService;
+import hae.basic.vo.RentVO;
 import hae.basic.vo.UserVO;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 
 /**
  * <pre>
@@ -47,6 +49,9 @@ public class LoginPlatformController extends HController {
     
     @Resource(name = "userService")
     private UserService userService;
+    
+    @Resource(name = "rentService")
+    private RentService rentService;
     
     @RequestMapping(value = "/basic/index.do")
     public String loginForm(@ModelAttribute("userVO") UserVO userVO,
@@ -77,7 +82,7 @@ public class LoginPlatformController extends HController {
     }
     
     @RequestMapping(value = "/basic/login.do", method = RequestMethod.POST)
-    public String loginProcess(@ModelAttribute("userVO") UserVO userVO, HttpSession session) throws Exception {
+    public String loginProcess(@ModelAttribute("userVO") UserVO userVO, HttpSession session, RedirectAttributes rdtr) throws Exception {
         userVO.setUserPWD(encrypPWD(userVO.getUserPWD()));
         UserVO vo = userService.selectUser(userVO.getUserID());
         // 아이디 없음.
@@ -89,6 +94,20 @@ public class LoginPlatformController extends HController {
         }            
         
         session.setAttribute("user", userVO.getUserID());
+        
+        // 대여중인 리스트에 현재 유저가 있을 경우. 바로 렌트페이지로 이동한다.
+        List<RentVO> rentList = rentService.selectRentedList();
+        for(RentVO rv : rentList) {
+            if(rv.getUserID().equals(userVO.getUserID())) {
+                logger.debug(rv.toString());
+                rdtr.addFlashAttribute("rentVO", rv);
+                return "redirect:/basic/rent.do";
+            }
+        }
+        
+        if(userVO.getUserID().equals("admin")) {// admin일 경우
+            return "redirect:/admin/main.do";
+        }
         return "redirect:/basic/main.do";
     }
     

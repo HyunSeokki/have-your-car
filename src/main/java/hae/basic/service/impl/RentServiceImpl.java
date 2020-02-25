@@ -125,4 +125,13 @@ public class RentServiceImpl extends HService implements RentService {
         return rentDAO.selectRentByCarNo(carNo);
     }
 
+    /*
+     * @see hae.basic.service.RentService#selectRentedList()
+     */
+    @Override
+    public List<RentVO> selectRentedList() throws Exception {
+        // TODO Auto-generated method stub
+        return rentDAO.selectRentedList();
+    }
+
 }

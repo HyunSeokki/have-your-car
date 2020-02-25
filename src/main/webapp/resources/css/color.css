@@ -4,5 +4,5 @@
 .text-primary{color: #000 !important;}
 .btn-primary {background-color: #013469; border-color: #013469;  }
 .btn-outline-primary{border-color: #013469; color: #013469;  }
-body {font-family: "Nanum Gothic", sans-serif;}
+body {font-family: "Nanum Gothic", sans-serif !important;}
 

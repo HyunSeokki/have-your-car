@@ -30,28 +30,31 @@
     <!-- 자동차 정보 삽입 -->
     <insert id="insertCar" parameterType="hae.basic.vo.CarVO">
     <![CDATA[
-        INSERT 
-        INTO CARINFTB
-            ( car_no
-              , car_size
-              , car_type
-              , mileage
-              , birth
-              , capacity
-              , cost
-              , latitude
-              , longitude )
-        VALUES ( #{carNo} /* need fix */
-              , #{carSize}
-              , #{carType}
-              , #{mileage}
-              , #{birth}
-              , #{capacity}
-              , #{cost}
-              , #{latitude}
-              , #{longitude} )
-    ]]>  
-    
+        INSERT INTO CARINFTB(
+            CAR_NO,
+            CAR_SIZE,
+            CAR_TYPE,
+            CAPACITY,
+            COST,
+            IMG_SRC,
+            MILEAGE,
+            BIRTH,
+            LATITUDE,
+            LONGITUDE
+          )
+          SELECT CAR_NO_SEQ.NEXTVAL,
+                 CAR_SIZE,
+                 CAR_TYPE,
+                 CAPACITY,
+                 COST,
+                 IMG_SRC,
+                 0,
+                 TO_CHAR(SYSDATE,'YYYY/MM' )|| '01',
+                 #{latitude},
+                 #{longitude}
+            FROM CARSTDTB
+           WHERE CAR_TYPE = #{carType}
+            ]]>      
     </insert>
 
     <!-- 자동차 정보 업데이트 -->
@@ -89,6 +92,7 @@
             , img_src
         FROM CARINFTB
         WHERE car_no = #{carNo}
+        ORDER BY car_no
     ]]>             
     </select>
 
@@ -106,7 +110,19 @@
             , longitude
             , img_src
         FROM CARINFTB
+        ORDER BY car_no
     ]]> 
     </select>
-
+    
+    <select id="selectCarStandard" resultMap="car">
+    <![CDATA[
+         SELECT CAR_SIZE,
+                CAR_TYPE,
+                CAPACITY,
+                COST,
+                IMG_SRC
+           FROM CARSTDTB
+           ORDER BY CAR_TYPE
+    ]]> 
+    </select>
 </mapper>

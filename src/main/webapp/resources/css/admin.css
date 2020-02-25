@@ -1,0 +1,90 @@
+@CHARSET "UTF-8";
+
+body {
+    -ms-overflow-style: none;
+}
+
+.wrap {
+    border-radius: 50px;
+    padding: 0px 2px;
+    position: absolute;
+    left: 40px;
+    bottom: 30px;
+    height: 25px;
+    margin-left: -144px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 12px;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    line-height: 1.5;
+    text-shadow: -2px 0 #013469, 0 2px #013469, 2px 0 #013469, 0 -2px #013469;
+    color: #fff;
+    font-size: 18px;
+
+}
+
+.wrapTime {
+    border-radius: 50px;
+    padding: 0px 2px;
+    position: absolute;
+    left: 40px;
+    bottom: -28px;
+    height: 20px;
+    margin-left: -144px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 0.8em;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    line-height: 1;
+    color: red;
+}
+
+
+.wrap * {
+    padding: 0;
+    margin: 0;
+}
+
+.info .title {
+    font-weight: bold;
+    padding-bottom: 2px;
+    width: 200px;
+    height: 25px;
+    text-align: center;
+}
+
+.info .body {
+    position: relative;
+    overflow: hidden;
+    height: 112px;
+}
+
+#status-user {
+    /* display: flex; */
+    color: #013469;
+    flex-grow: 0;
+}
+
+.title-common {
+   margin-top: 19.2px;
+   margin-bottom: 9.6px;
+   font-size:16px;
+   color: #013469;
+}
+
+.title-board {
+    height: 40px;
+    margin-top:28.8px;
+    min-height: 40px;
+    font-size: 22.4px;
+    font-style: italic;
+    text-decoration: overline;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.badge {
+    color : #013469;
+    background-color:white;
+}
+

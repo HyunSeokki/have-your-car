@@ -36,14 +36,13 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6557da8a0d87db5a0fc88ef215ba899d&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    var message = '<%= request.getParameter("message") %>';
+    var message = '${message}';
     if( message == 'duplicate' ) {
         swal("Already Rented!", "이미 대여된 차량입니다. 다시 선택해주세요.", "error");
         $(".swal-overlay").click(function() {
             <% request.setAttribute("message", ""); %>
         });
     }
-    
 })
 function goRent(carNo)
 {
@@ -123,7 +122,18 @@ function myFunction() {
                     </g>
                 </svg>
             </div>
-            <span style="position: absolute; left:36%; top:48%; font-size:2rem; font-weight:bold; color:#013469;">Loading ...</span>
+            <div style="position: absolute; left:36%; top:48%; font-size:2rem; font-weight:bold; color:#013469; clear:both;">
+                <div id="L" style="float:left">L</div>
+                <div id="o" style="float:left">o</div>
+                <div id="a" style="float:left">a</div>
+                <div id="d" style="float:left">d</div>
+                <div id="i" style="float:left">i</div>
+                <div id="n" style="float:left">n</div>
+                <div id="g" style="float:left">g</div>
+                <div id="dot1" style="float:left">.</div>
+                <div id="dot2" style="float:left">.</div>
+                <div id="dot3" style="float:left">.</div>
+            </div>
 </div>
 <div id="overlay" onclick="off()">
     <div class="card" style="width:80vw; top:10vh; left:10vw;">

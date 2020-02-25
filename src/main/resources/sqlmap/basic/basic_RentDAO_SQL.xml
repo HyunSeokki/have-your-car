@@ -126,7 +126,20 @@
                    RENT_DATE,
                    RETURN_DATE
               FROM CARRENTB
-             WHERE 1=1
+             ORDER BY RENT_NO
+        ]]>
+    </select>
+    
+    <select id="selectRentedList" parameterType="hae.basic.vo.RentVO" resultMap="rent">
+        <![CDATA[
+            SELECT /* QueryID=selectRent */
+                   RENT_NO,
+                   CAR_NO,
+                   USER_ID,
+                   RENT_DATE,
+                   RETURN_DATE
+              FROM CARRENTB
+             WHERE RETURN_DATE IS NULL
              ORDER BY RENT_NO
         ]]>
     </select>
