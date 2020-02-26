@@ -112,10 +112,10 @@ public class ReturnMapController extends HController {
 
         CarVO tempCar = carService.selectCar(rentInfo.getCarNo());
 
-        if (!(lat.equals("0") || lng.equals("0"))) {
+        /*if (!(lat.equals("0") || lng.equals("0"))) {
             tempCar.setLatitude(lat);
             tempCar.setLongitude(lng);
-        }
+        }*/
         tempCar.setMileage(tempCar.getMileage() + distance);
         carService.updateCar(tempCar);
 

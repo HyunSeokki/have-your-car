@@ -46,10 +46,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
 <link href="<c:url value="/resources/css/color.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/mypage.css" />" rel="stylesheet">
-<style>
-
-</style>
-
 </head>
 <body>
     <div class="container-fluid">
@@ -76,8 +72,8 @@
             <table id="rentTable" width="90%" class="table table-hover text-center">
                 <thead>
                     <tr>
-                        <th>대여번호</th>
-                        <th>차종</th>
+                        <th style="width:20%;">대여번호</th>
+                        <th style="width:30%">차종</th>
                         <th>대여날짜</th>
                         <th>반납날짜</th>
                         <!-- <th>사용자</th> -->
@@ -93,16 +89,25 @@
                         <c:otherwise>
                             <c:forEach var="result" items="${myRentList}" varStatus="status">
                                 <tr style="cursor:pointer;">
-                                    <td id="rentNo"><c:out value="${result.rentNo }" /></td>
-                                    <td id="carType">
+                                    <td id="rentNo" style="width:20%; vertical-align: middle;"><c:out value="${result.rentNo }" /></td>
+                                    <td id="carType" style="width:30%; vertical-align: middle;">
                                     <c:forEach var="car" items="${carList }">
                                         <c:if test="${car.carNo eq result.carNo}">
                                             <c:out value="${car.carType}" />
                                         </c:if>
                                     </c:forEach>
                                     </td>
-                                    <td id="rentDate"><c:out value="${result.rentDate }" /></td>
-                                    <td id="returnDate"><c:out value="${result.returnDate }" /></td>
+                                    <td id="rentDate">
+                                        <c:set var="red" value="${result.rentDate}"/>
+                                        <c:out value="${fn:substring(red, 0,4)}"/>/<c:out value="${fn:substring(red, 4,6) }"/>/<c:out value="${fn:substring(red, 6,8) }"/>&nbsp;
+                                        <c:out value="${fn:substring(red, 8,10) }"/>:<c:out value="${fn:substring(red, 10,12) }"/>:<c:out value="${fn:substring(red, 12,14) }"/>
+                                    </td>
+                                    
+                                    <td id="returnDate">
+                                        <c:set var="ret" value="${result.returnDate}"/>
+                                        <c:out value="${fn:substring(ret, 0,4)}"/>/<c:out value="${fn:substring(ret, 4,6) }"/>/<c:out value="${fn:substring(ret, 6,8) }"/>&nbsp;
+                                        <c:out value="${fn:substring(ret, 8,10) }"/>:<c:out value="${fn:substring(ret, 10,12) }"/>:<c:out value="${fn:substring(ret, 12,14) }"/>
+                                    </td>
                                     <%-- <td id = "userId"><c:out value="${result.userID }" /></td> --%>
                                 </tr>
                             </c:forEach>
